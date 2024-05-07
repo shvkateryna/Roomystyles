@@ -15,18 +15,37 @@
 .slick-prev, .slick-next {
     color:  red !important;
 }
+.card_room{
+    width: 18rem;
+    cursor: pointer;
+}
+.navbar_wrapper{
+    --bs-bg-opacity: 1;
+    background-color: rgba(230, 199, 151, 0.5)!important;
+}
 .roomscard{
     padding: 10px;
     width: 300px;
     border-radius: 10px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     cursor: pointer;
-}
-
+}  
+@media (min-width: 1400px) {
+    .container,
+    .container-lg,
+    .container-md,
+    .container-sm,
+    .container-xl,
+    .container-xxl {
+      max-width: 1410px!important;
+    }
+  }
+  
 .roomscardfooter{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     font-weight: 400;
+    gap: 10px;
     padding: 5px;
 }
 .roomscardfooter2{
@@ -43,7 +62,22 @@
 .roomscardfooter2>div>span{
     margin: auto;    
 }
-
+.heading_submition{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+.spec_submition_wrapper{
+    display: flex;
+    flex-direction: column  ;
+}
+.submition_wrapper{
+    padding: 10px 15px;
+    /* width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center; */
+}
 .roomscards{
     width: 100%;
     display: flex;
@@ -54,15 +88,15 @@
 }
 
 .roomrejected{
-    background-color: red;
-    width: 21%;
+    background-color: rgb(175, 3, 3);
+    width: 70%;
     height: 5px;
     margin: 0px 2%;
 }
 
 .roomaccepted{
     background-color: rgb(60, 139, 0);
-    width: 21%;
+    width: 70%;
     height: 5px;
     margin: 0px 2%;
 }

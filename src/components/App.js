@@ -49,18 +49,18 @@ function App() {
         <Route path="/" element={<span class="loader"></span>} />
         </>:<>
         {auth?<>
-          <Route >
-          <Route path="/rooms_curator/:number" element={<Room user_id={1} />} />
+          <Route>
+          <Route path="/:number" element={<Room user_id={1} />} />
           <Route exact path="/manager" element={<Curator_menager />}/>
-          <Route exact path="/rooms_curator" element={<Rooms user_id={1} />} />
+          <Route exact path="/" element={<Rooms user_id={1} />} />
         
           {/* <div>test<div/> */}
           {/* <Route exact path="/manager" element={<Curator_menager />} /> */}
-          <Route exact path="/" element={<Roomsnew />} />
+          {/* <Route exact path="/" element={<Roomsnew />} /> */}
           <Route exact path="/room" element={<Roomnew />} />
           
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/" element={<Main_Page />} />
+          {/* <Route path="/" element={<Main_Page />} /> */}
           
           <Route path="/rooms/:id_coded" element={<Main_Form />} />
           <Route path="/rooms/:id_coded/general" element={<Main_General/>} />

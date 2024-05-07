@@ -85,7 +85,9 @@ class Room(db.Document):
         new_room["number"]=self.number
         new_room["verified"]=self.verified
         new_room["filled_form"]=self.filled_form
+        new_room["names"]=self.names
         return new_room
+
 
     def to_json(self):
         new_list = []
@@ -270,10 +272,10 @@ def token_required(f):
 # @token_required
 def create_admin():
     rooms_user = []
-    for sets in ["422", "423", "424", "425", "426", "427"]:
-        for room_number in range(int(sets[0]), int(sets[1]) + 1):
-            rooms_user += [Room.objects(number = room_number).first()]
-    user_admin = User(user_type = "ADMIN", uid = "ZN9kWTtfexdxQTb0CsumNdl91NL2",email = "admin@gmail.com",  password = "admin")
+    for room_number in [422, 423, 424, 425, 426, 427]:
+        rooms_user += [Room.objects(number = room_number).first()]
+    print(rooms_user)
+    user_admin = User(user_type = "ADMIN", rooms = rooms_user, uid = "ZN9kWTtfexdxQTb0CsumNdl91NL2",email = "admin@gmail.com",  password = "admin")
     user_admin.save()
     return "done"
 
@@ -302,7 +304,7 @@ def login():
     if user:
         token = jwt.encode({
             'public_key': user.public_key,
-            'expiration': str(datetime.utcnow() + timedelta(minutes = 1))
+            'expiration': str(datetime.utcnow() + timedelta(minutes = 90))
         },
         app.config['SECRET_KEY'])
         return jsonify({"user_type": user.user_type, "token": token})
@@ -318,15 +320,15 @@ def curators():
     jsoned = [user.to_json(False) for user in users]
     return jsoned
 
-@app.route("/curator_rooms/<id>")
-@token_required
+@app.route("/curator_rooms")
 @cross_origin()
-def get_rooms(user, id):
-    print(id)
-    user = User.objects(uid = id).first()
+@token_required
+def get_rooms(user):
+    print(user.rooms)
     rooms = [room.shorten_room() for room in user.rooms]
     print(rooms)
     return rooms
+
 @app.route("/room_n/<number_room>")
 @cross_origin()
 def get_room(number_room):

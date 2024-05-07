@@ -1,45 +1,49 @@
-import React from 'react'
-import { useEffect, useState } from 'react'
-import axios from 'axios';
-import "../styles/Curator.css"
-import "../styles/Form.css"
-import { useAuth } from "../contexts/AuthContexts"
+import React from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import "../styles/Curator.css";
+import "../styles/Form.css";
+import { useAuth } from "../contexts/AuthContexts";
 import { useNavigate } from "react-router-dom";
-import {FaArrowCircleUp} from 'react-icons/fa';
-import styled from 'styled-components';
-import path from "../path"
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import "../styles/Roomsnew.css"
-import NavBar from './navbarnew';
-
+import { FaArrowCircleUp } from "react-icons/fa";
+import styled from "styled-components";
+import path from "../path";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "../styles/Roomsnew.css";
+import NavBar from "./navbarnew";
+import { fetcher } from "../services/ApiService";
+import { useCookies } from "react-cookie";
+import Card from "react-bootstrap/Card";
+import ListGroup from "react-bootstrap/ListGroup";
 const Rooms = (props) => {
-  const [inputValue, setInputValue] = useState('');
-  const [visible, setVisible] = useState(false)
+  const [inputValue, setInputValue] = useState("");
+  const [visible, setVisible] = useState(false);
+  const [cookies] = useCookies(["user"]);
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
   const toggleVisible = () => {
-      const scrolled = document.documentElement.scrollTop;
-      if (scrolled > 300){
-      setVisible(true)
-      } 
-      else if (scrolled <= 300){
-      setVisible(false)
-      }
+    const scrolled = document.documentElement.scrollTop;
+    if (scrolled > 300) {
+      setVisible(true);
+    } else if (scrolled <= 300) {
+      setVisible(false);
+    }
   };
   function SampleNextArrow(props) {
     const { className, style, onClick } = props;
     console.log(className);
     return (
-       <div
+      <div
         className={className}
-        style={{  ...style, color: "red" }}
-        onClick={onClick}/>
+        style={{ ...style, color: "red" }}
+        onClick={onClick}
+      />
     );
   }
-  
+  const SumbitionTitles = ["Ліж1 (1)", "Ліж1 (2)", "Ліж2", "Заг"];
   function SamplePrevArrow(props) {
     const { className, style, onClick } = props;
     return (
@@ -50,153 +54,132 @@ const Rooms = (props) => {
       />
     );
   }
-  const scrollToTop = () =>{
-      window.scrollTo({
-      top: 0, 
-      behavior: 'smooth'
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
       /* you can also use 'auto' behaviour
           in place of 'smooth' */
-      });
-  }; 
-  window.addEventListener('scroll', toggleVisible);
+    });
+  };
+  window.addEventListener("scroll", toggleVisible);
 
   const handleClick = (room_number) => {
     const element = document.getElementById(`element_${room_number}`);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   const handleKeyPress = (event, room_number) => {
-    if (event.key === 'Enter') {
-      console.log('Enter key pressed. Value:', inputValue);
+    if (event.key === "Enter") {
+      console.log("Enter key pressed. Value:", inputValue);
     }
-    const roomNumber = parseInt(inputValue -1, 10); // Assuming inputValue is a number
-      if (!isNaN(roomNumber)) {
-        handleClick(roomNumber);
-      }
+    const roomNumber = parseInt(inputValue - 1, 10);
+    if (!isNaN(roomNumber)) {
+      handleClick(roomNumber);
+    }
   };
 
-  const { currentUser } = useAuth()
-  const [loading, setLoading] = useState(false)
-  const [response, setResponse] = useState([])
-  const [currentRoom, setCurrentRoom] = useState(null)
-  const [loadinRoute, setLoadingRoute] = useState([false, -1])
-  const [justcopied, setJustCopied] = useState(-1)
+  // const { currentUser } = useAuth()
+  const [loading, setLoading] = useState(false);
+  const [response, setResponse] = useState([]);
+  const [currentRoom, setCurrentRoom] = useState(null);
+  const [loadinRoute, setLoadingRoute] = useState([false, -1]);
+  const [justcopied, setJustCopied] = useState(-1);
   const navigate = useNavigate();
 
   function wings(number) {
     if (number === 201) {
-      return "2 поверх, ліве крило"
-    } if (number == 219) {
-      return "2 поверх, праве крило"
-    } if (number === 301) {
-      return "3 поверх, ліве крило"
-    } if (number == 319) {
-      return "3 поверх, праве крило"
-    } if (number === 401) {
-      return "4 поверх, ліве крило"
-    } if (number === 419) {
-      return "4 поверх, праве крило"
-    } if (number === 501) {
-      return "5 поверх, ліве крило"
-    } if (number === 519) {
-      return "5 поверх, праве крило"
+      return "2 поверх, ліве крило";
+    }
+    if (number == 219) {
+      return "2 поверх, праве крило";
+    }
+    if (number === 301) {
+      return "3 поверх, ліве крило";
+    }
+    if (number == 319) {
+      return "3 поверх, праве крило";
+    }
+    if (number === 401) {
+      return "4 поверх, ліве крило";
+    }
+    if (number === 419) {
+      return "4 поверх, праве крило";
+    }
+    if (number === 501) {
+      return "5 поверх, ліве крило";
+    }
+    if (number === 519) {
+      return "5 поверх, праве крило";
     }
   }
 
   function checker(filled_forms) {
-    let counter = 0
+    let counter = 0;
     for (let i = 0; i < filled_forms.length; i++) {
       if (filled_forms[i] === true) {
-        counter = counter + 1
+        counter = counter + 1;
       }
     }
-    return counter
+    return counter;
   }
 
   function checker_verified(verified_list) {
-    let counter_verified = 0
-    console.log(verified_list.size)
+    let counter_verified = 0;
+    console.log(verified_list.size);
     for (let i = 0; i < verified_list.length; i++) {
       if (verified_list[i] === true) {
-        console.log(i)
-        counter_verified = counter_verified + 1
+        console.log(i);
+        counter_verified = counter_verified + 1;
       }
     }
-    return counter_verified
+    return counter_verified;
   }
 
   async function get_route(number) {
-    setLoadingRoute([true, number])
-    setJustCopied(number)
+    setLoadingRoute([true, number]);
+    setJustCopied(number);
     return new Promise(function (resolve, reject) {
-
-      axios.post(path + '/get_route', { room_n: number }).then((res) => {
-        setLoadingRoute([false, -1])
-        resolve(res.data)
-      }).catch(err => {
-        setLoadingRoute([false, -1])
-      })
-    })
+      axios
+        .post(path + "/get_route", { room_n: number })
+        .then((res) => {
+          setLoadingRoute([false, -1]);
+          resolve(res.data);
+        })
+        .catch((err) => {
+          setLoadingRoute([false, -1]);
+        });
+    });
   }
-  var settings = {
-    infinite: false,
-    speed: 200,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    initialSlide: 0,
-    nextArrow: <SampleNextArrow />,
-     prevArrow: <SamplePrevArrow />,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true
-        }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
-  };
 
   useEffect(() => {
-    setLoading(true)
-    axios.get(path + `/curator_rooms/${props.user_id}`)
-      .then(res => {
-        console.log(res.data)
-        setResponse(res.data)
-        setLoading(false)
-      }).catch(err =>
-        setLoading(false))
+    setLoading(true);
+    fetcher({ url: "curator_rooms", token: cookies.token, type: "get" })
+      .then((res) => {
+        console.log(res.data);
+        setResponse(res.data);
+        setLoading(false);
+      })
+      .catch((err) => setLoading(false));
   }, []);
   return (
-    <div key={"main_div_rooms"} className="main"
-      style={{ minHeight: '100vh' }}>
-      {loading ? <>
-        <span key={"loader"} className="loader"></span>
-      </> :
-      <> <div className="roomsbody">
-      <NavBar></NavBar>
-       <div className="roomsmain">
-          <div className='roomsslider'>
-           {/* <Slider {...settings}>
+    <div key={"main_div_rooms"} className="main" style={{ minHeight: "100vh" }}>
+      {
+        loading ? (
+          <>
+            <span key={"loader"} className="loader"></span>
+          </>
+        ) : (
+          <>
+            {" "}
+            <div className="roomsbody">
+              <NavBar></NavBar>
+              <div className="roomsmain">
+                <div className="roomsslider">
+                  {/* <Slider {...settings}>
            <div className='roomsroom' >
               <div className='roomsroominside'> <span>Крило імені Прими (419 - 436)</span> </div>
            </div>
@@ -216,64 +199,109 @@ const Rooms = (props) => {
               <div className='roomsroominside'> <span>Крило імені Прими (419 - 436)</span> </div>
            </div>
            </Slider> */}
-           </div>
-           <div className='roomscards'>
-           {response.map((ele, index) => (
+                </div>
+                <div className="roomscards">
+                  {response.map((ele, index) => (
+                    <Card className="card_room" onClick={() => navigate(String(ele.number))}>
+                      <Card.Body>
+                        <Card.Title>{ele.number}</Card.Title>
+                        <Card.Text></Card.Text>
+                      </Card.Body>
+                      <ListGroup className="list-group-flush">
+                        {ele.names.map((name, index) => (
+                          <ListGroup.Item>
+                            {name ? name : "Мешканця немає"}
+                          </ListGroup.Item>
+                        ))}
+                      </ListGroup>
+                      {/* <Card.Body> */}
+                      <div className="submition_wrapper">
+                        <div className="heading_submition">
+                          <span>Підтвердження:</span>
+                        </div>
 
-              <div className='roomscard'>
-              <div className='roomnumber'><span>{ele.number}</span></div>
-              <div className='roomscardfooter'>
-              <span> Мешканці: </span>
-              <span>1) Булешний Михайло</span>
-              <span>2) Ільницький Давид</span>
-              <span>3) Пельчарський Артур</span>
+                        <div className="roomscardfooter2">
+                          {ele.verified.map((el_verified, index) => (
+                            <div className="spec_submition_wrapper">
+                              {SumbitionTitles[index]}
+                            <div className={el_verified ? "roomaccepted" : "roomrejected"}></div>
+                            </div>
+                          ))}
+                        </div>
+                        {/* </Card.Body> */}
+                      </div>
+                    </Card>
+                    // <div
+                    //   className="roomscard"
+                    //   on
+                    //   onClick={() => navigate(String(ele.number))}
+                    // >
+                    //   <div className="roomnumber">
+                    //     <span>{ele.number}</span>
+                    //   </div>
+                    //   <div className="roomscardfooter">
+                    //     <span> Мешканці: </span>
 
+                    //     {ele.names.map((name, index) => (
+                    //       <span key={index}>
+                    //         {name ? name : "Мешканця немає"}
+                    //       </span>
+                    //     ))}
+                    //   </div>
+                    //   <span>Підтвердження:</span>
+                    //   <div className="roomscardfooter2">
+                    //     <div>
+                    //       <span>Ліж1.(1)</span>
+                    //     </div>
+                    //     <div>
+                    //       <span>Ліж1.(2)</span>
+                    //     </div>
+                    //     <div>
+                    //       <span>Ліж2.</span>
+                    //     </div>
+                    //     <div>
+                    //       <span>Заг.</span>
+                    //     </div>
+                    //   </div>
+
+                    //   <div className="roomscardfooter2">
+                    //     {ele.verified.map((name, index) => (
+                    //       <div className="roomaccepted"></div>
+                    //     ))}
+                    //   </div>
+                    // </div>
+                  ))}
+                </div>
               </div>
-              <span>Підтвердження:</span>
-              <div className='roomscardfooter2'>
-              <div><span>Ліж1.(1)</span></div>
-              <div><span>Ліж1.(2)</span></div>
-              <div><span>Ліж2.</span></div>
-              <div><span>Заг.</span></div>
-              </div>
-              <div className='roomscardfooter2'>
-              <div className='roomaccepted'></div>
-              <div className='roomrejected'></div>
-              <div className='roomaccepted'></div>
-              <div className='roomaccepted'></div>
-              </div>
-              </div>
-           ))}
-              
-           </div>
-       </div>
-   </div></>
-      // <>
-      //   <NavBar />
-      //   <div className='rooms_list_back'>
-      //   <div key={"main_text_div"} className="rooms_list">
-      //     <div key={"strong"}><strong>Список кімнат</strong></div>
-      //   </div>
-      //   </div>
-      //   <div className='circle'>
-      //     <FaArrowCircleUp onClick={scrollToTop} 
-      //     style={{display: visible ? 'inline' : 'none'}} />
-      //   </div>
-      //   <div className='body_search'>
-      //       <div class="search-container">
-      //           <input 
-      //             type="text" 
-      //             class="search-input" 
-      //             placeholder="Введіть номер кімнати"
-      //             value={inputValue}
-      //             onChange={handleInputChange}
-      //             onKeyDown={handleKeyPress}/>
-      //           <button class="search-button" onClick={handleKeyPress}>
-      //               Пошук
-      //           </button>
-      //       </div>
-      //   </div>
-      //   <div key={"rooms_div"} className="rooms">
+            </div>
+          </>
+        )
+        // <>
+        //   <NavBar />
+        //   <div className='rooms_list_back'>
+        //   <div key={"main_text_div"} className="rooms_list">
+        //     <div key={"strong"}><strong>Список кімнат</strong></div>
+        //   </div>
+        //   </div>
+        //   <div className='circle'>
+        //     <FaArrowCircleUp onClick={scrollToTop}
+        //     style={{display: visible ? 'inline' : 'none'}} />
+        //   </div>
+        //   <div className='body_search'>
+        //       <div class="search-container">
+        //           <input
+        //             type="text"
+        //             class="search-input"
+        //             placeholder="Введіть номер кімнати"
+        //             value={inputValue}
+        //             onChange={handleInputChange}
+        //             onKeyDown={handleKeyPress}/>
+        //           <button class="search-button" onClick={handleKeyPress}>
+        //               Пошук
+        //           </button>
+        //       </div>
+        //   </div>
+        //   <div key={"rooms_div"} className="rooms">
         //   {response.map((ele, index) => (
         //     <div>
         //       <label className='wings'>{wings(ele.number)}</label>
@@ -293,12 +321,9 @@ const Rooms = (props) => {
         //     </div>
         //   ))}
         // </div></>
-        
-        }
-
-
+      }
     </div>
-  )
-}
+  );
+};
 
-export default Rooms
+export default Rooms;

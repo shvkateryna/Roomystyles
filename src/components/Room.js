@@ -1,200 +1,390 @@
-import { React, useRef } from 'react'
-import axios from 'axios';
+import { React, useRef } from "react";
+import axios from "axios";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from 'react'
-import { Slide } from 'react-slideshow-image';
-import NavBar from './NavBar';
-import {FaArrowCircleUp} from 'react-icons/fa';
-import styled from 'styled-components';
-import path from "../path"
+import { useEffect, useState } from "react";
+// import { Slide } from 'react-slideshow-image';
+// import NavBar from "./NavBar";
+import { FaArrowCircleUp } from "react-icons/fa";
+import styled from "styled-components";
+import path from "../path";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "../styles/Roomnew.css";
+import NavBar from "./navbarnew";
 
 export const Room = (props) => {
-    const [visible, setVisible] = useState(false)
-    const toggleVisible = () => {
-        const scrolled = document.documentElement.scrollTop;
-        if (scrolled > 300){
-        setVisible(true)
-        } 
-        else if (scrolled <= 300){
-        setVisible(false)
-        }
-    };
-    const scrollToTop = () =>{
-        window.scrollTo({
-        top: 0, 
-        behavior: 'smooth'
-        /* you can also use 'auto' behaviour
-            in place of 'smooth' */
-        });
-    };
-    
-  window.addEventListener('scroll', toggleVisible);
-    const ref = useRef(null);
-    const handleClick = () => {
-        ref.current?.scrollIntoView({ behavior: 'smooth' });
-    };
-
-    const ref2 = useRef(null);
-    const handleClick2 = () => {
-        ref2.current?.scrollIntoView({ behavior: 'smooth' });
-    };
-
-    const ref3 = useRef(null);
-    const handleClick3 = () => {
-        ref3.current?.scrollIntoView({ behavior: 'smooth' });
-    };
-
-    const handleClick1 = (index) => {
-        const element = document.getElementById(`element_${index}`);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
-
-    const [showModal, setShowModal] = useState(false);
-    const handleClose = () => setShowModal(false);
-    const handleShow = () => setShowModal(true);
-
-    const [showModal1, setShowModal1] = useState(false);
-    const handleClose1 = () => setShowModal1(false);
-    const handleShow1 = () => setShowModal1(true);
-
-    const [showModal2, setShowModal2] = useState(false);
-    const handleClose2 = () => setShowModal2(false);
-    const handleShow2 = () => setShowModal2(true);
-
-    const { number } = useParams();
-    const [currentRoom, setCurrentRoom] = useState(null)
-    const [loading, setLoading] = useState(true)
-
-    const [showModal3, setShowModal3] = useState(false);
-    const handleClose3 = () => setShowModal3(false);
-    const handleShow3 = () => setShowModal3(true);
-
-    const [available, setAvailable] = useState(true)
-    const headers = ['Передпокій', 'Спальня', 'Вбиральня', 'Одноповерхове ліжко', 'Двоповерхове ліжко (1 поверх)', 'Двоповерхове ліжко (2 поверх)']
-    async function get_route(number) {
-        return new Promise(function (resolve, reject) {
-
-            axios.post(path + '/get_route', { room_n: number }).then((res) => {
-                resolve(res.data)
-            }).catch(err => {
-            })
-        })
+  const [visible, setVisible] = useState(false);
+  const toggleVisible = () => {
+    const scrolled = document.documentElement.scrollTop;
+    if (scrolled > 300) {
+      setVisible(true);
+    } else if (scrolled <= 300) {
+      setVisible(false);
     }
-    const verify = (e, room_number, user_id, index) => {
-        e.preventDefault()
-        let new_room_ls = currentRoom.verified
+  };
 
-        new_room_ls[index] = !new_room_ls[index]
-        setCurrentRoom((prev) => ({ ...prev, "verified": new_room_ls }))
-        console.log(currentRoom)
-        axios.post(path + '/verify', { room_n: room_number, u_id: user_id, index: index })
-    }
-
-    const DeleteRoomUser = (index_block) => {
-
-        if (available === false) {
-            return
-        }
-
-
-        let new_names = currentRoom.names
-        let new_start_dates = currentRoom.start_dates
-        let new_finish_dates = currentRoom.finish_dates
-        let new_verified = currentRoom.verified
-        let new_filled_form = currentRoom.filled_form
-        let new_list = currentRoom.furniture_list
-        
-        let leave_date = new_finish_dates[index_block - 3]
-    
-        // let name = currentRoom.names[index_block - 1]
-        // console.log(currentRoom)
-        // console.log(index_block)
-        // console.log(new_names)
-
-        new_names[index_block - 3] = ""
-        new_start_dates[index_block - 3] = ""
-        new_finish_dates[index_block - 3] = ""
-        new_verified[index_block - 2] = false
-        new_filled_form[index_block - 2] = false
-        
-        let obj = currentRoom.furniture_list[index_block]
-    
-        for (var index = 0; index < obj.length; index++) {
-            obj[index]["description"] = ""
-            obj[index]["images"] = []
-        }
-
-        new_list[index_block] = obj
-    
-        setCurrentRoom((prev) => ({ ...prev, "start_dates": new_start_dates, "verified": new_verified, "names": new_names, "furniture_list": new_list, "filled_form": new_filled_form }))
-        get_route(currentRoom.number).
-            then(async (value) => {
-                setAvailable(false)
-                axios.post(path + "/room/" + value + "/delete", { currentRoom, index_block, leave_date }).then((res) => {
-                    setAvailable(true)
-                })
-            })
-    }
-    const DeleteRoomGeneral = (index_block) => {
-
-        if (available === false) {
-            return
-        }
-        let new_names = currentRoom.names
-        let new_verified = currentRoom.verified
-        let new_filled_form = currentRoom.filled_form
-        let new_list = currentRoom.furniture_list
-        let leave_date = false
-        
-        
-        
-        new_verified[0] = false
-        new_filled_form[0] = false
-        let blocks = [0, 1, 2]
-        for (let block = 0; block < blocks.length; block++) { 
-        let obj = currentRoom.furniture_list[blocks[block]]
-        for (let index = 0; index < obj.length; index++) {
-            obj[index]["description"] = ""
-            obj[index]["images"] = []
-        }
-
-        new_list[blocks[block]] = obj
-        }
-
-        setCurrentRoom((prev) => ({ ...prev, "verified": new_verified, "names": new_names, "furniture_list": new_list, "filled_form": new_filled_form }))
-        get_route(currentRoom.number).
-            then(async (value) => {
-                setAvailable(false)
-                axios.post(path + "/room/" + value + "/delete", { currentRoom, index_block, leave_date }).then((res) => {
-                    setAvailable(true)
-                })
-            })
-    }
-
-    const handleChangeFinishDate = (index, value) => {
-        let users_dates = currentRoom.finish_dates
-        users_dates[index] = value
-        setCurrentRoom((prev) => ({ ...prev, "finish_dates": users_dates }))
-    }
-
-    useEffect(() => {
-        setLoading(true)
-        axios.get(path + `/room_n/${number}`)
-            .then(res => {
-                console.log(res.data)
-                setCurrentRoom(res.data)
-                setLoading(false)
-            }).catch(err =>
-                setLoading(false))
-    }, []);
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+  function SampleNextArrow(props) {
+    const { className, style, onClick } = props;
+    console.log(className);
     return (
+      <div
+        className={className}
+        style={{ ...style, color: "red" }}
+        onClick={onClick}
+      />
+    );
+  }
+
+  function SamplePrevArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{ ...style, display: "block", color: "green" }}
+        onClick={onClick}
+      />
+    );
+  }
+  window.addEventListener("scroll", toggleVisible);
+  const ref = useRef(null);
+  const handleClick = () => {
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const ref2 = useRef(null);
+  const handleClick2 = () => {
+    ref2.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const ref3 = useRef(null);
+  const handleClick3 = () => {
+    ref3.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleClick1 = (index) => {
+    const element = document.getElementById(`element_${index}`);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const [showModal, setShowModal] = useState(false);
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
+
+  const [showModal1, setShowModal1] = useState(false);
+  const handleClose1 = () => setShowModal1(false);
+  const handleShow1 = () => setShowModal1(true);
+
+  const [showModal2, setShowModal2] = useState(false);
+  const handleClose2 = () => setShowModal2(false);
+  const handleShow2 = () => setShowModal2(true);
+
+  const { number } = useParams();
+  const [currentRoom, setCurrentRoom] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const [showModal3, setShowModal3] = useState(false);
+  const handleClose3 = () => setShowModal3(false);
+  const handleShow3 = () => setShowModal3(true);
+
+  const [available, setAvailable] = useState(true);
+  const headers = [
+    "Передпокій",
+    "Спальня",
+    "Вбиральня",
+    "Одноповерхове ліжко",
+    "Двоповерхове ліжко (1 поверх)",
+    "Двоповерхове ліжко (2 поверх)",
+  ];
+  async function get_route(number) {
+    return new Promise(function (resolve, reject) {
+      axios
+        .post(path + "/get_route", { room_n: number })
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch((err) => {});
+    });
+  }
+  const verify = (e, room_number, user_id, index) => {
+    e.preventDefault();
+    let new_room_ls = currentRoom.verified;
+
+    new_room_ls[index] = !new_room_ls[index];
+    setCurrentRoom((prev) => ({ ...prev, verified: new_room_ls }));
+    console.log(currentRoom);
+    axios.post(path + "/verify", {
+      room_n: room_number,
+      u_id: user_id,
+      index: index,
+    });
+  };
+
+  const DeleteRoomUser = (index_block) => {
+    if (available === false) {
+      return;
+    }
+
+    let new_names = currentRoom.names;
+    let new_start_dates = currentRoom.start_dates;
+    let new_finish_dates = currentRoom.finish_dates;
+    let new_verified = currentRoom.verified;
+    let new_filled_form = currentRoom.filled_form;
+    let new_list = currentRoom.furniture_list;
+
+    let leave_date = new_finish_dates[index_block - 3];
+
+    // let name = currentRoom.names[index_block - 1]
+    // console.log(currentRoom)
+    // console.log(index_block)
+    // console.log(new_names)
+
+    new_names[index_block - 3] = "";
+    new_start_dates[index_block - 3] = "";
+    new_finish_dates[index_block - 3] = "";
+    new_verified[index_block - 2] = false;
+    new_filled_form[index_block - 2] = false;
+
+    let obj = currentRoom.furniture_list[index_block];
+
+    for (var index = 0; index < obj.length; index++) {
+      obj[index]["description"] = "";
+      obj[index]["images"] = [];
+    }
+
+    new_list[index_block] = obj;
+
+    setCurrentRoom((prev) => ({
+      ...prev,
+      start_dates: new_start_dates,
+      verified: new_verified,
+      names: new_names,
+      furniture_list: new_list,
+      filled_form: new_filled_form,
+    }));
+    get_route(currentRoom.number).then(async (value) => {
+      setAvailable(false);
+      axios
+        .post(path + "/room/" + value + "/delete", {
+          currentRoom,
+          index_block,
+          leave_date,
+        })
+        .then((res) => {
+          setAvailable(true);
+        });
+    });
+  };
+  const DeleteRoomGeneral = (index_block) => {
+    if (available === false) {
+      return;
+    }
+    let new_names = currentRoom.names;
+    let new_verified = currentRoom.verified;
+    let new_filled_form = currentRoom.filled_form;
+    let new_list = currentRoom.furniture_list;
+    let leave_date = false;
+
+    new_verified[0] = false;
+    new_filled_form[0] = false;
+    let blocks = [0, 1, 2];
+    for (let block = 0; block < blocks.length; block++) {
+      let obj = currentRoom.furniture_list[blocks[block]];
+      for (let index = 0; index < obj.length; index++) {
+        obj[index]["description"] = "";
+        obj[index]["images"] = [];
+      }
+
+      new_list[blocks[block]] = obj;
+    }
+
+    setCurrentRoom((prev) => ({
+      ...prev,
+      verified: new_verified,
+      names: new_names,
+      furniture_list: new_list,
+      filled_form: new_filled_form,
+    }));
+    get_route(currentRoom.number).then(async (value) => {
+      setAvailable(false);
+      axios
+        .post(path + "/room/" + value + "/delete", {
+          currentRoom,
+          index_block,
+          leave_date,
+        })
+        .then((res) => {
+          setAvailable(true);
+        });
+    });
+  };
+
+  var settings = {
+    infinite: false,
+    speed: 200,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const handleOptionClick = (option) => {
+    console.log(option);
+    console.log("test");
+    setSelectedOption(option);
+  };
+
+  const handleChangeFinishDate = (index, value) => {
+    let users_dates = currentRoom.finish_dates;
+    users_dates[index] = value;
+    setCurrentRoom((prev) => ({ ...prev, finish_dates: users_dates }));
+  };
+  const handleSelectChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get(path + `/room_n/${number}`)
+      .then((res) => {
+        console.log(res.data);
+        setCurrentRoom(res.data);
+        setLoading(false);
+      })
+      .catch((err) => setLoading(false));
+  }, []);
+  return (
+    <>
+      {loading ? (
         <>
-            {loading ? <>
-                <span key={"loader"} className="loader"></span>
-            </> : <>
-                <NavBar />
+          <span key={"loader"} className="loader"></span>
+        </>
+      ) : (
+        <>
+          <div className="roombody">
+            <NavBar></NavBar>
+            <div className="roommain">
+              <div
+                value={selectedOption}
+                onChange={handleSelectChange}
+                className="roomcards"
+              >
+                {/* <Slider {...settings}> */}
+                <div className="roomroom">
+                  {currentRoom.furniture_list.map((list_fur, index_fur) => (
+                    <div className="roomroomfur">
+                      <span onClick={() => handleOptionClick(index_fur)}>
+                        {headers[index_fur]}
+                      </span>{" "}
+                    </div>
+                  ))} 
+                  
+                </div>
+                {/* </Slider> */}
+                {currentRoom.furniture_list.map((list_fur, index_fur) => (
+                  <div>
+                    {selectedOption === index_fur && (
+                      <div className="furniture_wrapper">
+                        {list_fur.map((furniture, index) => (
+                          <div
+                            className="furniture_div"
+                            key={"furniture_div" + index + index_fur}
+                          >
+                            <br></br>
+                            <div
+                              key={"furniture_type_div" + index + index_fur}
+                              className="main_heading"
+                            >
+                              <div key={"strong_type" + index + index_fur}>
+                                {furniture.type_expanded}
+                              </div>
+                            </div>
+                            <div
+                              key={
+                                "furniture_description_div" + index + index_fur
+                              }
+                              className="description"
+                            >
+                              Опис: {furniture.description}
+                            </div>
+                            {furniture.owner ? (
+                              <>
+                                <div
+                                  key={
+                                    "furniture_owner_div" + index + index_fur
+                                  }
+                                >
+                                  {"Власник: " + furniture.owner}
+                                </div>
+                              </>
+                            ) : (
+                              <></>
+                            )}
+                            <>
+                              {furniture.images.length != 0 ? (
+                                <div className="image_div">
+                                  {/* <Slide> */}
+                                  {furniture.images.map((slideImage, index) => (
+                                    <div className="slider_div" key={index}>
+                                      <img
+                                        className="slider_image"
+                                        src={slideImage}
+                                      />
+                                    </div>
+                                  ))}
+                                  {/* </Slide> */}
+                                </div>
+                              ) : (
+                                <label></label>
+                              )}
+                            </>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          {/* <NavBar />
                 <div key={"main_room_div"} className='main_rooms'>
                     <div className='info_back'>
                         <div key={"div_room_info"} className='main_info'><strong>Інформація про кімнату {currentRoom.number}</strong></div>
@@ -287,7 +477,7 @@ export const Room = (props) => {
                     <br></br>
                     {/* {available?<></>:<>
                     <div>Зачекайте трохи, ми обробляємо операцію.</div>
-                    </>} */}
+                    </>} 
                     
                     <div>{currentRoom.names[0] !== "" ? <label className='finish_date_text'>{currentRoom.names[0]}</label> :
                         <label className='finish_date_text' for="myInput">Немає мешканця</label>}</div>
@@ -413,8 +603,9 @@ export const Room = (props) => {
                         </div>
                         </div>
                     </div>
-                    </div>
-            </>}
+                    </div> */}
         </>
-    )
-}
+      )}
+    </>
+  );
+};

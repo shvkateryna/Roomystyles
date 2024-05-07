@@ -1,13 +1,16 @@
 import useSWR from "swr";
 import axios from "axios";
 import { useCookies } from "react-cookie";
-const BASE_URL = "http://localhost:5000/";
+const BASE_URL = "http://localhost:5000";
 
 const fetcher = async (params) => {
   let config = {
     headers: {
       'Authorization': `Bearer ${params.token}`,
     }
+  }
+  if (params.type === "get"){
+    return axios.get(BASE_URL + "/" + params.url, config).then((res) => res);
   }
   return axios.post(BASE_URL + "/" + params.url, {}, config).then((res) => res);
 };
