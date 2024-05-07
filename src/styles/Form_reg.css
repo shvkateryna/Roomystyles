@@ -1,0 +1,356 @@
+.alert_div {
+    padding: 20px;
+    background-color: #efd8b5; /* Red */
+    color: black;
+    margin-bottom: 15px;
+  }
+  
+  /* The close button */
+  .closebtn {
+    margin-left: 15px;
+    color: black;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  /* When moving the mouse over the close button */
+  .closebtn:hover {
+    color: black;
+  }
+
+
+.furniture_block+.furniture_block {
+    margin-top: 50px;
+}
+
+.furniture_block {
+    border-top: 1px solid gray;
+}
+
+.header_furniture {
+    padding: 10px 30px 10px 10px;
+}
+
+.header_furniture label {
+    font-size: 16px;
+}
+
+.file_div {
+    align-items: center;
+    
+}
+.clear_images{
+    background: rgb(234, 103, 103);
+    color: white;
+    text-decoration: none;
+    margin-left: 5px;
+    margin-right: 10px;
+    border-radius: 12px;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    font-family: 'Montserrat Medium 500', sans-serif;
+    font-size: 14px;
+    padding: 14px;
+    width: 150px;
+    height: 50px;
+    text-align: center
+}
+.body_furniture {
+    font-size: 16px;
+}
+
+.body_furniture textarea {
+    text-align: justify;
+}
+input:disabled,
+input[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+input:disabled,
+input[disabled]:hover{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+.file_input {
+    content: 'Додати фото';
+}
+
+.file_input::-webkit-file-upload-button {
+    content: 'Додати фото';
+    visibility: hidden;
+}
+
+.file_input::before {
+    text-decoration: none;
+    margin-left: 30px;
+    color: black;
+    border-radius: 12px;
+    content: 'Додати фото';
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    font-family: 'Montserrat Medium 500', sans-serif;
+    font-size: 14px;
+    padding: 14px;
+    background-color: #E6C797;
+    width: 70%;
+    height: 50px;
+    text-align: center
+}
+
+.file_input:hover::before {
+    content: 'Додати фото';
+    font-family: 'Montserrat Medium 500', sans-serif;
+    border: none;
+    background-color: #efd8b5;
+}
+
+.file_input:active::before {
+    content: 'Додати фото';
+    font-family: 'Montserrat Medium 500', sans-serif;
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+.file_div {
+    /* width: 1000%; */
+}
+
+.obj_input {
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    padding-left: 22px;
+}
+
+.step_2 {
+    font-size: 30px;
+    font-family: Forum;
+}
+
+.main_div {
+    overflow-x: hidden;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+    padding: 0px 10px 20px 7px;
+    width: auto;
+    font-family: 'Verdana';
+    background-color: #FFEDCE;
+    border-radius: 15px;
+}
+
+.main_div_buttons {
+    overflow-x: hidden;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+    padding: 0px 10px 20px 7px;
+    width: auto;
+    font-family: 'Verdana';
+    background-color: #ffffff;
+    border-radius: 15px;
+}
+
+.user_label {
+    font-size: 90%;
+    padding-bottom: 10px;
+    font-weight: 500;
+    color: #542400;
+
+}
+
+.user_div_inner {
+    font-family: Forum;
+    font-size: 150%;
+    text-align: center;
+    padding-top: 30px;
+}
+
+.button_next {
+    display: block;
+    cursor: pointer;
+    font-size: 16px;
+    color: #000000;
+    transition: .5s all;
+    width: 500px;
+    height: 70px;
+    background-color: #E6C797;
+    font-family: 'Montserrat Medium 500', sans-serif;
+    border-radius: 12px;
+    border: none;
+    margin: 20px auto;
+}
+
+.button_next:hover {
+    background-color: #efd8b5;
+}
+
+@media screen and (max-width:480px){
+    .button_next{
+      width: 300px;
+      height: 80px;
+      font-size: 18px;
+    }
+    .main_div {
+        width: 90%;
+    }
+}
+
+.user_div_inner+.user_div_inner {
+
+    /* padding-top: 30px; */
+    align-items: center;
+    align-self: center;
+}
+
+.user_input {
+    margin-left: 15px;
+    margin-top: 10px;
+    display: block;
+    width: 100%;
+    align-self: center;
+    padding: 10px;
+    max-width: 300px;
+    min-width: 200px;
+    outline: none;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    transition: all .5s;
+    border: 1px solid rgb(86, 85, 85);
+    color: black;
+}
+
+.user_input:hover {
+    border: 1px solid black;
+}
+.text_header {
+    padding: 20px 20px 0px 20px;
+    font-size: 18px;
+    font-family: 'Montserrat Medium 500', sans-serif;
+}
+
+.obj_description {
+    margin-bottom: 150px;
+    padding: 15px;
+    border-radius: 10px;
+    transition: all .5s;
+    width: 600px;
+    border: 1px solid gray;
+    min-height: 80px;
+}
+
+.obj_description:hover {
+    border: 1px solid black;
+}
+
+.select_owner {
+    width: 50%;
+    padding: 5px;
+}
+
+.select_owner option {
+    border: none;
+    border-radius: 10px;
+}
+
+.error_block {
+    background-color: rgb(189, 48, 48);
+    color: #ffffff;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+.submit_form{
+    margin-left: 30px;
+    color: black;
+    border-radius: 12px;
+    content: 'Додати фото';
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    font-family: 'Montserrat Medium 500', sans-serif;
+    font-size: 16px;
+    padding: 12px;
+    background-color: #E6C797;
+    width: 240px;
+    height: 50px;
+    text-align: center
+}
+.submit_form:hover {
+    background-color: #efd8b5;
+}
+.rules {
+    font-size: 100%;
+    text-align: center;
+}
+
+.slider_image{
+    margin-top: 20px;
+    height: 175px ;
+    width: auto;
+}
+.slider_div{
+    display: flex;
+    justify-content: center;
+}
+
+.room_type {
+    padding: 40px;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-family: 'Montserrat Medium 500', sans-serif;
+    letter-spacing: 5px;
+    margin-bottom: 0.8rem;
+    color: #000000;
+    outline: none;
+    text-align: center;
+}
+
+.sending_form {
+    font-size: 16px;
+    padding-left: 40%;
+    padding-top: 5%;
+    padding-bottom: 30%;
+}
+
+@media screen and (max-width:480px){
+    .button_next{
+      width: 290px;
+      height: 60px;
+      font-size: 16px;
+    }
+    .obj_description {
+        width: 300px;
+    }
+    .sending_form {
+        padding-left: 12%;
+        padding-top: 10%;
+        padding-bottom: 120%;
+    }
+    .file_div{
+        justify-content: space-between;
+    }
+    .file_input::before {
+        font-size: 12px;
+        padding: 12px;
+        width: 60%;
+        height: 40px;
+    }
+    .clear_images{
+        font-size: 12px;
+        padding: 12px;
+        width: 62%;
+        height: 40px;
+        margin-top: 10px;
+        margin-left: 30px;
+    }
+}

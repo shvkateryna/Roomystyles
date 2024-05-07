@@ -1,0 +1,137 @@
+.roomsbody{
+    height: 93vh;
+}
+.roomsmain{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.roomsheader{
+    width: 100%;
+    height: 7vh;
+    background-color: blue;
+}
+.slick-prev, .slick-next {
+    color:  red !important;
+}
+.roomscard{
+    padding: 10px;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    cursor: pointer;
+}
+
+.roomscardfooter{
+    display: flex;
+    flex-direction: column;
+    font-weight: 400;
+    padding: 5px;
+}
+.roomscardfooter2{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.roomscardfooter2>div{
+   width: 25%;
+    display: flex;
+    align-items: center;
+}
+.roomscardfooter2>div>span{
+    margin: auto;    
+}
+
+.roomscards{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 30px;
+    gap: 15px;
+    align-items: center;
+}
+
+.roomrejected{
+    background-color: red;
+    width: 21%;
+    height: 5px;
+    margin: 0px 2%;
+}
+
+.roomaccepted{
+    background-color: rgb(60, 139, 0);
+    width: 21%;
+    height: 5px;
+    margin: 0px 2%;
+}
+.roomswings{
+width: 20%;
+background-color: aquamarine;
+}
+.roomslogo > h1{
+    height: 75px;
+    background-color: blue;
+}
+.roomswings{
+    background-color: azure;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    align-items: center;
+    padding: 0px 3px;
+}
+.roomswing{
+    background-color: aliceblue;    
+    width: 100%;
+    padding: 10px 3px;
+    margin: 0px 3px;
+    border-radius: 10px;
+    font-size: 15px;
+}
+.roomswing:hover{
+    background-color: red;    
+}
+.roomsroom{
+    display: flex;
+    align-items: center;
+
+}
+.roomsroominside{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 3px 10px;
+    padding: 2px 5px;
+    border-radius: 10px;
+    background-color: blueviolet;
+}
+.roomsslider{
+    margin: 5px 30px;
+}
+.roomsroomfur{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 3px 10px;
+    padding: 2px 10px;
+    border-radius: 10px;
+    background-color: brown;
+    white-space: nowrap;
+}
+.roomsmaininfo{
+    display: flex;
+    width: 100%;
+    background-color: chartreuse;
+    height: 100%;
+}
+.roomnumber{
+    font-weight: 400;
+    font-size: 30px;
+    border-bottom: 1px solid gray;
+    
+}

@@ -1,0 +1,21 @@
+.multiselect::before{
+    content: 'Оберіть крило'
+}
+
+.manager_error{
+    background-color: rgb(238, 143, 143);
+    color: #ffffff;
+    padding: 20px;
+    width: 100%;
+    margin: 20px;
+}
+
+.add_curator_div {
+    align-items:center;
+}
+
+.multiselect {
+    max-width: 100%;
+    overflow-x: hidden;
+    width: 250px
+}

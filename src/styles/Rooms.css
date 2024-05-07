@@ -1,0 +1,26 @@
+.main{
+    background-color: #e9dfbc;
+}
+
+.button_group{
+    grid-area: "group";
+    display: grid;
+    grid-template-areas: 'button1 button2 button3';
+    margin-right: 30px;
+}
+.main-text{
+    color: #542400;
+    margin: 30px;
+    font-size: 175%;
+    padding: 15px 10px 20px 7px;
+    text-align: center;
+}
+
+.rooms{
+    font-size: 125%;
+    padding: 0px 10px 20px 7px;
+}
+.heading_login{
+    height: auto;
+    margin-top: 50px;
+}
