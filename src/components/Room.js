@@ -230,12 +230,21 @@ export const Room = (props) => {
   var settings = {
     infinite: false,
     speed: 200,
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToShow: 5,
+    slidesToScroll: 5,
     initialSlide: 0,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
     responsive: [
+      {
+        breakpoint: 1500,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+          infinite: true,
+          dots: true,
+        },
+      },
       {
         breakpoint: 1024,
         settings: {
@@ -250,23 +259,28 @@ export const Room = (props) => {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          initialSlide: 2,
         },
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
+          slidesToShow: 2,
+          slidesToScroll: 2,
         },
       },
     ],
   };
+  var settings_image = {
+    infinite: false,
+    speed: 200,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    initialSlide: 0,
+  };
   const [selectedOption, setSelectedOption] = useState("");
 
   const handleOptionClick = (option) => {
-    console.log(option);
-    console.log("test");
+     console.log(option);
     setSelectedOption(option);
   };
 
@@ -316,11 +330,70 @@ export const Room = (props) => {
                       </div>
                     </div>
                   ))}
+                  <div>
+                      <div className={6 !== selectedOption ? "roomroomfur" : "roomroomfur_active"} onClick={() => handleOptionClick(6)}>
+                        <span>
+                        Підтвердження форми
+                        </span>
+                      </div>
+                    </div>
+                    <div>
+                      <div className={7 !== selectedOption ? "roomroomfur" : "roomroomfur_active"} onClick={() => handleOptionClick(7)}>
+                        <span>
+                          Виселення
+                        </span>
+                      </div>
+                    </div>
                 </Slider>
-                {currentRoom.furniture_list.map((list_fur, index_fur) => (
+                <div className="furniture_wrapper">
+
+                {selectedOption === 6 ? (
+                  <>
+        <div className="furnire_topic"><strong>Підтвердження форм</strong></div>
+        <div className='verify'>
+            <div className='verify_button' onClick={(e) => verify(e, currentRoom.number, props.user_id, 0)}>Загальне {currentRoom.verified[0] ? <label style={{ color: '#4e8533', marginLeft: '5px' }}><strong>✓</strong></label> : <label style={{ color: '#ee6363', marginLeft: '5px' }}><strong>✗</strong></label>}</div>
+            <div className='verify_button' onClick={(e) => verify(e, currentRoom.number, props.user_id, 1)}>{currentRoom.names[0] !== "" ? <label>{currentRoom.names[0]}</label> : <label>Немає мешканця</label>} {currentRoom.verified[1] ? <label style={{ color: '#4e8533', marginLeft: '5px' }}><strong>✓</strong></label> : <label style={{ color: '#ee6363', marginLeft: '5px' }}><strong>✗</strong></label>}</div>
+            <div className='verify_button' onClick={(e) => verify(e, currentRoom.number, props.user_id, 2)}>{currentRoom.names[1] !== "" ? <label>{currentRoom.names[1]}</label> : <label>Немає мешканця</label>} {currentRoom.verified[2] ? <label style={{ color: '#4e8533', marginLeft: '5px' }}><strong>✓</strong></label> : <label style={{ color: '#ee6363', marginLeft: '5px' }}><strong>✗</strong></label>}</div>
+            <div className='verify_button' onClick={(e) => verify(e, currentRoom.number, props.user_id, 3)}>{currentRoom.names[2] !== "" ? <label>{currentRoom.names[2]}</label> : <label>Немає мешканця</label>} {currentRoom.verified[3] ? <label style={{ color: '#4e8533', marginLeft: '5px' }}><strong>✓</strong></label> : <label style={{ color: '#ee6363', marginLeft: '5px' }}><strong>✗</strong></label>}</div>
+        </div>
+        </>
+      ) : selectedOption === 7 ? (
+        <>
+                    <div className="furnire_topic"><strong>Виселення</strong></div>
+
+        <div className="verify">
+                    <div className="furniture_clear">
+                      {currentRoom.names[0] !== "" ? <label className='finish_date_text'>{currentRoom.names[0]}</label> :
+                        <label className='finish_date_text' for="myInput">Немає </label>}
+                      <input placeholder="Введіть дату" className="finish_date_input" type="date" key={"inp_user" + 0} onChange={(e) => handleChangeFinishDate(0, e.target.value)} value={currentRoom.finish_dates[0]} />
+                      <button className='move_out_button' disabled={!available} onClick={handleShow}>Виселити</button>
+                    </div>
+
+                    <div className="furniture_clear">
+                    {currentRoom.names[1] !== "" ? <div className='finish_date_text'>{currentRoom.names[1]}</div> :
+                        <label className='finish_date_text' for="myInput"> мешканця</label>}
+                    <input placeholder="Введіть дату" className="finish_date_input" type="date" key={"inp_user" + 1} onChange={(e) => handleChangeFinishDate(1, e.target.value)} value={currentRoom.finish_dates[1]} />
+                    <button className='move_out_button' disabled={!available} onClick={handleShow1}>Виселити</button>
+                    </div>
+
+                    <div className="furniture_clear">
+                    {currentRoom.names[2] !== "" ? <div className='finish_date_text'>{currentRoom.names[2]}</div> :
+                        <label className='finish_date_text' for="myInput">Немає мешканця</label>}
+                    <input placeholder="Введіть дату" className="finish_date_input" type="date" key={"inp_user" + 2} onChange={(e) => handleChangeFinishDate(2, e.target.value)} value={currentRoom.finish_dates[2]} />
+                    <button className='move_out_button' disabled={!available} onClick={handleShow2}>Виселити</button>
+                    </div>
+
+                    <button className='general_move_out' onClick={handleShow3}>Очистити загальну форму</button>
+
+        </div>
+        </>
+      ) : (
+        <>
+            {currentRoom.furniture_list.map((list_fur, index_fur) => (
                   <div>
                     {selectedOption === index_fur && (
-                      <div className="furniture_wrapper">
+                      <>
+                      <div className="furnire_topic"><strong>{headers[index_fur]}</strong></div>
                         {list_fur.map((furniture, index) => (
                           <>
                             <div className="furniture_info" >
@@ -338,7 +411,7 @@ export const Room = (props) => {
                             ) : (<></>)}
                             {furniture.images.length != 0 ? (
                               <div className="image_div">
-                                <Slider>
+                                <Slider {...settings_image}>
                                 {furniture.images.map((slideImage, index) => (
                                   <div className="slider_div" key={index}>
                                     <img
@@ -351,10 +424,13 @@ export const Room = (props) => {
                             ) : (<></>)}
                           </>
                         ))}
-                      </div>
+                      </>
                     )}
                   </div>
-                ))}
+                ))}</>
+      )}
+      </div>
+
               </div>
             </div>
           </div>

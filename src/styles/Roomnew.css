@@ -9,18 +9,61 @@
     width: 100%;
     height: 7vh;
     background-color: blue;
-
 }
 .furniture_type{
     padding: 10px;
     font-weight: 500;
     background-color: rgb(252, 238, 219);
 }
+.finish_date_input{
+    padding: 8px 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      width: 200px; /* Adjust width as needed */
+      box-sizing: border-box; /* Ensure padding and border are included in the width */
+      background-color: #f8f8f8;
+}
 .furniture_info{
     font-size: large;
-    margin: 10px 20px;
+    margin: 10px 30px;
+}
+.furnire_topic{
+    text-align: center;
+    font-size: large;
+    font-weight: 500;
+}
+.verify{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    align-items: center;
+}
+.furniture_clear{
+    width: 60%;
+    max-width: 600px;
+    border: 1px solid gray;
+    display: flex;
+    gap: 10px;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 10px;
+    align-items: center;
+}
+.verify_button{
+    border: 1px solid gray;
+    background-color: antiquewhite;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px;
+    width: 60%;
+    max-width: 600px;
+    font-weight: 500;
+    text-align: center;
 }
 .furniture_wrapper{
+    font-size: large;
+    margin-top: 30px;
     display: flex;
     flex-direction: column;
 }
