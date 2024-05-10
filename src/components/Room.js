@@ -111,7 +111,7 @@ export const Room = (props) => {
         .then((res) => {
           resolve(res.data);
         })
-        .catch((err) => {});
+        .catch((err) => { });
     });
   }
   const verify = (e, room_number, user_id, index) => {
@@ -306,76 +306,50 @@ export const Room = (props) => {
                 onChange={handleSelectChange}
                 className="roomcards"
               >
-                {/* <Slider {...settings}> */}
-                <div className="roomroom">
+                <Slider {...settings}>
                   {currentRoom.furniture_list.map((list_fur, index_fur) => (
-                    <div className="roomroomfur">
-                      <span onClick={() => handleOptionClick(index_fur)}>
-                        {headers[index_fur]}
-                      </span>{" "}
+                    <div>
+                      <div className={index_fur !== selectedOption ? "roomroomfur" : "roomroomfur_active"} onClick={() => handleOptionClick(index_fur)}>
+                        <span>
+                          {headers[index_fur]}
+                        </span>{" "}
+                      </div>
                     </div>
-                  ))} 
-                  
-                </div>
-                {/* </Slider> */}
+                  ))}
+                </Slider>
                 {currentRoom.furniture_list.map((list_fur, index_fur) => (
                   <div>
                     {selectedOption === index_fur && (
                       <div className="furniture_wrapper">
                         {list_fur.map((furniture, index) => (
-                          <div
-                            className="furniture_div"
-                            key={"furniture_div" + index + index_fur}
-                          >
-                            <br></br>
-                            <div
-                              key={"furniture_type_div" + index + index_fur}
-                              className="main_heading"
-                            >
-                              <div key={"strong_type" + index + index_fur}>
+                          <>
+                            <div className="furniture_info" >
+                              <div key={2 * index + 1} className="furniture_type">
                                 {furniture.type_expanded}
                               </div>
-                            </div>
-                            <div
-                              key={
-                                "furniture_description_div" + index + index_fur
-                              }
-                              className="description"
-                            >
-                              Опис: {furniture.description}
+                              <div key={2 * furniture + 2} className="furniture_description">
+                                Опис: {furniture.description}
+                              </div>
                             </div>
                             {furniture.owner ? (
-                              <>
-                                <div
-                                  key={
-                                    "furniture_owner_div" + index + index_fur
-                                  }
-                                >
-                                  {"Власник: " + furniture.owner}
-                                </div>
-                              </>
-                            ) : (
-                              <></>
-                            )}
-                            <>
-                              {furniture.images.length != 0 ? (
-                                <div className="image_div">
-                                  {/* <Slide> */}
-                                  {furniture.images.map((slideImage, index) => (
-                                    <div className="slider_div" key={index}>
-                                      <img
-                                        className="slider_image"
-                                        src={slideImage}
-                                      />
-                                    </div>
-                                  ))}
-                                  {/* </Slide> */}
-                                </div>
-                              ) : (
-                                <label></label>
-                              )}
-                            </>
-                          </div>
+                              <div key={"furniture_owner_div" + index + index_fur}>
+                                {"Власник: " + furniture.owner}
+                              </div>
+                            ) : (<></>)}
+                            {furniture.images.length != 0 ? (
+                              <div className="image_div">
+                                <Slider>
+                                {furniture.images.map((slideImage, index) => (
+                                  <div className="slider_div" key={index}>
+                                    <img
+                                      className="slider_image"
+                                      src={slideImage}/>
+                                  </div>
+                                ))}
+                                </Slider>
+                              </div>
+                            ) : (<></>)}
+                          </>
                         ))}
                       </div>
                     )}

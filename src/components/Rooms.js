@@ -1,12 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import "../styles/Curator.css";
-import "../styles/Form.css";
-import { useAuth } from "../contexts/AuthContexts";
 import { useNavigate } from "react-router-dom";
-import { FaArrowCircleUp } from "react-icons/fa";
-import styled from "styled-components";
 import path from "../path";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";

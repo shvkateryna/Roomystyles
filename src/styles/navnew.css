@@ -1,15 +1,18 @@
-.navbar {
+.navbar_m {
     display: flex;
+    align-items: center;
     position: relative;
+    padding: 20px;
     justify-content: space-between;
     align-items: center;
-    background-color: #c2961b;
-    color: white;
-    padding: 0px 20px;
+    background-color: #f8e3ab;
+    color: black;
     height:7vh;
 
 }
-
+.navbarbrand-title{
+    cursor: pointer;
+}
 .navbaroptions{
     display: flex;
 }
@@ -45,9 +48,10 @@
 }
 #mobile{
     display: none;
+    font-size: 20px;
 }
 #mobile i {
-color: white;
+color: rgb(0, 0, 0);
 
 cursor: pointer;
 }
@@ -62,7 +66,7 @@ cursor: pointer;
         right: -300px;
         width: 300px;
         height: 100vh;
-        background-color: #c2961b;
+        background-color:  #f8e3ab;
         transition: 1s;
         z-index: 1;
     }
