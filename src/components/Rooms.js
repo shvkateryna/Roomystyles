@@ -173,28 +173,6 @@ const Rooms = (props) => {
             <div className="roomsbody">
               <NavBar></NavBar>
               <div className="roomsmain">
-                <div className="roomsslider">
-                  {/* <Slider {...settings}>
-           <div className='roomsroom' >
-              <div className='roomsroominside'> <span>Крило імені Прими (419 - 436)</span> </div>
-           </div>
-           <div className='roomsroom' >
-              <div className='roomsroominside'> <span>Крило імені Прими (419 - 436)</span> </div>
-           </div>
-           <div className='roomsroom' >
-              <div className='roomsroominside'> <span>Крило імені Прими (419 - 436)</span> </div>
-           </div>
-           <div className='roomsroom' >
-              <div className='roomsroominside'> <span>Крило імені Прими (419 - 436)</span> </div>
-           </div>
-           <div className='roomsroom' >
-              <div className='roomsroominside'> <span>Крило імені Прими (419 - 436)</span> </div>
-           </div>
-           <div className='roomsroom' >
-              <div className='roomsroominside'> <span>Крило імені Прими (419 - 436)</span> </div>
-           </div>
-           </Slider> */}
-                </div>
                 <div className="roomscards">
                   {response.map((ele, index) => (
                     <Card className="card_room" onClick={() => navigate(String(ele.number))}>

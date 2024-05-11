@@ -40,7 +40,7 @@
     align-items: center;
 }
 .furniture_clear{
-    width: 60%;
+    width: 90%;
     max-width: 600px;
     border: 1px solid gray;
     display: flex;
@@ -49,10 +49,33 @@
     border-radius: 10px;
     margin: 10px;
     align-items: center;
+    justify-content: space-evenly;
+}
+.furniture_clear>label{
+width: 40%;
+}
+.furniture_clear>div{
+    border: 1px solid gray;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 7px;
+}
+.furniture_clear>div:hover{
+    background-color: #ececec;
+}
+.general_move_out{
+    border-radius: 10px;
+    padding: 7px;
+    text-align: center;
+    width: 90%;
+    max-width: 300px;
+    background-color: rgb(252, 196, 196);
+    border: 1px solid gray;
+    cursor: pointer;
+    margin-top: 30px;
 }
 .verify_button{
     border: 1px solid gray;
-    background-color: antiquewhite;
     border-radius: 10px;
     padding: 10px;
     margin: 5px;
@@ -60,12 +83,30 @@
     max-width: 600px;
     font-weight: 500;
     text-align: center;
+    cursor: pointer;
 }
 .furniture_wrapper{
     font-size: large;
-    margin-top: 30px;
+    margin-top: 5px;
     display: flex;
     flex-direction: column;
+}
+.furniture_navigation{
+    display: flex;
+    justify-content: flex-end;
+    gap:10px;
+    padding: 10px 30px;
+}
+.furniture_navigation>div{
+    width: 100px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    padding: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+.furniture_navigation>div:hover{
+    background-color: #ececec;
 }
 .furniture_div{
     

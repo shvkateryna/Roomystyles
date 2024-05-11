@@ -12,8 +12,6 @@ import Main_One from './Main_One';
 import Main_Two from './Main_Two';
 import Main_Two2 from './Main_Two2';
 import { Room } from './Room';
-import Roomsnew from './Roomsnew';
-import Roomnew from './Roomnew';
 import { useCookies } from "react-cookie";  
 import { MakeRequest, fetcher, makeRequest } from "../services/ApiService";
 import "../styles/app.css"
@@ -57,7 +55,6 @@ function App() {
           {/* <div>test<div/> */}
           {/* <Route exact path="/manager" element={<Curator_menager />} /> */}
           {/* <Route exact path="/" element={<Roomsnew />} /> */}
-          <Route exact path="/room" element={<Roomnew />} />
           
           <Route path="/forgot-password" element={<ForgotPassword />} />
           {/* <Route path="/" element={<Main_Page />} /> */}

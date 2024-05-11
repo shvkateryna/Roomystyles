@@ -15,6 +15,17 @@ import NavBar from "./navbarnew";
 
 export const Room = (props) => {
   const [visible, setVisible] = useState(false);
+
+
+  let sliderRef = useRef(null);
+  const next = () => {
+    sliderRef.slickNext();
+  };
+  const previous = () => {
+    sliderRef.slickPrev();
+  };
+
+
   const toggleVisible = () => {
     const scrolled = document.documentElement.scrollTop;
     if (scrolled > 300) {
@@ -233,8 +244,6 @@ export const Room = (props) => {
     slidesToShow: 5,
     slidesToScroll: 5,
     initialSlide: 0,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
     responsive: [
       {
         breakpoint: 1500,
@@ -242,7 +251,6 @@ export const Room = (props) => {
           slidesToShow: 4,
           slidesToScroll: 4,
           infinite: true,
-          dots: true,
         },
       },
       {
@@ -251,23 +259,16 @@ export const Room = (props) => {
           slidesToShow: 3,
           slidesToScroll: 3,
           infinite: true,
-          dots: true,
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 800,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
+          
         },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
-      },
+      }
     ],
   };
   var settings_image = {
@@ -320,7 +321,9 @@ export const Room = (props) => {
                 onChange={handleSelectChange}
                 className="roomcards"
               >
-                <Slider {...settings}>
+                <Slider ref={slider => {
+          sliderRef = slider;
+        }} {...settings}>
                   {currentRoom.furniture_list.map((list_fur, index_fur) => (
                     <div>
                       <div className={index_fur !== selectedOption ? "roomroomfur" : "roomroomfur_active"} onClick={() => handleOptionClick(index_fur)}>
@@ -345,6 +348,14 @@ export const Room = (props) => {
                       </div>
                     </div>
                 </Slider>
+                <div className="furniture_navigation">
+                  <div onClick={previous}>
+                  <i class="fa-solid fa-arrow-left"></i>
+                  </div>
+                  <div onClick={next}>
+                  <i class="fa-solid fa-arrow-right"></i>
+                  </div>
+                  </div>
                 <div className="furniture_wrapper">
 
                 {selectedOption === 6 ? (
@@ -364,26 +375,26 @@ export const Room = (props) => {
         <div className="verify">
                     <div className="furniture_clear">
                       {currentRoom.names[0] !== "" ? <label className='finish_date_text'>{currentRoom.names[0]}</label> :
-                        <label className='finish_date_text' for="myInput">Немає </label>}
+                        <label className='finish_date_text' for="myInput">Немає  asd asd asda dsasd</label>}
                       <input placeholder="Введіть дату" className="finish_date_input" type="date" key={"inp_user" + 0} onChange={(e) => handleChangeFinishDate(0, e.target.value)} value={currentRoom.finish_dates[0]} />
-                      <button className='move_out_button' disabled={!available} onClick={handleShow}>Виселити</button>
+                      <div className='move_out_button' disabled={!available} onClick={handleShow}>Виселити</div>
                     </div>
 
                     <div className="furniture_clear">
                     {currentRoom.names[1] !== "" ? <div className='finish_date_text'>{currentRoom.names[1]}</div> :
                         <label className='finish_date_text' for="myInput"> мешканця</label>}
                     <input placeholder="Введіть дату" className="finish_date_input" type="date" key={"inp_user" + 1} onChange={(e) => handleChangeFinishDate(1, e.target.value)} value={currentRoom.finish_dates[1]} />
-                    <button className='move_out_button' disabled={!available} onClick={handleShow1}>Виселити</button>
+                    <div className='move_out_button' disabled={!available} onClick={handleShow1}>Виселити</div>
                     </div>
 
                     <div className="furniture_clear">
                     {currentRoom.names[2] !== "" ? <div className='finish_date_text'>{currentRoom.names[2]}</div> :
                         <label className='finish_date_text' for="myInput">Немає мешканця</label>}
                     <input placeholder="Введіть дату" className="finish_date_input" type="date" key={"inp_user" + 2} onChange={(e) => handleChangeFinishDate(2, e.target.value)} value={currentRoom.finish_dates[2]} />
-                    <button className='move_out_button' disabled={!available} onClick={handleShow2}>Виселити</button>
+                    <div className='move_out_button' disabled={!available} onClick={handleShow2}>Виселити</div>
                     </div>
 
-                    <button className='general_move_out' onClick={handleShow3}>Очистити загальну форму</button>
+                    <div className='general_move_out' onClick={handleShow3}>Очистити загальну форму</div>
 
         </div>
         </>
