@@ -19,3 +19,8 @@
     overflow-x: hidden;
     width: 250px
 }
+
+.mutiselect_align{
+    display: flex;
+    flex-direction: column;
+}

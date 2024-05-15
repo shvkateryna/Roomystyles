@@ -308,12 +308,12 @@ def login():
         return jsonify({"user_type": user.user_type, "token": token})
     else:
         return "Invalid credentials"
-    
+        
 
 @app.route("/curators")
-@token_required
 @cross_origin()
-def curators():
+@token_required
+def curators(_):
     users = User.objects().all()
     jsoned = [user.to_json(False) for user in users]
     return jsoned

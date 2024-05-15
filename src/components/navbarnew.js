@@ -247,10 +247,10 @@ export default function NavBar() {
         </div>
         <div className={isActive ? "navbaroptions active" : "navbaroptions"}>
           <div id="navoption">
-            <span> Home </span>
+            <span> Admin </span>
           </div>
           <div id="navoption">
-            <span> Rooms </span>
+            <span> Clear Report </span>
           </div>
           <div id="navoption">
             <span
@@ -261,6 +261,9 @@ export default function NavBar() {
               {" "}
               Download Report{" "}
             </span>
+          </div>
+          <div styles = {"margin-left: 100px"} id="navoption">
+            <span> Log out </span>
           </div>
         </div>
         <div id="mobile" onClick={() => setActive(!isActive)}>

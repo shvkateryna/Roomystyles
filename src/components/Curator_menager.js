@@ -3,12 +3,16 @@ import { useAuth } from "../contexts/AuthContexts";
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { MultiSelect } from "react-multi-select-component"
-import '../styles/Manager.css'
-import '../styles/Main.css'
+// import '../styles/Manager.css'
 import path from "../path"
 import Map from "../components/Map"
 import NavBar from './NavBar';
 import { Form, Button, Card, Alert, Container } from "react-bootstrap"
+import { type } from '@testing-library/user-event/dist/type';
+import { useCookies } from "react-cookie";
+
+import {  fetcher } from "../services/ApiService";
+
 
 const Curator_menager = () => {
     const [loading, setLoading] = useState(false)
@@ -19,7 +23,8 @@ const Curator_menager = () => {
     const [role_new, setRole_new] = useState("")
     const [login_new, setLogin_new] = useState([])
     const [password_new, setPassword_new] = useState([])
-    const { signup } = useAuth()
+    const [cookies] = useCookies(["user"]);
+    // const { signup } = useAuth()
     const options = [
         { value: "201-218", label: "201-218" },
         { value: "219-234", label: "219-234" },
@@ -54,7 +59,7 @@ const Curator_menager = () => {
     const [selected, setSelected] = useState([]);
     useEffect(() => {
         setLoading(true)
-        axios.get(path+`/curators`)
+        fetcher({ url: "curators", token: cookies.token, type: "get" })
             .then(res => {
                 setResponse(res.data)
                 setLoading(false)
@@ -84,11 +89,11 @@ const Curator_menager = () => {
         for (let elem of selected) {
             rooms += elem.value + ","
         }
-        signup(login_new, password_new, role_new, rooms)
+        // signup(login_new, password_new, role_new, rooms)
     }
     return (
         <div className='manager_div_main'>
-            <NavBar/>
+            {/* <NavBar/> */}
             <Container className='align-items-center justify-content-center' style = {{justifyContent: "center",  minHeight: '60vh', maxWidth: '550px', marginTop:"100px"}}>
             <Card style={{position: "unset"}}>
                 <Card.Body style={{backgroundColor: "#FDF2E9", border: 'none', borderRadius: '5px', borderColor: '#f3e8c9'}}>
@@ -107,6 +112,7 @@ const Curator_menager = () => {
                             <MultiSelect style={{color: "black", fontFamily: 'Verdana'}}
                                 options={options}
                                 value={selected}
+                                className = "mutiselect_align"
                                 onChange={setSelected}
                             />
                         <Button disabled = {loading} className = 'w-100' type = 'submit' style={{backgroundColor: "#f7d474", border: "none", borderRadius: "12px", marginTop: "15px", height: "65px", fontFamily: 'Montserrat Medium 500', fontSize: "16px", backgroundColor: isHover ? '#efd8b5' : '#f3e8c9', color: isHover ? 'black' : 'black', padding: '15px'}}
@@ -145,10 +151,7 @@ const Curator_menager = () => {
             <br></br>
             <br></br>
             </Container>
-            <div className="greeting">
-                <strong><p>Вітаємо вдома!</p></strong>
-                <Map />
-            </div>
+            
         </div>
     )}
 
