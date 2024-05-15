@@ -9,6 +9,7 @@ import path from "../path";
 // import logo_copy from "../assets/upload-image-icon.png"
 import trash_logo from "../assets/trash.png";
 import arrow_image from "../assets/arrow.png";
+import tick_icon from "../assets/tick-icon.png";
 
 function General(props) {
   const id_coded = props.id_coded;
@@ -78,6 +79,16 @@ function General(props) {
     filled[index] = true;
     setRoom((prev) => ({ ...prev, filled_form: filled }));
   };
+
+  function extractValue(input) {
+    const startIndex = input.indexOf("=") + 1; // Find the index of the first "="
+    if (startIndex === 0) return null; // If "=" is not found, return null
+    const endIndex = input.indexOf("&", startIndex); // Find the index of the first "&" after the "="
+    if (endIndex === -1) return input.substring(startIndex); // If "&" is not found, return the substring from "=" to the end
+    return input.substring(startIndex, endIndex); // Return the substring between "=" and "&"
+  }
+
+
   async function shrinkImage(image) {
     const options = {
       maxSizeMB: 0.05,
@@ -178,7 +189,8 @@ function General(props) {
     if (typeof slideImage != "string") {
       return URL.createObjectURL(slideImage);
     } else {
-      return slideImage;
+      return "https://drive.google.com/thumbnail?id=" + extractValue(slideImage) + "&sz=w1000"
+      // return slideImage;
     }
   }
   return (
@@ -216,7 +228,7 @@ function General(props) {
               <div class="main">
                 <ul>
                   <li>
-                    <i class="icons awesome fa-solid fa-user"></i>
+                    <i class="icons awesome fa-solid fa-house"></i>
                     <div
                       className={
                         stageCounter >= 1 ? "step second active" : "step first"
@@ -228,7 +240,7 @@ function General(props) {
                     <p class="label">{room_type[0]}</p>
                   </li>
                   <li>
-                    <i class="icons awesome fa-solid fa-coins"></i>
+                    <i class="icons awesome fa-solid fa-house"></i>
                     <div
                       className={
                         stageCounter >= 2 ? "step second active" : "step second"
@@ -359,42 +371,42 @@ function General(props) {
                                 key={`div_text_image_${index_room}_${index}_${ele.type_expanded}`}
                                 className="obj_input"
                               > */}
-                                <textarea
-                                  className="obj_description"
-                                  onChange={(e) =>
-                                    handleChangeRoom(
-                                      index_room,
-                                      index,
-                                      "description",
-                                      e.target.value
-                                    )
-                                  }
-                                  value={my_room[index].description}
-                                  key={`div_inp_${index_room}_${index}_${ele.type_expanded}`}
-                                  type="text"
-                                  placeholder={"Опишіть стан"}
-                                />
+                              <textarea
+                                className="obj_description"
+                                onChange={(e) =>
+                                  handleChangeRoom(
+                                    index_room,
+                                    index,
+                                    "description",
+                                    e.target.value
+                                  )
+                                }
+                                value={my_room[index].description}
+                                key={`div_inp_${index_room}_${index}_${ele.type_expanded}`}
+                                type="text"
+                                placeholder={"Опишіть стан"}
+                              />
                               {/* </div> */}
                               <div
                                 key={`div_image_${index_room}_${index}_${ele.type_expanded}`}
                                 className="file_div"
                               >
-                                  <input
-                                    key={`div_input_image_${index_room}_${index}_${ele.type_expanded}`}
-                                    className="file_input"
-                                    type="file"
-                                    multiple
-                                    onChange={(event) => {
-                                      handleChangeRoomFile(
-                                        index_room,
-                                        index,
-                                        "images",
-                                        Array.from(event.target.files)
-                                      );
-                                    }}
-                                  ></input>
+                                <input
+                                  key={`div_input_image_${index_room}_${index}_${ele.type_expanded}`}
+                                  className="file_input"
+                                  type="file"
+                                  multiple
+                                  onChange={(event) => {
+                                    handleChangeRoomFile(
+                                      index_room,
+                                      index,
+                                      "images",
+                                      Array.from(event.target.files)
+                                    );
+                                  }}
+                                ></input>
 
-                                  {/* <img className = "image_upload_logo" src={logo_copy}/> */}
+                                {/* <img className = "image_upload_logo" src={logo_copy}/> */}
                                 <div
                                   className="clear_images"
                                   onClick={() => {
@@ -414,16 +426,18 @@ function General(props) {
                               </div>
                               {ele.images.length != 0 ? (
                                 <>
-                                  <Slide>
-                                    {ele.images.map((slideImage, index) => (
-                                      <div className="slider_div" key={index}>
-                                        <img
-                                          className="slider_image"
-                                          src={check_url(slideImage)}
-                                        />
-                                      </div>
-                                    ))}
-                                  </Slide>
+                                  <div className="slider_wrapper">
+                                    <Slide>
+                                      {ele.images.map((slideImage, index) => (
+                                        <div className="slider_div" key={index}>
+                                          <img
+                                            className="slider_image"
+                                            src={check_url(slideImage)}
+                                          />
+                                        </div>
+                                      ))}
+                                    </Slide>
+                                  </div>
                                 </>
                               ) : (
                                 <></>
@@ -455,10 +469,10 @@ function General(props) {
                           Правила колегіуму
                         </a>
                       </p>
-                    </div>
-                    <div>
+
+                      <div class = "results_wrapper">
                       <p style={{ fontSize: "16px" }}>
-                        Я ознайомився / -лася з правилами та підтверджую, що вся
+                        Я ознайомився / -лася з правилами та <br /> підтверджую, що вся
                         надана інформація достовірна.
                         <input
                           style={{
@@ -472,22 +486,25 @@ function General(props) {
                           onChange={() => setRuleAccepted(!ruleAccepted)}
                         />
                       </p>
+                      <input
+                        id={`element_3`}
+                        disabled={!ruleAccepted}
+                        className="submit_form"
+                        value="Відправити"
+                        onClick={handle_post}
+                        key="submit_button"
+                        type={"submit"}
+                      />
+                      </div>
                     </div>
-                    <input
-                      id={`element_3`}
-                      disabled={!ruleAccepted}
-                      className="submit_form"
-                      value="Відправити"
-                      onClick={handle_post}
-                      key="submit_button"
-                      type={"submit"}
-                    />
                   </>
                 ) : (
                   <>
                     <div className="next_stage_wrapper">
-                     
-                      <p>Перейти до наступного блоку: <strong >{room_type[stageCounter + 1]}</strong></p>
+                      <p>
+                        Перейти до наступного блоку:{" "}
+                        <strong>{room_type[stageCounter + 1]}</strong>
+                      </p>
                       <button
                         // id={`element_3`}
                         // disabled={!ruleAccepted}

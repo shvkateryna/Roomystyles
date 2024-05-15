@@ -42,8 +42,6 @@ class SaveFurn(db.Document):
             "images":self.images,
             "description": self.description
             }
-
-
 class Furniture(db.Document):
     type = db.StringField()
     type_expanded = db.StringField()
@@ -502,9 +500,9 @@ def delete_room(encoded):
 
 
 @app.route("/download_report", methods = ["POST"])
-@token_required
 @cross_origin()
-def download_report():
+@token_required
+def download_report(_):
     test = []
     # funrniture = Furniture.objects()
     # for i in funrniture:

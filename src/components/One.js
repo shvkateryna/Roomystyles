@@ -6,6 +6,7 @@ import imageCompression from 'browser-image-compression';
 import { Slide } from 'react-slideshow-image';
 import path from "../path"
 
+import trash_logo from "../assets/trash.png"
 function One(props) {
     const id_coded = props.id_coded
     const [room, setRoom] = useState(props.room);
@@ -103,6 +104,13 @@ function One(props) {
         const compressedFile = await imageCompression(image, options);
         return compressedFile
     }
+    function extractValue(input) {
+        const startIndex = input.indexOf("=") + 1; // Find the index of the first "="
+        if (startIndex === 0) return null; // If "=" is not found, return null
+        const endIndex = input.indexOf("&", startIndex); // Find the index of the first "&" after the "="
+        if (endIndex === -1) return input.substring(startIndex); // If "&" is not found, return the substring from "=" to the end
+        return input.substring(startIndex, endIndex); // Return the substring between "=" and "&"
+    }
     const handle_post = async (e) => {
         e.preventDefault();
         if (room.names[0] === "") {
@@ -137,7 +145,10 @@ function One(props) {
                 for (let file of furnit.images) {
                     // console.log(file)
                     if (typeof (file) != 'string') {
-                    const link = await upload_google_drive(file)
+                    let link = await upload_google_drive(file)
+                    // let a = "https://drive.google.com/uc?id=1LqRL0bxSAme7CRa5cXFHAxzcGagUEk5g&export=download";
+
+                    // console.log("---------")
                     // console.log(link)
                     // const res = await uploadFile(file, room.number);
                     console.log(links)
@@ -175,7 +186,7 @@ function One(props) {
                 <form className="main_form" key="submit_form" >
                     <div className='furniture_list' key="furniture_div">
                         {errorFurniture ? <>
-                            <div className="error_block">{errorFurniture}</div>
+                            <div className="error_block">{errorFurniture} </div>
                         </> : <></>}
                         <label className="text_header" key={"user_label_1"}>
                             <div>Ім'я та прізвище мешканця </div>
@@ -188,6 +199,8 @@ function One(props) {
                         <br></br>
                         {new_block.map((ele, index) => (<>
                             <div key={"div_" + index + "" + 3} className='furniture_block'>
+                            <div className="horizontal_line_separator"></div>
+
                                 <div key={"div_header_" + index + "" + 3} className="header_furniture">
                                     <div key={"que_body_" + index + "" + 3} className="text_header">
                                         <div key={"strong_" + index + "" + 3}>{index + 1 + ")    "} {ele.type_expanded}<br /></div>
@@ -196,13 +209,11 @@ function One(props) {
                                 </div>
                                 <div key={"div_body_" + index + "" + 3} className="body_furniture">
                                     {ele.type === "bed" ? <div key={"div_select_" + index + "" + 3}></div> : <></>}
-                                    <div key={"text_image" + index + "" + 3} className="obj_input">
                                         <textarea className="obj_description"
                                             onChange={(e) => handleChangeRoom(3, index, "description", e.target.value)}
                                             value={room.furniture_list[3][index].description}
                                             key={"inp_" + index + "" + 3} type="text"
                                             placeholder={"Опишіть стан"} />
-                                    </div>
                                     <div key={"div_image" + index + "" + 3} className="file_div">
                                         <input
                                             key={"input_image" + index + "" + 3}
@@ -213,7 +224,15 @@ function One(props) {
                                                 handleChangeRoomFile(3, index, "images", Array.from((event.target.files)))
                                             }}>
                                         </input>
-                                    <div className="clear_images" onClick={()=>{handleChangeRoomFile(3, index, "images", [])}}>Видалити фото</div>
+                                    <div className="clear_images" onClick={()=>{handleChangeRoomFile(3, index, "images", [])}}>
+                                        
+                                    <img
+                                    className="trash_logo"
+                                    src={trash_logo}
+                                  />
+                                  
+                                  
+                                  </div>
                                     </div>
                                     {ele.images.length != 0 ? <>
                                             <Slide>
@@ -228,15 +247,15 @@ function One(props) {
                             </div>
 
                         </>))}
-                    </div>
-                    <div>
+                   
+                    <div className = "submit_align_wrapper">
                         <br />
-                        <div style={{paddingLeft: '20px', fontSize: '16px'}}>
+                        <div style={{fontSize: '16px'}}>
                             <p>Перед підтвердженням форми уважно перегляньте правила Колегіуму за посиланням.</p>
                             <p><a target="_blank" href="https://collegium.ucu.edu.ua/dlia-vstupnika/dokumenty/pravila-vnutrishnogo-rozporiadku-v-kolegiumi">Правила колегіуму</a></p>
                         </div>
-                        <div>
-                            <p style={{paddingLeft: '20px', fontSize: '16px'}}>Я ознайомився / -лася з правилами та підтверджую, що вся надана інформація достовірна.
+                        <div className="results_wrapper">
+                            <p style={{fontSize: '16px'}}>Я ознайомився / -лася з правилами <br/> та підтверджую, що вся надана інформація достовірна.
                             <input style={{height: '15px', width: '15px', marginLeft: '10px'}}
                                 key="check_rules"
                                 type="checkbox"
@@ -244,8 +263,11 @@ function One(props) {
                                 onChange={() => setRuleAccepted(!ruleAccepted)}
                             />
                             </p>
+
+                            <input disabled={!ruleAccepted} className="submit_form" value="Відправити" onClick={handle_post} key="submit_button" type={"submit"} />
                         </div>
-                        <input disabled={!ruleAccepted} className="submit_form" value="Відправити" onClick={handle_post} key="submit_button" type={"submit"} />
+                       
+                    </div>
                     </div>
                 </form>
         </div>

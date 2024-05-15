@@ -27,11 +27,11 @@ function Main_One() {
                 <>
                     {(response) ? <>
                         {/* <NavBar /> */}
-                        <div className='reg_text_div' ><strong>Реєстрація кімнати №{response.number}</strong></div>
+                        <div className='register' ><strong>Реєстрація кімнати №{response.number}</strong></div>
                         <One room={response} id_coded={id_coded} />
-                        <div className="greeting">
+                        {/* <div className="greeting">
                             <strong><p>Вітаємо вдома!</p></strong>
-                        </div>
+                        </div> */}
                     </> : <></>}
                     {error ? <>
                         {error.response.data === "Wrong code" ? <div className='notions'>

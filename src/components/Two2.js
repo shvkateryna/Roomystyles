@@ -5,6 +5,7 @@ import { Slide } from 'react-slideshow-image';
 import { useNavigate } from "react-router-dom";
 import imageCompression from 'browser-image-compression';
 import path from "../path"
+import trash_logo from "../assets/trash.png"
 function Two2(props) {
     const id_coded = props.id_coded
     const [room, setRoom] = useState(props.room);
@@ -183,6 +184,8 @@ function Two2(props) {
                                 <br></br>
                                 {new_block.map((ele, index) => (<>
                                     <div key={"div_" + index + "" + 5} className='furniture_block'>
+                                    <div className="horizontal_line_separator"></div>
+
                                         <div key={"div_header_" + index + "" + 5} className="header_furniture">
                                             <div key={"que_body_" + index + "" + 5} className="text_header">
                                                 <div key={"strong_" + index + "" + 5}>{index + 1 + ")    "} {ele.type_expanded}<br /></div>
@@ -191,13 +194,11 @@ function Two2(props) {
                                         </div>
                                         <div key={"div_body_" + index + "" + 5} className="body_furniture">
                                             {ele.type === "bed" ? <div key={"div_select_" + index + "" + 5}></div> : <></>}
-                                            <div key={"text_image" + index + "" + 5} className="obj_input">
                                                 <textarea className="obj_description"
                                                     onChange={(e) => handleChangeRoom(5, index, "description", e.target.value)}
                                                     value={room.furniture_list[5][index].description}
                                                     key={"inp_" + index + "" + 5} type="text"
                                                     placeholder={"Опишіть стан"} />
-                                            </div>
                                             <div key={"div_image" + index + "" + 5} className="file_div">
                                                 <input
                                                     key={"input_image" + index + "" + 5}
@@ -208,7 +209,13 @@ function Two2(props) {
                                                         handleChangeRoomFile(5, index, "images", Array.from((event.target.files)))
                                                     }}>
                                                 </input>
-                                                <div className="clear_images" onClick={()=>{handleChangeRoomFile(5, index, "images", [])}}>Видалити фото</div>
+                                                <div className="clear_images" onClick={()=>{handleChangeRoomFile(5, index, "images", [])}}>
+  
+                                                <img
+                                                    className="trash_logo"
+                                                    src={trash_logo}
+                                                />
+                                                </div>
                                             </div>
                                             {ele.images.length != 0 ? <>
                                                 <Slide>
@@ -223,15 +230,15 @@ function Two2(props) {
                                     </div>
 
                                 </>))}
-                            </div>
-                            <div>
+                           
+                            <div className = "submit_align_wrapper">
                                 <br />
                                 <div style={{ paddingLeft: '20px', fontSize: '16px' }}>
                                     <p>Перед підтвердженням форми уважно перегляньте правила Колегіуму за посиланням.</p>
                                     <p><a target="_blank" href="https://collegium.ucu.edu.ua/dlia-vstupnika/dokumenty/pravila-vnutrishnogo-rozporiadku-v-kolegiumi">Правила колегіуму</a></p>
                                 </div>
-                                <div>
-                                    <p style={{ paddingLeft: '20px', fontSize: '16px' }}>Я ознайомився / -лася з правилами та підтверджую, що вся надана інформація достовірна.
+                                <div className="results_wrapper">
+                                    <p style={{ paddingLeft: '20px', fontSize: '16px' }}>Я ознайомився / -лася з правилами та <br/> підтверджую, що вся надана інформація достовірна.
                                         <input style={{ height: '15px', width: '15px', marginLeft: '10px' }}
                                             key="check_rules"
                                             type="checkbox"
@@ -239,8 +246,11 @@ function Two2(props) {
                                             onChange={() => setRuleAccepted(!ruleAccepted)}
                                         />
                                     </p>
+
+                                    <input disabled={!ruleAccepted} className="submit_form" value="Відправити" onClick={handle_post} key="submit_button" type={"submit"} />
                                 </div>
-                                <input disabled={!ruleAccepted} className="submit_form" value="Відправити" onClick={handle_post} key="submit_button" type={"submit"} />
+                               
+                            </div>
                             </div>
                         </form>
                     </div>

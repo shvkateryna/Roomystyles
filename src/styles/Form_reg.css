@@ -32,6 +32,17 @@
     background-color: #000000;
 } */
 
+.submit_align_wrapper{
+    margin-top: 30px;
+    border-top: 2px dashed #000000;
+    width: 70%;
+}
+.body_furniture{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 .horizontal_line_separator{
     width: 100%;
     height: 1px;
@@ -119,6 +130,7 @@
     visibility: hidden;
 }
 .body_furniture {
+    width: 70%;
     font-size: 16px;
 }
 
@@ -257,7 +269,6 @@ input[disabled]:hover{
 
 .main {
     
-    margin-top: 30px;
     width: auto;
     display: flex;
     justify-content: space-between;
@@ -286,7 +297,7 @@ ul li {
 
 ul li .icons {
     font-size: 25px;
-    color: #1b761b;
+    color: #479c47;
     margin: 0 60px;
 }
 
@@ -295,7 +306,7 @@ ul li .label {
     letter-spacing: 1px;
     font-size: 14px;
     font-weight: bold;
-    color: #1b761b;
+    color: #479c47;
 }
 
 ul li .step {
@@ -340,13 +351,13 @@ ul li .step p {
 
 ul li .active {
     z-index: 3;
-    background-color: #1b761b;
+    background-color: #479c47;
 }
 
 li .active::after {
     position: absolute;
     z-index: 2;
-    background-color: #1b761b;
+    background-color: #479c47;
 
 }
 
@@ -364,6 +375,12 @@ ul li .active .awesome {
 }
 
 @media screen and (max-width:480px){
+    .submit_align_wrapper{
+        width: 100%;
+    }
+    .body_furniture{
+        width: 100%;
+    }
     .next_stage_wrapper{
         width: 100%;
     }
@@ -418,7 +435,8 @@ ul li .active .awesome {
     border: 1px solid black;
 }
 .text_header {
-    padding: 20px 0px 0px 0px;
+    margin-top: 10px;
+    padding: 5px 0px 0px 0px;
     font-size: 18px;
     font-family: 'Montserrat Medium 500', sans-serif;
 }
@@ -456,7 +474,6 @@ ul li .active .awesome {
     margin-bottom: 20px;
 }
 .submit_form{
-    margin-left: 30px;
     color: black;
     border-radius: 12px;
     content: 'Додати фото';
@@ -488,8 +505,26 @@ ul li .active .awesome {
     display: flex;
     justify-content: center;
 }
-.trash_logo{    
+.slider_wrapper > div {
+    width: 100%!important;
+}
+/* .slider_align_wrapper{
+    width: 100%!important;
+} */
+
+
+.results_wrapper{
+    display: flex;
+    justify-content: space-between;
+    
+}
+.react-slideshow-container{
+    width: 100%!important;
+}
+.slider_wrapper{
     width: 100%;
+}
+.trash_logo{    
     height: 100%;
 }
 .room_type {
@@ -512,6 +547,11 @@ ul li .active .awesome {
 }
 
 @media screen and (max-width:480px){
+    .results_wrapper{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
     .error_block {
         width: 100%;
     }
