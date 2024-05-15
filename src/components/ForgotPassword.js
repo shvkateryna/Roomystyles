@@ -48,7 +48,7 @@ export default function ForgotPassword() {
                                 <Form.Label style={{color: "black", fontFamily: 'Montserrat Medium 500', fontSize: "16px"}}>Корпоративна пошта</Form.Label>
                                 <Form.Control type='email' ref={emailRef} required></Form.Control>
                             </Form.Group>
-                            <Button disabled={loading} className='w-100' type='submit' style={{backgroundColor: "#f7d474", border: "none", borderRadius: "12px", marginTop: "15px", height: "65px", fontFamily: 'Montserrat Medium 500', fontSize: "16px", backgroundColor: isHover ? '#efd8b5' : '#E6C797', color: isHover ? 'black' : 'black', padding: '15px'}}
+                            <Button disabled={loading} className='w-100' type='submit' style={{backgroundColor: "#f7d474", border: "none", borderRadius: "12px", marginTop: "15px", height: "65px", fontFamily: 'Montserrat Medium 500', fontSize: "16px", backgroundColor: isHover ? '#efd8b5' : '#f3e8c9', color: isHover ? 'black' : 'black', padding: '15px'}}
                                 onMouseEnter={handleMouseEnter}
                                 onMouseLeave={handleMouseLeave}>
                                 Скинути пароль

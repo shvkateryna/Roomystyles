@@ -1,6 +1,6 @@
 .alert_div {
     padding: 20px;
-    background-color: #efd8b5; /* Red */
+    background-color: #f3e8c9; /* Red */
     color: black;
     margin-bottom: 15px;
   }
@@ -26,25 +26,48 @@
 .furniture_block+.furniture_block {
     margin-top: 50px;
 }
+/* .horizontal_line_separator_confirm{
+    width: 10%;
+    height: 2px;
+    background-color: #000000;
+} */
 
+.horizontal_line_separator{
+    width: 100%;
+    height: 1px;
+    background-color: #000000;
+}
 .furniture_block {
-    border-top: 1px solid gray;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border-top: 1px solid gray; */
 }
 
+.furniture_list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .header_furniture {
-    padding: 10px 30px 10px 10px;
+    padding: 10px 10px 10px 10px;
+    margin-right: auto;
 }
-
+.arrow{
+    width: 20px;
+    height: 20px;
+}
 .header_furniture label {
     font-size: 16px;
 }
 
 .file_div {
     align-items: center;
-    
+    justify-self: start;
 }
 .clear_images{
-    background: rgb(234, 103, 103);
+    /* background: rgb(234, 103, 103); */
     color: white;
     text-decoration: none;
     margin-left: 5px;
@@ -55,10 +78,45 @@
     cursor: pointer;
     font-family: 'Montserrat Medium 500', sans-serif;
     font-size: 14px;
-    padding: 14px;
-    width: 150px;
-    height: 50px;
+    width: 25px;
+    height: 25px;
     text-align: center
+}
+
+.form_button_next_step {
+    display: block;
+    cursor: pointer;
+    font-size: 16px;
+    color: #000000;
+    transition: .5s all;
+    width: 200px;
+    height: 45px;
+    background-color: #ffffff;
+    border: solid;
+    border-color: #f3e8c9;
+    border-width: 3px;
+    font-family: 'Montserrat Medium 500', sans-serif;
+    border-radius: 12px;
+  }
+  
+  .form_button_next_step:hover {
+    background-color: #f3e8c9;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  }
+
+.next_stage_wrapper{
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 2px dashed #000000 ;
+    display: flex;
+    align-items: center;
+    width: 70%;
+    
+    display: flex;
+    justify-content: space-between;
+}
+.link_author{
+    visibility: hidden;
 }
 .body_furniture {
     font-size: 16px;
@@ -80,33 +138,40 @@ input[disabled]:hover{
   color: #666666;
 }
 .file_input {
-    content: 'Додати фото';
+    width: 50%;
+    max-width: 300px;
 }
 
 .file_input::-webkit-file-upload-button {
-    content: 'Додати фото';
+    content: url('../assets/upload-image-icon.png') " | Додати фото";
     visibility: hidden;
 }
 
+.image_upload_logo{
+    width: 20px;
+    height: 20px;
+}
 .file_input::before {
+    width: 100px;
     text-decoration: none;
-    margin-left: 30px;
+    /* margin-left: 30px; */
     color: black;
     border-radius: 12px;
-    content: 'Додати фото';
+    content: "Додати фото";
     display: inline-block;
     border: none;
     cursor: pointer;
     font-family: 'Montserrat Medium 500', sans-serif;
     font-size: 14px;
     padding: 14px;
-    background-color: #E6C797;
-    width: 70%;
+    background-color: #f3e8c9;
+    width: 100%;
     height: 50px;
     text-align: center
 }
 
 .file_input:hover::before {
+
     content: 'Додати фото';
     font-family: 'Montserrat Medium 500', sans-serif;
     border: none;
@@ -120,14 +185,14 @@ input[disabled]:hover{
 }
 
 .file_div {
-    /* width: 1000%; */
+    gap: 30px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .obj_input {
     align-items: center;
-    width: 100px;
     height: 100px;
-    padding-left: 22px;
 }
 
 .step_2 {
@@ -136,7 +201,7 @@ input[disabled]:hover{
 }
 
 .main_div {
-    overflow-x: hidden;
+
     margin-top: 15px;
     margin-left: auto;
     margin-right: auto;
@@ -144,7 +209,6 @@ input[disabled]:hover{
     padding: 0px 10px 20px 7px;
     width: auto;
     font-family: 'Verdana';
-    background-color: #FFEDCE;
     border-radius: 15px;
 }
 
@@ -182,20 +246,140 @@ input[disabled]:hover{
     font-size: 16px;
     color: #000000;
     transition: .5s all;
-    width: 500px;
-    height: 70px;
-    background-color: #E6C797;
+    width: 400px;
+    height: 40px;
+    background-color: #f3e8c9;
     font-family: 'Montserrat Medium 500', sans-serif;
-    border-radius: 12px;
+    border-radius: 7px;
     border: none;
     margin: 20px auto;
 }
+
+.main {
+    
+    margin-top: 30px;
+    width: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+ul {
+    padding-left: 0px!important;
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    justify-content: space-between;
+}
+
+ul li {
+    /* z-index: 1; */
+    width: 15%;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 20px;
+}           
+
+ul li .icons {
+    font-size: 25px;
+    color: #1b761b;
+    margin: 0 60px;
+}
+
+ul li .label {
+    font-family: sans-serif;
+    letter-spacing: 1px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #1b761b;
+}
+
+ul li .step {
+    display: block;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-color: #d7d7c3;
+    margin: 16px 0 10px;
+    display: grid;
+    place-items: center;
+    color: ghostwhite;
+    position: relative;
+    cursor: pointer;
+}
+
+.step::after 
+    
+{
+    position: absolute;
+    z-index: -1;
+    content: "";
+    width: 25vw;
+    max-width: 300px;
+    height: 3px;
+    background-color: #d7d7c3;
+    right: 30px;
+}
+
+.first::after {
+    width: 0;
+    height: 0;
+}
+
+ul li .step .awesome {
+    display: none;
+}
+
+ul li .step p {
+    font-size: 18px;
+}
+
+ul li .active {
+    z-index: 3;
+    background-color: #1b761b;
+}
+
+li .active::after {
+    position: absolute;
+    z-index: 2;
+    background-color: #1b761b;
+
+}
+
+ul li .active p {
+    display: none;
+}
+
+ul li .active .awesome {
+    display: flex;
+}
+
 
 .button_next:hover {
     background-color: #efd8b5;
 }
 
 @media screen and (max-width:480px){
+    .next_stage_wrapper{
+        width: 100%;
+    }
+    
+    .furniture_block{
+        width: 100%;
+    }
+    
+    ul li .label {
+        /* font-family: sans-serif; */
+        letter-spacing: 0.5px;
+        font-size: 12px;
+        margin-right: 5px;
+    }
+
+    
     .button_next{
       width: 300px;
       height: 80px;
@@ -234,17 +418,18 @@ input[disabled]:hover{
     border: 1px solid black;
 }
 .text_header {
-    padding: 20px 20px 0px 20px;
+    padding: 20px 0px 0px 0px;
     font-size: 18px;
     font-family: 'Montserrat Medium 500', sans-serif;
 }
 
 .obj_description {
-    margin-bottom: 150px;
+    width: 100%;
+    margin-bottom: 15px;
     padding: 15px;
     border-radius: 10px;
     transition: all .5s;
-    width: 600px;
+    max-width: 600px;
     border: 1px solid gray;
     min-height: 80px;
 }
@@ -264,6 +449,7 @@ input[disabled]:hover{
 }
 
 .error_block {
+    width: 70%;
     background-color: rgb(189, 48, 48);
     color: #ffffff;
     padding: 10px;
@@ -280,7 +466,7 @@ input[disabled]:hover{
     font-family: 'Montserrat Medium 500', sans-serif;
     font-size: 16px;
     padding: 12px;
-    background-color: #E6C797;
+    background-color: #f3e8c9;
     width: 240px;
     height: 50px;
     text-align: center
@@ -302,9 +488,12 @@ input[disabled]:hover{
     display: flex;
     justify-content: center;
 }
-
+.trash_logo{    
+    width: 100%;
+    height: 100%;
+}
 .room_type {
-    padding: 40px;
+    padding: 2          0px;
     font-size: 18px;
     text-transform: uppercase;
     font-family: 'Montserrat Medium 500', sans-serif;
@@ -323,13 +512,19 @@ input[disabled]:hover{
 }
 
 @media screen and (max-width:480px){
+    .error_block {
+        width: 100%;
+    }
     .button_next{
       width: 290px;
       height: 60px;
       font-size: 16px;
     }
     .obj_description {
-        width: 300px;
+        width: 100%;
+    }
+    .obj_input{
+        width: 100%;
     }
     .sending_form {
         padding-left: 12%;
@@ -339,18 +534,21 @@ input[disabled]:hover{
     .file_div{
         justify-content: space-between;
     }
+    .file_input{
+        width: 50%;
+        max-width: 300px;
+    }
     .file_input::before {
+        /* width: 100px; */
         font-size: 12px;
-        padding: 12px;
-        width: 60%;
+        width: 100%;
         height: 40px;
     }
     .clear_images{
         font-size: 12px;
-        padding: 12px;
-        width: 62%;
-        height: 40px;
-        margin-top: 10px;
-        margin-left: 30px;
+        width: 25px;
+        height: 25px;
+        /* margin-top: 10px; */
+        /* margin-left: 30px; */
     }
 }

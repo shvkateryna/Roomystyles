@@ -66,7 +66,7 @@ export default function Login() {
             <h1 class="heading_login"> Roommy </h1>
             <Container className="aside_login_container">
               <Card>
-                <Card.Body class="card-body">
+                <Card.Body class="card-body-login">
                   <h2 className="login_header">
                     <strong>Увійти</strong>
                   </h2>

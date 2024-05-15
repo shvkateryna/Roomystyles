@@ -91,7 +91,7 @@ const Curator_menager = () => {
             <NavBar/>
             <Container className='align-items-center justify-content-center' style = {{justifyContent: "center",  minHeight: '60vh', maxWidth: '550px', marginTop:"100px"}}>
             <Card style={{position: "unset"}}>
-                <Card.Body style={{backgroundColor: "#FDF2E9", border: 'none', borderRadius: '5px', borderColor: '#E6C797'}}>
+                <Card.Body style={{backgroundColor: "#FDF2E9", border: 'none', borderRadius: '5px', borderColor: '#f3e8c9'}}>
                     <h2 className = 'text-center mb-4' style={{color: "black", fontFamily: 'Montserrat Medium 500', fontSize: "18px", textTransform: 'uppercase', letterSpacing: '5px'}}><strong>Додати куратора</strong></h2>
                     {error && <Alert variant = 'danger'>{error}</Alert>}
                     <Form onSubmit={(e) => create_new_user(e)} style={{height: "300px"}}>
@@ -109,7 +109,7 @@ const Curator_menager = () => {
                                 value={selected}
                                 onChange={setSelected}
                             />
-                        <Button disabled = {loading} className = 'w-100' type = 'submit' style={{backgroundColor: "#f7d474", border: "none", borderRadius: "12px", marginTop: "15px", height: "65px", fontFamily: 'Montserrat Medium 500', fontSize: "16px", backgroundColor: isHover ? '#efd8b5' : '#E6C797', color: isHover ? 'black' : 'black', padding: '15px'}}
+                        <Button disabled = {loading} className = 'w-100' type = 'submit' style={{backgroundColor: "#f7d474", border: "none", borderRadius: "12px", marginTop: "15px", height: "65px", fontFamily: 'Montserrat Medium 500', fontSize: "16px", backgroundColor: isHover ? '#efd8b5' : '#f3e8c9', color: isHover ? 'black' : 'black', padding: '15px'}}
                         onMouseEnter={handleMouseEnter}
                         onMouseLeave={handleMouseLeave}>
                             Додати

@@ -8,6 +8,14 @@
     grid-template-areas: 'button1 button2 button3';
     margin-right: 30px;
 }
+.card_header_wrapper{
+    display: flex!important;
+    flex-direction: row!important;
+}
+.card-body{
+    flex-direction: row!important;
+}
+
 .main-text{
     color: #542400;
     margin: 30px;

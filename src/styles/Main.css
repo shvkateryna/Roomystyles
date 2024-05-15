@@ -62,7 +62,7 @@ body > .container {
     grid-area: "button1";
     font-size: 16px;
     font-family: 'Montserrat Medium 500', sans-serif;
-    background-color: #E6C797;
+    background-color: #f3e8c9;
     color: rgb(0, 0, 0);
     border-radius: 12px;
     padding: 10px 18px;
@@ -82,7 +82,7 @@ body > .container {
     }
     .header_button-login{
         font-size: 14px;
-        background-color: #E6C797;
+        background-color: #f3e8c9;
         color: rgb(0, 0, 0);
         border-radius: 5px;
         padding: 10px 8px;
@@ -298,22 +298,68 @@ font-size: 23px;
     color: black;
     padding: 15px;
     width: 100%;
-    --bs-btn-bg: #E6C797!important;
+    --bs-btn-bg: #f3e8c9!important;
     --bs-btn-border-color: none!important;
   }
   
   .button_submit:hover {
     background-color: #e7ba77!important;
     color: black;
+    
   }
+
+  .link{
+    display: inline-block;
+    background-color: transparent;
+    color: inherit;
+    border: none;
+    font-size: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    outline: none;
+  }
+
+.h5{
+    margin-bottom: 0px!important;
+}
+.link-copied{
+    display: inline-block;
+    background-color: transparent;
+    color: inherit;
+    border: none;
+    font-size: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    outline: none;
+    opacity: 0.5    ;
+}
+.copy_logo{
+    width: 20px;
+    height: 20px;
+}
 .card-body{
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* flex-direction: column; */
     /* background: #FDF2E9; */
     align-items: center;
     border-radius: '5px';
     border: none!important;
 }
+.card-body-login{
+
+    display: flex;
+    flex-direction: column!important;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: '5px';
+    padding: 15px;
+    /* border: none!important; */
+}
+
+
 
 .aside_image_login{
   height: 100%;

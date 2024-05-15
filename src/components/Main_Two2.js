@@ -28,7 +28,7 @@ function Main_Two2() {
             {loading ? <div className="loader_block"><div className="loader"></div></div> :
                 <>
                     {(response) ? <>
-                        <NavBar />
+                        {/* <NavBar /> */}
                         <div className='reg_text_div' ><strong>Реєстрація кімнати №{response.number}</strong></div>
                         <Two2 room={response} id_coded={id_coded} />
                         <div className="greeting">

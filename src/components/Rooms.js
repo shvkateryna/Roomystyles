@@ -12,6 +12,9 @@ import { fetcher } from "../services/ApiService";
 import { useCookies } from "react-cookie";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
+import copy_logo from '../assets/copy.png'
+
+
 const Rooms = (props) => {
   const [inputValue, setInputValue] = useState("");
   const [visible, setVisible] = useState(false);
@@ -175,12 +178,34 @@ const Rooms = (props) => {
               <div className="roomsmain">
                 <div className="roomscards">
                   {response.map((ele, index) => (
-                    <Card className="card_room" onClick={() => navigate(String(ele.number))}>
-                      <Card.Body>
+                    <Card
+                      className="card_room"
+                      
+                    >
+                      <Card.Body className = "card_header_wrapper">
                         <Card.Title>{ele.number}</Card.Title>
-                        <Card.Text></Card.Text>
+                        
+                        
+                        <button
+                        // className = "copy_button"
+                          key={"button_room_link" + index}
+                          disabled={loadinRoute[0]}
+                          className={
+                            justcopied === ele.number ? "link-copied" : "link"
+                          }
+                          onClick={async () => {
+                            navigator.clipboard.writeText(
+                              "http://localhost:3000" +
+                                "/rooms/" +
+                                (await get_route(ele.number))
+                            );
+                          }}
+                        >
+                          <img class = "copy_logo" src={copy_logo}/>
+                        </button>
                       </Card.Body>
-                      <ListGroup className="list-group-flush">
+                      
+                      <ListGroup onClick={() => navigate(String(ele.number))} className="list-group-flush">
                         {ele.names.map((name, index) => (
                           <ListGroup.Item>
                             {name ? name : "Мешканця немає"}
@@ -197,10 +222,15 @@ const Rooms = (props) => {
                           {ele.verified.map((el_verified, index) => (
                             <div className="spec_submition_wrapper">
                               {SumbitionTitles[index]}
-                            <div className={el_verified ? "roomaccepted" : "roomrejected"}></div>
+                              <div
+                                className={
+                                  el_verified ? "roomaccepted" : "roomrejected"
+                                }
+                              ></div>
                             </div>
                           ))}
                         </div>
+
                         {/* </Card.Body> */}
                       </div>
                     </Card>

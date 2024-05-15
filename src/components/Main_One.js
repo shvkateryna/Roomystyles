@@ -26,7 +26,7 @@ function Main_One() {
             {loading ? <div className="loader_block"><div className="loader"></div></div> :
                 <>
                     {(response) ? <>
-                        <NavBar />
+                        {/* <NavBar /> */}
                         <div className='reg_text_div' ><strong>Реєстрація кімнати №{response.number}</strong></div>
                         <One room={response} id_coded={id_coded} />
                         <div className="greeting">

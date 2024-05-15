@@ -27,7 +27,7 @@ function Main_Page() {
             <div style = {{marginTop: "60px"}}>
                 <img className="image" src={logo}></img>
             </div>
-            <hr width="100%" size="30" color="#E6C797" ></hr>
+            <hr width="100%" size="30" color="#f3e8c9" ></hr>
             <div className="heading">
                 <strong>Як зареєструвати кімнату?</strong>
             </div>
@@ -37,7 +37,7 @@ function Main_Page() {
                 <p><strong className="heading1">3.</strong> Опишіть стан кімнати. За потреби сфотографуйте пошкодження.</p>
                 <p><strong className="heading1">4.</strong> Збережіть кожну форму та чекайте підтвердження від куратора.</p>
             </div>
-            <hr width="100%" size="30" color="#E6C797" ></hr>
+            <hr width="100%" size="30" color="#f3e8c9" ></hr>
             <div className="footer">
                 <div className="heading">
                     <strong>Контакти</strong>
@@ -56,7 +56,7 @@ function Main_Page() {
                     <a href="https://collegium.ucu.edu.ua/" target="_blank" className="fa fa-dribbble"></a>
                 </div>
                 </div>
-                <hr width="100%" size="30" color="#E6C797" ></hr>
+                <hr width="100%" size="30" color="#f3e8c9" ></hr>
                 <div className="greeting">
                     <strong><p>Вітаємо вдома!</p></strong>
                     <Map />
