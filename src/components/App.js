@@ -23,7 +23,7 @@ function App() {
   useEffect(()=>{
       console.log(cookies)
       if (cookies.token) {
-          fetcher({ url: "validate_token", token: cookies.token }).then(()=>{
+          fetcher({ url: "validate_token", body: {} ,token: cookies.token }).then(()=>{
           setAuth(true)
           setLoading(false)
         }).catch(()=>{
@@ -44,6 +44,7 @@ function App() {
         
         {loading?
         <>
+        
         <Route path="/" element={<span class="loader"></span>} />
         </>:<>
         {auth?<>

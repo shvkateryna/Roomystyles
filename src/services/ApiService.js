@@ -12,7 +12,7 @@ const fetcher = async (params) => {
   if (params.type === "get"){
     return axios.get(BASE_URL + "/" + params.url, config).then((res) => res);
   }
-  return axios.post(BASE_URL + "/" + params.url, {}, config).then((res) => res);
+  return axios.post(BASE_URL + "/" + params.url, params.body, config).then((res) => res);
 };
 
 // function MakeRequest (url,cookies) {

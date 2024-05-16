@@ -495,14 +495,18 @@ ul li .active .awesome {
     font-size: 100%;
     text-align: center;
 }
-
+.image_wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .slider_image{
-    margin-top: 20px;
-    height: 175px ;
-    width: auto;
+    max-width: 100%;
+    height: auto;
 }
 .slider_div{
     display: flex;
+    align-items: center;
     justify-content: center;
 }
 .slider_wrapper > div {

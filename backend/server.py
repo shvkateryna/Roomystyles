@@ -540,13 +540,12 @@ def create_report():
     return "add"
 
 @app.route("/verify", methods = ["POST"])
-@token_required
 @cross_origin()
-def verify():
+@token_required
+def verify(user):
     data = json.loads(request.data.decode("utf-8"))
-    user_id = data["u_id"]
     index = data["index"]
-    user = User.objects(uid = user_id).first()
+    print(user)
     if user.user_type == "USER" or user.user_type == "ADMIN":
         room_number = data["room_n"]
         for room in user.rooms:

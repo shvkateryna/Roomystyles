@@ -14,7 +14,6 @@ import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import copy_logo from '../assets/copy.png'
 
-
 const Rooms = (props) => {
   const [inputValue, setInputValue] = useState("");
   const [visible, setVisible] = useState(false);

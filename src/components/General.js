@@ -10,7 +10,7 @@ import path from "../path";
 import trash_logo from "../assets/trash.png";
 import arrow_image from "../assets/arrow.png";
 import tick_icon from "../assets/tick-icon.png";
-
+import Slider from "react-slick";
 function General(props) {
   const id_coded = props.id_coded;
   const [room, setRoom] = useState(props.room);
@@ -24,6 +24,14 @@ function General(props) {
     room.furniture_list[1],
     room.furniture_list[2],
   ];
+  const settings = {
+    lazyLoad: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    initialSlide: 1
+  };
   const room_type = ["Передпокій", "Спальня", "Вбиральня"];
   let navigate = useNavigate();
   const routeChange = (path) => {
@@ -130,7 +138,7 @@ function General(props) {
         return null;
       }
     }
-    document.documentElement.scrollIntoView({ behavior: "smooth" });
+    document.documentElement.scrollIntoView({behavior: "smooth" });
 
     setStageCounter(stageCounter + 1);
   };
@@ -427,16 +435,18 @@ function General(props) {
                               {ele.images.length != 0 ? (
                                 <>
                                   <div className="slider_wrapper">
-                                    <Slide>
+                                    <Slider {...settings}>
                                       {ele.images.map((slideImage, index) => (
-                                        <div className="slider_div" key={index}>
+                                        <div>
+                                        <div className="image_wrapper">
                                           <img
                                             className="slider_image"
                                             src={check_url(slideImage)}
                                           />
-                                        </div>
+                                          </div>
+                                          </div>
                                       ))}
-                                    </Slide>
+                                    </Slider>
                                   </div>
                                 </>
                               ) : (

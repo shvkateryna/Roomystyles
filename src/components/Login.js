@@ -46,7 +46,7 @@ export default function Login() {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      navigate("/");
+      window.location.href = '/';
       console.log("here");
     } catch {
       setError("Не вдалося увійти");

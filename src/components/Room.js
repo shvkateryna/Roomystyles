@@ -11,11 +11,13 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../styles/Roomnew.css";
+import { fetcher } from "../services/ApiService";
 import NavBar from "./navbarnew";
+import { useCookies } from "react-cookie";
 
 export const Room = (props) => {
   const [visible, setVisible] = useState(false);
-
+  const [cookies] = useCookies(["user"]);
 
   let sliderRef = useRef(null);
   const next = () => {
@@ -112,8 +114,8 @@ export const Room = (props) => {
     "Спальня",
     "Вбиральня",
     "Одноповерхове ліжко",
-    "Двоповерхове ліжко (1 поверх)",
-    "Двоповерхове ліжко (2 поверх)",
+    "Двоповерхове ліжко (1 п.)",
+    "Двоповерхове ліжко (2 п.)",
   ];
   async function get_route(number) {
     return new Promise(function (resolve, reject) {
@@ -126,17 +128,30 @@ export const Room = (props) => {
     });
   }
   const verify = (e, room_number, user_id, index) => {
+
+
     e.preventDefault();
     let new_room_ls = currentRoom.verified;
-
-    new_room_ls[index] = !new_room_ls[index];
+    console.log(cookies.token)
+    let saved = !new_room_ls[index];
+    new_room_ls[index] = null;
     setCurrentRoom((prev) => ({ ...prev, verified: new_room_ls }));
-    console.log(currentRoom);
-    axios.post(path + "/verify", {
+    fetcher({ url: "verify", token: cookies.token, type: "post" , body: {
       room_n: room_number,
-      u_id: user_id,
-      index: index,
-    });
+      index: index
+    }})
+    .then((res) => {
+      new_room_ls[index] = saved;
+      setCurrentRoom((prev) => ({ ...prev, verified: new_room_ls }));
+    })
+    .catch((err) => console.log('Error'));
+
+    // console.log(currentRoom);
+    // axios.post(path + "/verify", {
+    //   room_n: room_number,
+    //   u_id: user_id,
+    //   index: index,
+    // });
   };
 
   const DeleteRoomUser = (index_block) => {
@@ -268,15 +283,24 @@ export const Room = (props) => {
           slidesToScroll: 2,
           
         },
+      },
+      {
+        breakpoint: 500,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          
+        },
       }
     ],
   };
-  var settings_image = {
+  const settings_image = {
+    lazyLoad: false,
     infinite: false,
-    speed: 200,
+    speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    initialSlide: 0,
+    initialSlide: 1
   };
   const [selectedOption, setSelectedOption] = useState("");
 
@@ -284,7 +308,22 @@ export const Room = (props) => {
      console.log(option);
     setSelectedOption(option);
   };
-
+  function extractValue(input) {
+    const startIndex = input.indexOf("=") + 1; // Find the index of the first "="
+    if (startIndex === 0) return null; // If "=" is not found, return null
+    const endIndex = input.indexOf("&", startIndex); // Find the index of the first "&" after the "="
+    if (endIndex === -1) return input.substring(startIndex); // If "&" is not found, return the substring from "=" to the end
+    return input.substring(startIndex, endIndex); // Return the substring between "=" and "&"
+  }
+  function check_url(slideImage) {
+    if (typeof slideImage != "string") {
+      return URL.createObjectURL(slideImage);
+    } else {
+      console.log("https://drive.google.com/thumbnail?id=" + extractValue(slideImage) + "&sz=w1000")
+      return "https://drive.google.com/thumbnail?id=" + extractValue(slideImage) + "&sz=w1000"
+      // return slideImage;
+    }
+  }
   const handleChangeFinishDate = (index, value) => {
     let users_dates = currentRoom.finish_dates;
     users_dates[index] = value;
@@ -301,16 +340,17 @@ export const Room = (props) => {
       .then((res) => {
         console.log(res.data);
         setCurrentRoom(res.data);
-        setLoading(false);
+        setLoading(false)
       })
       .catch((err) => setLoading(false));
+      setSelectedOption(0);
   }, []);
   return (
     <>
       {loading ? (
-        <>
-          <span key={"loader"} className="loader"></span>
-        </>
+        <div className="loader_div">
+          <span key={"loader"} className="loader_1"></span>
+        </div>
       ) : (
         <>
           <div className="roombody">
@@ -321,127 +361,348 @@ export const Room = (props) => {
                 onChange={handleSelectChange}
                 className="roomcards"
               >
-                <Slider ref={slider => {
-          sliderRef = slider;
-        }} {...settings}>
+                <Slider
+                  ref={(slider) => {
+                    sliderRef = slider;
+                  }}
+                  {...settings}
+                >
                   {currentRoom.furniture_list.map((list_fur, index_fur) => (
                     <div>
-                      <div className={index_fur !== selectedOption ? "roomroomfur" : "roomroomfur_active"} onClick={() => handleOptionClick(index_fur)}>
-                        <span>
-                          {headers[index_fur]}
-                        </span>{" "}
+                      <div
+                        className={
+                          index_fur !== selectedOption
+                            ? "roomroomfur"
+                            : "roomroomfur_active"
+                        }
+                        onClick={() => handleOptionClick(index_fur)}
+                      >
+                        <span>{headers[index_fur]}</span>{" "}
                       </div>
                     </div>
                   ))}
                   <div>
-                      <div className={6 !== selectedOption ? "roomroomfur" : "roomroomfur_active"} onClick={() => handleOptionClick(6)}>
-                        <span>
-                        Підтвердження форми
-                        </span>
-                      </div>
+                    <div
+                      className={
+                        6 !== selectedOption
+                          ? "roomroomfur_accept"
+                          : "roomroomfur_active"
+                      }
+                      onClick={() => handleOptionClick(6)}
+                    >
+                      <span>Підтвердження форми</span>
                     </div>
-                    <div>
-                      <div className={7 !== selectedOption ? "roomroomfur" : "roomroomfur_active"} onClick={() => handleOptionClick(7)}>
-                        <span>
-                          Виселення
-                        </span>
-                      </div>
+                  </div>
+                  <div>
+                    <div
+                      className={
+                        7 !== selectedOption
+                          ? "roomroomfur_end"
+                          : "roomroomfur_active"
+                      }
+                      onClick={() => handleOptionClick(7)}
+                    >
+                      <span>Виселення</span>
                     </div>
+                  </div>
                 </Slider>
                 <div className="furniture_navigation">
                   <div onClick={previous}>
-                  <i class="fa-solid fa-arrow-left"></i>
+                    <i class="fa-solid fa-arrow-left"></i>
                   </div>
                   <div onClick={next}>
-                  <i class="fa-solid fa-arrow-right"></i>
+                    <i class="fa-solid fa-arrow-right"></i>
                   </div>
-                  </div>
+                </div>
                 <div className="furniture_wrapper">
+                  {selectedOption === 6 ? (
+                    <>
+                      <div className="furnire_topic">
+                        <strong>Підтвердження форм</strong>
+                      </div>
 
-                {selectedOption === 6 ? (
-                  <>
-        <div className="furnire_topic"><strong>Підтвердження форм</strong></div>
-        <div className='verify'>
-            <div className='verify_button' onClick={(e) => verify(e, currentRoom.number, props.user_id, 0)}>Загальне {currentRoom.verified[0] ? <label style={{ color: '#4e8533', marginLeft: '5px' }}><strong>✓</strong></label> : <label style={{ color: '#ee6363', marginLeft: '5px' }}><strong>✗</strong></label>}</div>
-            <div className='verify_button' onClick={(e) => verify(e, currentRoom.number, props.user_id, 1)}>{currentRoom.names[0] !== "" ? <label>{currentRoom.names[0]}</label> : <label>Немає мешканця</label>} {currentRoom.verified[1] ? <label style={{ color: '#4e8533', marginLeft: '5px' }}><strong>✓</strong></label> : <label style={{ color: '#ee6363', marginLeft: '5px' }}><strong>✗</strong></label>}</div>
-            <div className='verify_button' onClick={(e) => verify(e, currentRoom.number, props.user_id, 2)}>{currentRoom.names[1] !== "" ? <label>{currentRoom.names[1]}</label> : <label>Немає мешканця</label>} {currentRoom.verified[2] ? <label style={{ color: '#4e8533', marginLeft: '5px' }}><strong>✓</strong></label> : <label style={{ color: '#ee6363', marginLeft: '5px' }}><strong>✗</strong></label>}</div>
-            <div className='verify_button' onClick={(e) => verify(e, currentRoom.number, props.user_id, 3)}>{currentRoom.names[2] !== "" ? <label>{currentRoom.names[2]}</label> : <label>Немає мешканця</label>} {currentRoom.verified[3] ? <label style={{ color: '#4e8533', marginLeft: '5px' }}><strong>✓</strong></label> : <label style={{ color: '#ee6363', marginLeft: '5px' }}><strong>✗</strong></label>}</div>
-        </div>
-        </>
-      ) : selectedOption === 7 ? (
-        <>
-                    <div className="furnire_topic"><strong>Виселення</strong></div>
+                      <div className="verify">
+                        <div
+                          className="verify_button"
+                          onClick={(e) =>
+                            verify(e, currentRoom.number, props.user_id, 0)
+                          }
+                        >
+                          Загальне{" "}
+                          {currentRoom.verified[0] ? (
+                            <label
+                              style={{ color: "#4e8533", marginLeft: "5px" }}
+                            >
+                              <strong>✓</strong>
+                            </label>
+                          ) : currentRoom.verified[0] === null ? (
+                            <span className="loader_accept"></span>
+                          )
+                          : (
+                            <label
+                              style={{ color: "#ee6363", marginLeft: "5px" }}
+                            >
+                              <strong>✗</strong>
+                            </label>
+                          )}
+                        </div>
+                        <div
+                          className="verify_button"
+                          onClick={(e) =>
+                            verify(e, currentRoom.number, props.user_id, 1)
+                          }
+                        >
+                          {currentRoom.names[0] !== "" ? (
+                            <label>{currentRoom.names[0]}</label>
+                          ) : (
+                            <label>Немає мешканця</label>
+                          )}{" "}
+                          {currentRoom.verified[1] ? (
+                            <label
+                              style={{ color: "#4e8533", marginLeft: "5px" }}
+                            >
+                              <strong>✓</strong>
+                            </label>
+                          )
+                          : currentRoom.verified[1] === null ? (
+                            <span className="loader_accept"></span>
+                          ) 
+                          : (
+                            <label
+                              style={{ color: "#ee6363", marginLeft: "5px" }}
+                            >
+                              <strong>✗</strong>
+                            </label>
+                          )}
+                        </div>
+                        <div
+                          className="verify_button"
+                          onClick={(e) =>
+                            verify(e, currentRoom.number, props.user_id, 2)
+                          }
+                        >
+                          {currentRoom.names[1] !== "" ? (
+                            <label>{currentRoom.names[1]}</label>
+                          ) : (
+                            <label>Немає мешканця</label>
+                          )}{" "}
+                          {currentRoom.verified[2] ? (
+                            <label
+                              style={{ color: "#4e8533", marginLeft: "5px" }}
+                            >
+                              <strong>✓</strong>
+                            </label>
+                          ): currentRoom.verified[2] === null ? (
+                            <span className="loader_accept"></span>
+                          ) 
+                          : (
+                            <label
+                              style={{ color: "#ee6363", marginLeft: "5px" }}
+                            >
+                              <strong>✗</strong>
+                            </label>
+                          )}
+                        </div>
+                        <div
+                          className="verify_button"
+                          onClick={(e) =>
+                            verify(e, currentRoom.number, props.user_id, 3)
+                          }
+                        >
+                          {currentRoom.names[2] !== "" ? (
+                            <label>{currentRoom.names[2]}</label>
+                          ) : (
+                            <label>Немає мешканця</label>
+                          )}{" "}
+                          {currentRoom.verified[3] ? (
+                            <label
+                              style={{ color: "#4e8533", marginLeft: "5px" }}
+                            >
+                              <strong>✓</strong>
+                            </label>
+                          ): currentRoom.verified[3] === null ? (
+                            <span className="loader_accept"></span>
+                          ) 
+                          : (
+                            <label
+                              style={{ color: "#ee6363", marginLeft: "5px" }}
+                            >
+                              <strong>✗</strong>
+                            </label>
+                          )}
+                        </div>
+                      </div>
+                    </>
+                  ) : selectedOption === 7 ? (
+                    <>
+                      <div className="furnire_topic">
+                        <strong>Виселення</strong>
+                      </div>
 
-        <div className="verify">
-                    <div className="furniture_clear">
-                      {currentRoom.names[0] !== "" ? <label className='finish_date_text'>{currentRoom.names[0]}</label> :
-                        <label className='finish_date_text' for="myInput">Немає  asd asd asda dsasd</label>}
-                      <input placeholder="Введіть дату" className="finish_date_input" type="date" key={"inp_user" + 0} onChange={(e) => handleChangeFinishDate(0, e.target.value)} value={currentRoom.finish_dates[0]} />
-                      <div className='move_out_button' disabled={!available} onClick={handleShow}>Виселити</div>
-                    </div>
+                      <div className="verify">
+                        <div className="furniture_clear">
+                          {currentRoom.names[0] !== "" ? (
+                            <label className="finish_date_text">
+                              {currentRoom.names[0]}
+                            </label>
+                          ) : (
+                            <label className="finish_date_text" for="myInput">
+                              Немає asd asd asda dsasd
+                            </label>
+                          )}
+                          <input
+                            placeholder="Введіть дату"
+                            className="finish_date_input"
+                            type="date"
+                            key={"inp_user" + 0}
+                            onChange={(e) =>
+                              handleChangeFinishDate(0, e.target.value)
+                            }
+                            value={currentRoom.finish_dates[0]}
+                          />
+                          <div
+                            className="move_out_button"
+                            disabled={!available}
+                            onClick={handleShow}
+                          >
+                            Виселити
+                          </div>
+                        </div>
 
-                    <div className="furniture_clear">
-                    {currentRoom.names[1] !== "" ? <div className='finish_date_text'>{currentRoom.names[1]}</div> :
-                        <label className='finish_date_text' for="myInput"> мешканця</label>}
-                    <input placeholder="Введіть дату" className="finish_date_input" type="date" key={"inp_user" + 1} onChange={(e) => handleChangeFinishDate(1, e.target.value)} value={currentRoom.finish_dates[1]} />
-                    <div className='move_out_button' disabled={!available} onClick={handleShow1}>Виселити</div>
-                    </div>
+                        <div className="furniture_clear">
+                          {currentRoom.names[1] !== "" ? (
+                            <label className="finish_date_text">
+                              {currentRoom.names[1]}
+                            </label>
+                          ) : (
+                            <label className="finish_date_text" for="myInput">
+                              {" "}
+                              мешканця
+                            </label>
+                          )}
+                          <input
+                            placeholder="Введіть дату"
+                            className="finish_date_input"
+                            type="date"
+                            key={"inp_user" + 1}
+                            onChange={(e) =>
+                              handleChangeFinishDate(1, e.target.value)
+                            }
+                            value={currentRoom.finish_dates[1]}
+                          />
+                          <div
+                            className="move_out_button"
+                            disabled={!available}
+                            onClick={handleShow1}
+                          >
+                            Виселити
+                          </div>
+                        </div>
 
-                    <div className="furniture_clear">
-                    {currentRoom.names[2] !== "" ? <div className='finish_date_text'>{currentRoom.names[2]}</div> :
-                        <label className='finish_date_text' for="myInput">Немає мешканця</label>}
-                    <input placeholder="Введіть дату" className="finish_date_input" type="date" key={"inp_user" + 2} onChange={(e) => handleChangeFinishDate(2, e.target.value)} value={currentRoom.finish_dates[2]} />
-                    <div className='move_out_button' disabled={!available} onClick={handleShow2}>Виселити</div>
-                    </div>
+                        <div className="furniture_clear">
+                          {currentRoom.names[2] !== "" ? (
+                            <label className="finish_date_text">
+                              {currentRoom.names[2]}
+                            </label>
+                          ) : (
+                            <label className="finish_date_text" for="myInput">
+                              Немає мешканця
+                            </label>
+                          )}
+                          <input
+                            placeholder="Введіть дату"
+                            className="finish_date_input"
+                            type="date"
+                            key={"inp_user" + 2}
+                            onChange={(e) =>
+                              handleChangeFinishDate(2, e.target.value)
+                            }
+                            value={currentRoom.finish_dates[2]}
+                          />
+                          <div
+                            className="move_out_button"
+                            disabled={!available}
+                            onClick={handleShow2}
+                          >
+                            Виселити
+                          </div>
+                        </div>
 
-                    <div className='general_move_out' onClick={handleShow3}>Очистити загальну форму</div>
-
-        </div>
-        </>
-      ) : (
-        <>
-            {currentRoom.furniture_list.map((list_fur, index_fur) => (
-                  <div>
-                    {selectedOption === index_fur && (
-                      <>
-                      <div className="furnire_topic"><strong>{headers[index_fur]}</strong></div>
-                        {list_fur.map((furniture, index) => (
-                          <>
-                            <div className="furniture_info" >
-                              <div key={2 * index + 1} className="furniture_type">
-                                {furniture.type_expanded}
+                        <div className="general_move_out" onClick={handleShow3}>
+                          Очистити загальну форму
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      {currentRoom.furniture_list.map((list_fur, index_fur) => (
+                        <div>
+                          {selectedOption === index_fur && (
+                            <>
+                              <div className="furnire_topic">
+                                <strong>{headers[index_fur]}</strong>
                               </div>
-                              <div key={2 * furniture + 2} className="furniture_description">
-                                Опис: {furniture.description}
-                              </div>
-                            </div>
-                            {furniture.owner ? (
-                              <div key={"furniture_owner_div" + index + index_fur}>
-                                {"Власник: " + furniture.owner}
-                              </div>
-                            ) : (<></>)}
-                            {furniture.images.length != 0 ? (
-                              <div className="image_div">
-                                <Slider {...settings_image}>
-                                {furniture.images.map((slideImage, index) => (
-                                  <div className="slider_div" key={index}>
-                                    <img
-                                      className="slider_image"
-                                      src={slideImage}/>
+                              {list_fur.map((furniture, index) => (
+                                <>
+                                  <div className="furniture_info">
+                                    <div
+                                      key={2 * index + 1}
+                                      className="furniture_type"
+                                    >
+                                      {furniture.type_expanded}
+                                    </div>
+                                    <div
+                                      key={2 * furniture + 2}
+                                      className="furniture_description"
+                                    >
+                                      Опис: {furniture.description}
+                                    </div>
                                   </div>
-                                ))}
-                                </Slider>
-                              </div>
-                            ) : (<></>)}
-                          </>
-                        ))}
-                      </>
-                    )}
-                  </div>
-                ))}</>
-      )}
-      </div>
-
+                                  {furniture.owner ? (
+                                    <div
+                                      key={
+                                        "furniture_owner_div" +
+                                        index +
+                                        index_fur
+                                      }
+                                    >
+                                      {"Власник: " + furniture.owner}
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  {furniture.images.length != 0 ? (
+                                    <div className="image_div">
+                                      <Slider {...settings_image}>
+                                        {furniture.images.map(
+                                          (slideImage, index) => (
+                                            <div>
+                                            <div
+                                              className="slider_div"
+                                              key={index}
+                                            >
+                                              <img
+                                                className="slider_image"
+                                                src={check_url(slideImage)}
+                                              />
+                                            </div>
+                                            </div>
+                                          )
+                                        )}
+                                      </Slider>
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
+                                </>
+                              ))}
+                            </>
+                          )}
+                        </div>
+                      ))}
+                    </>
+                  )}
+                </div>
               </div>
             </div>
           </div>

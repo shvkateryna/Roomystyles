@@ -1,5 +1,6 @@
 .roombody{
     height: 93vh;
+    font-size: small;
 }
 .roommain{
     display: flex;
@@ -19,18 +20,20 @@
     padding: 8px 12px;
       border: 1px solid #ccc;
       border-radius: 4px;
-      font-size: 16px;
       width: 200px; /* Adjust width as needed */
       box-sizing: border-box; /* Ensure padding and border are included in the width */
       background-color: #f8f8f8;
 }
 .furniture_info{
-    font-size: large;
     margin: 10px 30px;
 }
+
+
+/* HTML: <div class="loader"></div> */
+
+
 .furnire_topic{
     text-align: center;
-    font-size: large;
     font-weight: 500;
 }
 .verify{
@@ -86,7 +89,6 @@ width: 40%;
     cursor: pointer;
 }
 .furniture_wrapper{
-    font-size: large;
     margin-top: 5px;
     display: flex;
     flex-direction: column;
@@ -98,7 +100,7 @@ width: 40%;
     padding: 10px 30px;
 }
 .furniture_navigation>div{
-    width: 100px;
+    width: 50px;
     border-radius: 10px;
     border: 1px solid gray;
     padding: 5px;
@@ -141,7 +143,6 @@ background-color: aquamarine;
     padding: 10px 3px;
     margin: 0px 3px;
     border-radius: 10px;
-    font-size: 15px;
 }
 .roomwing:hover{
     background-color: red;    
@@ -186,7 +187,6 @@ background-color: aquamarine;
 }
 .roomroomfur{
     font-weight: 500;
-
     display: flex;
     cursor: pointer;
     flex-direction: column;
@@ -196,6 +196,85 @@ background-color: aquamarine;
     padding: 3px 3px;
     border-radius: 10px;
     border: 1px solid gray;
+    white-space: nowrap;
+}
+.loader_div{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.room_scrol
+.loader_1 {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #642a29;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+    } 
+.slider_div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+    .loader_accept {
+        width: 10px;
+        height: 10px;
+        border: 2px solid #642a29;
+        border-bottom-color: transparent;
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+        }
+    
+        @keyframes rotation {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+        } 
+    
+.roomroomfur_end{
+    font-weight: 500;
+    display: flex;
+    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 2px 10px;
+    padding: 3px 3px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    background-color: rgb(254, 215, 215);
+    white-space: nowrap;
+}
+.roomroomfur_accept{
+    font-weight: 500;
+    display: flex;
+    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 2px 10px;
+    padding: 3px 3px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    background-color: rgb(254, 215, 215);
     white-space: nowrap;
 }
 .roommaininfo{

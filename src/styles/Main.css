@@ -288,7 +288,6 @@ font-size: 23px;
     margin-top: 20px;
 }
 .button_submit {
-    background: #efd8b5;
     border: none;
     border-radius: 12px;
     margin-top: 15px;
@@ -298,8 +297,8 @@ font-size: 23px;
     color: black;
     padding: 15px;
     width: 100%;
-    --bs-btn-bg: #f3e8c9!important;
-    --bs-btn-border-color: none!important;
+    --bs-btn-bg:  #f7cf95!important;
+    --bs-btn-border-color:  #f7cf95!important;
   }
   
   .button_submit:hover {

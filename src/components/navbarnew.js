@@ -16,7 +16,7 @@ export default function NavBar() {
   let navigate = useNavigate();
 
   const [showModal, setShowModal] = useState(false);
-  const [cookies] = useCookies(["user"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [showModalСlear, setShowModalСlear] = useState(false);
   const handleClose = () => {
     setShowModal(false);
@@ -246,13 +246,7 @@ export default function NavBar() {
           Roomy
         </div>
         <div className={isActive ? "navbaroptions active" : "navbaroptions"}>
-          <div id="navoption">
-            <span> Admin </span>
-          </div>
-          <div id="navoption">
-            <span> Clear Report </span>
-          </div>
-          <div id="navoption">
+        <div id="navoption" className="download_nav">
             <span
               onClick={() => {
                 handleShow();
@@ -262,8 +256,18 @@ export default function NavBar() {
               Download Report{" "}
             </span>
           </div>
+          <div id="navoption">
+            <span> Admin </span>
+          </div>
+          <div id="navoption">
+            <span> Clear Report </span>
+          </div>
+          
           <div styles = {"margin-left: 100px"} id="navoption">
-            <span> Log out </span>
+            <span onClick={()=>{
+              removeCookie("token");
+              window.location.href = '/login';
+            }}> Log out </span>
           </div>
         </div>
         <div id="mobile" onClick={() => setActive(!isActive)}>
