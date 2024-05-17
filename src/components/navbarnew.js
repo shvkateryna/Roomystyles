@@ -189,6 +189,10 @@ export default function NavBar() {
     setShowModal(true);
   };
 
+  const navigateAdmin = () => {
+    window.location.href = "/manager"; 
+  };
+
   return (
     <>
       <div
@@ -257,7 +261,9 @@ export default function NavBar() {
             </span>
           </div>
           <div id="navoption">
-            <span> Admin </span>
+            <span onClick={()=>{
+            navigateAdmin();
+          }}> Admin </span>
           </div>
           <div id="navoption">
             <span> Clear Report </span>

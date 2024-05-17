@@ -276,7 +276,7 @@ input[disabled]:hover{
     flex-direction: column;
 }
 
-ul {
+.stage_wrapper {
     padding-left: 0px!important;
     width: 100%;
     max-width: 1000px;
@@ -284,7 +284,7 @@ ul {
     justify-content: space-between;
 }
 
-ul li {
+.stage_wrapper li {
     /* z-index: 1; */
     width: 15%;
     list-style: none;
@@ -295,13 +295,13 @@ ul li {
     margin: 0 20px;
 }           
 
-ul li .icons {
+.stage_wrapper li .icons {
     font-size: 25px;
     color: #479c47;
     margin: 0 60px;
 }
 
-ul li .label {
+.stage_wrapper li .label {
     font-family: sans-serif;
     letter-spacing: 1px;
     font-size: 14px;
@@ -309,7 +309,7 @@ ul li .label {
     color: #479c47;
 }
 
-ul li .step {
+.stage_wrapper li .step {
     display: block;
     height: 30px;
     width: 30px;
@@ -341,15 +341,15 @@ ul li .step {
     height: 0;
 }
 
-ul li .step .awesome {
+.stage_wrapper li .step .awesome {
     display: none;
 }
 
-ul li .step p {
+.stage_wrapper li .step p {
     font-size: 18px;
 }
 
-ul li .active {
+.stage_wrapper li .active {
     z-index: 3;
     background-color: #479c47;
 }
@@ -361,11 +361,11 @@ li .active::after {
 
 }
 
-ul li .active p {
+.stage_wrapper li .active p {
     display: none;
 }
 
-ul li .active .awesome {
+.stage_wrapper li .active .awesome {
     display: flex;
 }
 
@@ -389,8 +389,8 @@ ul li .active .awesome {
         width: 100%;
     }
     
-    ul li .label {
-        /* font-family: sans-serif; */
+    .stage_wrapper li .label {
+
         letter-spacing: 0.5px;
         font-size: 12px;
         margin-right: 5px;

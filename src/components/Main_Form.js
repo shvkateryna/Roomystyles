@@ -3,8 +3,6 @@ import { useParams } from "react-router-dom";
 import "../styles/Main_form.css";
 import axios from "axios";
 import Form_reg from "./Form_reg";
-import { MapComponent } from "./Map.js";
-import NavBar from "./NavBar";
 import path from "../path";
 
 function Main_Form() {

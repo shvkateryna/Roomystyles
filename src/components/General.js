@@ -234,7 +234,7 @@ function General(props) {
           ) : (
             <>
               <div class="main">
-                <ul>
+                <ul className="stage_wrapper">
                   <li>
                     <i class="icons awesome fa-solid fa-house"></i>
                     <div

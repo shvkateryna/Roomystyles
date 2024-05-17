@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import "../styles/Main_form.css"
 import axios from 'axios';
 import Two from './Two'
-import NavBar from "./NavBar";
 import path from "../path"
 function Main_Two() {
     const { id_coded } = useParams();

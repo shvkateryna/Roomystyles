@@ -1,9 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert, Container } from "react-bootstrap";
-// import { useAuth } from "../contexts/AuthContexts";
 import { Link, useNavigate } from "react-router-dom";
-import { MapComponent } from "./Map.js";
-import NavBar from "./NavBar";
 import logo from "../assets/collegium.jpg";
 import "../styles/Main.css";
 import path from "../path";
@@ -107,30 +104,13 @@ export default function Login() {
                 </Card.Body>
               </Card>
               <div className="w-100 text-center mt-3">
-                {/* <Link
-                  style={{
-                    color: "black",
-                    fontFamily: "Montserrat Medium 500",
-                    marginTop: "40px",
-                    fontSize: "16px",
-                  }}
-                  to="/forgot-password"
-                >
-                  Забули пароль?
-                </Link> */}
+
               </div>
             </Container>
           </div>
 
           <img />
         </div>
-        {/* <div className="header">
-            <div onClick={()=>navigate("/")} className="logo"><strong>RooMy</strong></div></div> */}
-
-        {/* <div className="greeting">
-            <strong><p>Вітаємо вдома!</p></strong>
-            <MapComponent />
-        </div> */}
       </div>
     </CookiesProvider>
   );

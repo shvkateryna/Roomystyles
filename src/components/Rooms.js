@@ -166,9 +166,9 @@ const Rooms = (props) => {
     <div key={"main_div_rooms"} className="main" style={{ minHeight: "100vh" }}>
       {
         loading ? (
-          <>
+          <div className="loader_div">
             <span key={"loader"} className="loader"></span>
-          </>
+          </div>
         ) : (
           <>
             {" "}
@@ -178,15 +178,11 @@ const Rooms = (props) => {
                 <div className="roomscards">
                   {response.map((ele, index) => (
                     <Card
-                      className="card_room"
-                      
-                    >
+                      className="card_room">
                       <Card.Body className = "card_header_wrapper">
                         <Card.Title>{ele.number}</Card.Title>
-                        
-                        
+
                         <button
-                        // className = "copy_button"
                           key={"button_room_link" + index}
                           disabled={loadinRoute[0]}
                           className={
@@ -211,7 +207,6 @@ const Rooms = (props) => {
                           </ListGroup.Item>
                         ))}
                       </ListGroup>
-                      {/* <Card.Body> */}
                       <div className="submition_wrapper">
                         <div className="heading_submition">
                           <span>Підтвердження:</span>
@@ -229,100 +224,14 @@ const Rooms = (props) => {
                             </div>
                           ))}
                         </div>
-
-                        {/* </Card.Body> */}
                       </div>
                     </Card>
-                    // <div
-                    //   className="roomscard"
-                    //   on
-                    //   onClick={() => navigate(String(ele.number))}
-                    // >
-                    //   <div className="roomnumber">
-                    //     <span>{ele.number}</span>
-                    //   </div>
-                    //   <div className="roomscardfooter">
-                    //     <span> Мешканці: </span>
-
-                    //     {ele.names.map((name, index) => (
-                    //       <span key={index}>
-                    //         {name ? name : "Мешканця немає"}
-                    //       </span>
-                    //     ))}
-                    //   </div>
-                    //   <span>Підтвердження:</span>
-                    //   <div className="roomscardfooter2">
-                    //     <div>
-                    //       <span>Ліж1.(1)</span>
-                    //     </div>
-                    //     <div>
-                    //       <span>Ліж1.(2)</span>
-                    //     </div>
-                    //     <div>
-                    //       <span>Ліж2.</span>
-                    //     </div>
-                    //     <div>
-                    //       <span>Заг.</span>
-                    //     </div>
-                    //   </div>
-
-                    //   <div className="roomscardfooter2">
-                    //     {ele.verified.map((name, index) => (
-                    //       <div className="roomaccepted"></div>
-                    //     ))}
-                    //   </div>
-                    // </div>
                   ))}
                 </div>
               </div>
             </div>
           </>
         )
-        // <>
-        //   <NavBar />
-        //   <div className='rooms_list_back'>
-        //   <div key={"main_text_div"} className="rooms_list">
-        //     <div key={"strong"}><strong>Список кімнат</strong></div>
-        //   </div>
-        //   </div>
-        //   <div className='circle'>
-        //     <FaArrowCircleUp onClick={scrollToTop}
-        //     style={{display: visible ? 'inline' : 'none'}} />
-        //   </div>
-        //   <div className='body_search'>
-        //       <div class="search-container">
-        //           <input
-        //             type="text"
-        //             class="search-input"
-        //             placeholder="Введіть номер кімнати"
-        //             value={inputValue}
-        //             onChange={handleInputChange}
-        //             onKeyDown={handleKeyPress}/>
-        //           <button class="search-button" onClick={handleKeyPress}>
-        //               Пошук
-        //           </button>
-        //       </div>
-        //   </div>
-        //   <div key={"rooms_div"} className="rooms">
-        //   {response.map((ele, index) => (
-        //     <div>
-        //       <label className='wings'>{wings(ele.number)}</label>
-        //       <div key={"div_room_main" + index} className='block_room'>
-        //         <div id={`element_${ele.number}`} key={'div_room_validate' + index} className="header_button-room"
-        //           onClick={() => navigate(String(ele.number))}>
-        //           {ele.number} <span className='check_and_verify'>{checker(ele.filled_form)} заповнено | {checker_verified(ele.verified)} підтверджено</span>
-        //         </div>
-        //         <button key={'button_room_link' + index}
-        //           disabled={loadinRoute[0]}
-        //           className={justcopied === ele.number ? 'link-copied' : 'link'}
-        //           onClick={async () => {
-        //             navigator.clipboard.writeText("https://roommy.netlify.app"+'/rooms/' + await get_route(ele.number))
-        //           }} >Посилання</button>
-        //         {loadinRoute[0] & loadinRoute[1] === ele.number ? "": <></>}
-        //       </div>
-        //     </div>
-        //   ))}
-        // </div></>
       }
     </div>
   );

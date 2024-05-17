@@ -4,12 +4,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import path from "../path"
-import {
-    ref,
-    uploadBytes,
-    getDownloadURL
-} from "firebase/storage";
-import { storage } from "../firebase";
+
 function Form_reg(props) {
     const id_coded = props.id_coded
     const [loading, setLoading] = useState(true)
@@ -39,16 +34,7 @@ function Form_reg(props) {
             (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
         );
     }
-    async function uploadFile(file, categorie) {
-        return new Promise(function (resolve, reject) {
-            const imageRef = ref(storage, `images/${categorie}/${uuidv4()}`);
-            uploadBytes(imageRef, file).then((snapshot) => {
-                getDownloadURL(snapshot.ref).then((url) => {
-                    resolve(url)
-                }).catch((error) => { reject(error) });
-            });
-        });
-    };
+
 
     return (
         <div className="main_div_buttons" key={"main_form_div"}>
@@ -67,10 +53,10 @@ function Form_reg(props) {
                 </div>
             </> : <>
                 <form key="submit_form" >
-                    <button disabled={room.verified[0]} className="form_button_nav" key="button_users_0" onClick={() => routeChange("general")}  >Загальне {room.filled_form[0] ? <label style={{ color: '#4e8533', marginLeft: '5px' }}><strong>✓</strong></label> : <label style={{ color: '#ee6363', marginLeft: '5px' }}><strong>✗</strong></label>}</button>
-                    <button disabled={room.verified[1]} className="form_button_nav" key="button_users_1" onClick={() => routeChange("one")}  >Одноповерхове ліжко {room.filled_form[1] ? <label style={{ color: '#4e8533', marginLeft: '5px' }}><strong>✓</strong></label> : <label style={{ color: '#ee6363', marginLeft: '5px' }}><strong>✗</strong></label>}</button>
-                    <button disabled={room.verified[2]} className="form_button_nav" key="button_users_2" onClick={() => routeChange("two")}  >Двоповерхове ліжко (1 поверх) {room.filled_form[2] ? <label style={{ color: '#4e8533', marginLeft: '5px' }}><strong>✓</strong></label> : <label style={{ color: '#ee6363', marginLeft: '5px' }}><strong>✗</strong></label>}</button>
-                    <button disabled={room.verified[3]} className="form_button_nav" key="button_users_3" onClick={() => routeChange("two2")}  >Двоповерхове ліжко (2 поверх) {room.filled_form[3] ? <label style={{ color: '#4e8533', marginLeft: '5px' }}><strong>✓</strong></label> : <label style={{ color: '#ee6363', marginLeft: '5px' }}><strong>✗</strong></label>}</button>
+                    <button disabled={room.verified[0]} className="form_button_nav" key="button_users_0" onClick={() => {routeChange("general")}}  >Загальне {room.verified[0] ? <label style={{ color: '#4e8533', marginLeft: '5px' }}><strong>✓</strong></label> : <label style={{ color: '#ee6363', marginLeft: '5px' }}><strong>✗</strong></label>}</button>
+                    <button disabled={room.verified[1]} className="form_button_nav" key="button_users_1" onClick={() => routeChange("one")}  >Одноповерхове ліжко {room.verified[1] ? <label style={{ color: '#4e8533', marginLeft: '5px' }}><strong>✓</strong></label> : <label style={{ color: '#ee6363', marginLeft: '5px' }}><strong>✗</strong></label>}</button>
+                    <button disabled={room.verified[2]} className="form_button_nav" key="button_users_2" onClick={() => routeChange("two")}  >Двоповерхове ліжко (1 поверх) {room.verified[2] ? <label style={{ color: '#4e8533', marginLeft: '5px' }}><strong>✓</strong></label> : <label style={{ color: '#ee6363', marginLeft: '5px' }}><strong>✗</strong></label>}</button>
+                    <button disabled={room.verified[3]} className="form_button_nav" key="button_users_3" onClick={() => routeChange("two2")}  >Двоповерхове ліжко (2 поверх) {room.verified[3] ? <label style={{ color: '#4e8533', marginLeft: '5px' }}><strong>✓</strong></label> : <label style={{ color: '#ee6363', marginLeft: '5px' }}><strong>✗</strong></label>}</button>
                 </form>
                 <div className='w-100 text-center mt-3'>
                     <Link style={{ color: "black", fontFamily: 'Montserrat Medium 500', marginTop: "40px", fontSize: '16px' }} onClick={() => {

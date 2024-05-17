@@ -15,6 +15,13 @@
 .slick-prev, .slick-next {
     color:  red !important;
 }
+.loader_div{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: center;
+}
 .card_room{
     width: 18rem;
     cursor: pointer;

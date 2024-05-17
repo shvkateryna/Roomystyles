@@ -10,7 +10,7 @@ import jwt
 import uuid
 from datetime import datetime, timedelta
 from functools import wraps
-# import requests
+import secrets
 
 key = "Z6IIrLq-hAWCNUtSIvbOfeZ9LmPKy8QNFgpPFENyJ2U="
 f = Fernet(key)
@@ -279,8 +279,9 @@ def create_admin():
 
 
 @app.route("/create_user", methods = ["POST"])
+@cross_origin()
 @token_required
-def create_user_endpoint():
+def create_user_endpoint(_):
     data = json.loads(request.data.decode("utf-8"))
     rooms = [wing.split("-") for wing in data["rooms"].split(",")][:-1]
     rooms_user = []
@@ -288,7 +289,7 @@ def create_user_endpoint():
         for room_number in range(int(sets[0]), int(sets[1]) + 1):
             rooms_user += [Room.objects(number = room_number).first()]
 
-    new_user = User(uid = data["uid"], email = data["email"] , user_type = data["role"] , rooms = rooms_user)
+    new_user = User(email = data["email"], uid = secrets.token_hex(16), user_type = data["role"] , rooms = rooms_user, password = data["password"])
     new_user.save()
     return "user_created"
 
@@ -305,6 +306,8 @@ def login():
             'expiration': str(datetime.utcnow() + timedelta(minutes = 90))
         },
         app.config['SECRET_KEY'])
+
+        create_report()
         return jsonify({"user_type": user.user_type, "token": token})
     else:
         return "Invalid credentials"

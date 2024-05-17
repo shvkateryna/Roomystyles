@@ -3,8 +3,6 @@ import { useParams } from "react-router-dom";
 import "../styles/Main_form.css";
 import axios from "axios";
 import General from "./General";
-import { MapComponent } from "./Map.js";
-import NavBar from "./NavBar";
 import { FaArrowCircleUp } from "react-icons/fa";
 import styled from "styled-components";
 import path from "../path";
