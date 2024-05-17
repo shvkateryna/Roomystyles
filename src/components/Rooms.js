@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import path from "../path";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../styles/Roomsnew.css";
@@ -12,7 +11,6 @@ import { fetcher } from "../services/ApiService";
 import { useCookies } from "react-cookie";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
-import copy_logo from '../assets/copy.png'
 
 const Rooms = (props) => {
   const [inputValue, setInputValue] = useState("");
@@ -31,7 +29,6 @@ const Rooms = (props) => {
   };
   function SampleNextArrow(props) {
     const { className, style, onClick } = props;
-    console.log(className);
     return (
       <div
         className={className}
@@ -52,12 +49,6 @@ const Rooms = (props) => {
     );
   }
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-  };
   window.addEventListener("scroll", toggleVisible);
 
   const handleClick = (room_number) => {
@@ -67,72 +58,12 @@ const Rooms = (props) => {
     }
   };
 
-  const handleKeyPress = (event, room_number) => {
-    if (event.key === "Enter") {
-      console.log("Enter key pressed. Value:", inputValue);
-    }
-    const roomNumber = parseInt(inputValue - 1, 10);
-    if (!isNaN(roomNumber)) {
-      handleClick(roomNumber);
-    }
-  };
-
-  // const { currentUser } = useAuth()
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState([]);
-  const [currentRoom, setCurrentRoom] = useState(null);
   const [loadinRoute, setLoadingRoute] = useState([false, -1]);
   const [justcopied, setJustCopied] = useState(-1);
   const navigate = useNavigate();
 
-  function wings(number) {
-    if (number === 201) {
-      return "2 поверх, ліве крило";
-    }
-    if (number == 219) {
-      return "2 поверх, праве крило";
-    }
-    if (number === 301) {
-      return "3 поверх, ліве крило";
-    }
-    if (number == 319) {
-      return "3 поверх, праве крило";
-    }
-    if (number === 401) {
-      return "4 поверх, ліве крило";
-    }
-    if (number === 419) {
-      return "4 поверх, праве крило";
-    }
-    if (number === 501) {
-      return "5 поверх, ліве крило";
-    }
-    if (number === 519) {
-      return "5 поверх, праве крило";
-    }
-  }
-
-  function checker(filled_forms) {
-    let counter = 0;
-    for (let i = 0; i < filled_forms.length; i++) {
-      if (filled_forms[i] === true) {
-        counter = counter + 1;
-      }
-    }
-    return counter;
-  }
-
-  function checker_verified(verified_list) {
-    let counter_verified = 0;
-    console.log(verified_list.size);
-    for (let i = 0; i < verified_list.length; i++) {
-      if (verified_list[i] === true) {
-        console.log(i);
-        counter_verified = counter_verified + 1;
-      }
-    }
-    return counter_verified;
-  }
 
   async function get_route(number) {
     setLoadingRoute([true, number]);
@@ -154,7 +85,6 @@ const Rooms = (props) => {
     setLoading(true);
     fetcher({ url: "curator_rooms", token: cookies.token, type: "get" })
       .then((res) => {
-        console.log(res.data);
         setResponse(res.data);
         setLoading(false);
       })

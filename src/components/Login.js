@@ -32,7 +32,6 @@ export default function Login() {
         password: password,
       })
       .then(function (response) {
-        console.log(response.data.token)
         setCookie('token', response.data.token)
         window.location.href = "/"
 
@@ -46,7 +45,6 @@ export default function Login() {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      console.log("here");
     } catch {
       setError("Не вдалося увійти");
     }
@@ -106,30 +104,12 @@ export default function Login() {
                 </Card.Body>
               </Card>
               <div className="w-100 text-center mt-3">
-                {/* <Link
-                  style={{
-                    color: "black",
-                    fontFamily: "Montserrat Medium 500",
-                    marginTop: "40px",
-                    fontSize: "16px",
-                  }}
-                  to="/forgot-password"
-                >
-                  Забули пароль?
-                </Link> */}
               </div>
             </Container>
           </div>
 
           <img />
         </div>
-        {/* <div className="header">
-            <div onClick={()=>navigate("/")} className="logo"><strong>RooMy</strong></div></div> */}
-
-        {/* <div className="greeting">
-            <strong><p>Вітаємо вдома!</p></strong>
-            <MapComponent />
-        </div> */}
       </div>
     </CookiesProvider>
   );

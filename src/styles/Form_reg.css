@@ -501,7 +501,7 @@ li .active::after {
     justify-content: center;
 }
 .slider_image{
-    max-width: 100%;
+    max-width: 90%;
     height: 200px;
 }
 .slider_div{

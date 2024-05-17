@@ -12,7 +12,18 @@
     font-size: medium;
     z-index: 1;
 }
-
+.confirm_button{
+    background-color: #f8e3ab;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 5px;
+}
+.discard_button{
+    background-color: #f8e3ab;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 5px;
+}
 .navbarbrand-title{
     cursor: pointer;
 }

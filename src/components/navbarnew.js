@@ -23,8 +23,6 @@ export default function NavBar(props) {
       type: "text/csv;charset=" + encoding,
     });
 
-    console.log(blob);
-
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.setAttribute("href", url);
@@ -39,7 +37,7 @@ export default function NavBar(props) {
   const clearReport = (e) => {
     fetcher({ url: "clear_report", token: cookies.token, type: "post" })
       .then((data) => {})
-      .catch((err) => console.log(err));
+      .catch((err) => {});
   };
   const downladReport = (e) => {
     fetcher({ url: "download_report", token: cookies.token, type: "post" })
@@ -174,7 +172,7 @@ export default function NavBar(props) {
         }
         download(columns.join(",") + "\n" + data_lines);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {});
   };
 
   const handleShow = () => {
@@ -304,7 +302,7 @@ export default function NavBar(props) {
                     handleShow();
                   }}
                 >
-                  Download Report
+                  Завантажити звіт
                 </span>
               </div>
 
@@ -315,7 +313,7 @@ export default function NavBar(props) {
                   }}
                 >
                   {" "}
-                  Admin{" "}
+                  Адмін сторінка{" "}
                 </span>
               </div>
               <div id="navoption">
@@ -325,7 +323,7 @@ export default function NavBar(props) {
                   }}
                 >
                   {" "}
-                  Clear Report{" "}
+                  Очистити звіт{" "}
                 </span>
               </div>
             </>
@@ -341,7 +339,7 @@ export default function NavBar(props) {
               }}
             >
               {" "}
-              Log out{" "}
+              Вийти{" "}
             </span>
           </div>
         </div>

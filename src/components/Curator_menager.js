@@ -26,27 +26,6 @@ const Curator_menager = (props) => {
     { value: "501-518", label: "501-518" },
     { value: "519-534", label: "519-534" },
   ];
-  const [isHover, setIsHover] = useState(false);
-  const [isHover1, setIsHover1] = useState(false);
-  const [isHover2, setIsHover2] = useState(false);
-  const handleMouseEnter = () => {
-    setIsHover(true);
-  };
-  const handleMouseLeave = () => {
-    setIsHover(false);
-  };
-  const handleMouseEnter1 = () => {
-    setIsHover1(true);
-  };
-  const handleMouseLeave1 = () => {
-    setIsHover1(false);
-  };
-  const handleMouseEnter2 = () => {
-    setIsHover2(true);
-  };
-  const handleMouseLeave2 = () => {
-    setIsHover2(false);
-  };
   const [selected, setSelected] = useState([]);
   useEffect(() => {
     setLoading(true);
@@ -204,8 +183,6 @@ const Curator_menager = (props) => {
                       disabled={loading}
                       className="button_add_curators"
                       type="submit"
-                      onMouseEnter={handleMouseEnter}
-                      onMouseLeave={handleMouseLeave}
                     >
                       Додати
                     </button>

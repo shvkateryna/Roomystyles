@@ -25,12 +25,8 @@ function Main_Two() {
             {loading ? <div className="loader_block"><div className="loader"></div></div> :
                 <>
                     {(response) ? <>
-                        {/* <NavBar /> */}
                         <div className='register' ><strong>Реєстрація кімнати №{response.number}</strong></div>
                         <Two room={response} id_coded={id_coded} />
-                        {/* <div className="greeting">
-                            <strong><p>Вітаємо вдома!</p></strong>
-                        </div> */}
                     </> : <></>}
                     {error ? <>
                         {error.response.data === "Wrong code" ? <div className='notions'>

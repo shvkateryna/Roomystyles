@@ -69,7 +69,6 @@ function Main_General() {
         <>
           {response ? (
             <>
-              {/* <NavBar /> */}
               <div className="circle">
                 <FaArrowCircleUp
                   onClick={scrollToTop}

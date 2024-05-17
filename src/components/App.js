@@ -19,7 +19,6 @@ function App() {
   const [role, setRole] = useState("");
   const [cookies] = useCookies(["user"]);
   useEffect(() => {
-    console.log(cookies);
     if (cookies.token) {
       fetcher({ url: "validate_token", body: {}, token: cookies.token })
         .then((res) => {
@@ -52,35 +51,42 @@ function App() {
                 <>
                   {role === "ADMIN" ? (
                     <>
-                      <Route path="/:number" element={<Room role = {role} user_id={1} />} />
+                      <Route
+                        path="/:number"
+                        element={<Room role={role} user_id={1} />}
+                      />
                       <Route
                         exact
                         path="/manager"
-                        element={<Curator_menager role = {role} />}
+                        element={<Curator_menager role={role} />}
                       />
                     </>
                   ) : (
                     <>
-                      <Route path="/:number" element={<Room role = {role} user_id={1} />} />
+                      <Route
+                        path="/:number"
+                        element={<Room role={role} user_id={1} />}
+                      />
                     </>
                   )}
-                  <Route exact path="/" element={<Rooms role = {role} user_id={1} />} />
+                  <Route
+                    exact
+                    path="/"
+                    element={<Rooms role={role} user_id={1} />}
+                  />
                 </>
               ) : (
                 <>
-                  <Route path="/rooms/:id_coded" element={<Main_Form />} />
-                  <Route
-                    path="/rooms/:id_coded/general"
-                    element={<Main_General />}
-                  />
-                  <Route path="/rooms/:id_coded/one" element={<Main_One />} />
-                  <Route path="/rooms/:id_coded/two" element={<Main_Two />} />
-                  <Route path="/rooms/:id_coded/two2" element={<Main_Two2 />} />
                   <Route path="/" element={<Navigate to="/login" />} />
                 </>
               )}
             </>
           )}
+          <Route path="/rooms/:id_coded" element={<Main_Form />} />
+          <Route path="/rooms/:id_coded/general" element={<Main_General />} />
+          <Route path="/rooms/:id_coded/one" element={<Main_One />} />
+          <Route path="/rooms/:id_coded/two" element={<Main_Two />} />
+          <Route path="/rooms/:id_coded/two2" element={<Main_Two2 />} />
         </Routes>
       </div>
     </div>

@@ -1,12 +1,6 @@
 # Roomy
 
 
-## Technical instruction
-
-```
-collegium@ucu.edu.ua 
-AdminCollegium2023!
-```
 
 ### Run backend
 ```

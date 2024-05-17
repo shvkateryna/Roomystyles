@@ -12,7 +12,6 @@ function Two(props) {
   const id_coded = props.id_coded;
   const [room, setRoom] = useState(props.room);
   const [ruleAccepted, setRuleAccepted] = useState(false);
-  const [error, setError] = useState("");
   const [errorFurniture, setErrorFurniture] = useState("");
   const [sendingForm, setSendingForm] = useState(false);
   const new_block = room.furniture_list[4];
@@ -44,30 +43,20 @@ function Two(props) {
       "https://script.google.com/macros/s/AKfycbzzUASeCpfNN5Z9nv4H21rq3p3KcH8lSm5-HDBxay0EpJIeZ18T_XF1s090Ki_o9Ga2hg/exec";
     return new Promise(function (resolve, reject) {
       var reader = new FileReader();
-      let responce = "test";
       reader.readAsDataURL(file);
       reader.onloadend = function () {
         var base64data = reader.result;
-        // console.log(base64data)
-
-        // This line sets the "src" attribute of the "img" element to the value of "res"
-        // This line splits the "res" variable into an array, using the string "base64," as the separator, and assigns the second element to a variable called "spt"
         let spt = base64data.split("base64,")[1];
-        // This line creates an object called "obj" with three properties: "base64", "type", and "name"
         let obj = {
           base64: spt,
           type: file.type,
           name: file.name,
         };
-        // console.log(obj)
-        // This line sends a POST request to the URL specified in the "url" variable, with the "obj" object as the request body
         fetch(url, {
           method: "POST",
           body: JSON.stringify(obj),
         })
-          // This line waits for the response from the server and converts it to text
           .then((r) => r.text())
-          // This line logs the response data to the console
           .then((data) => {
             resolve(data);
           });
@@ -136,23 +125,15 @@ function Two(props) {
     let new_furniture_list = [];
     for (let furnit of room.furniture_list[4]) {
       if (furnit.images !== null) {
-        // console.log("images here")
-        console.log(furnit.images);
         let links = [];
         for (let file of furnit.images) {
-          // console.log(file)
           if (typeof file != "string") {
             const link = await upload_google_drive(file);
-            // console.log(link)
-            // const res = await uploadFile(file, room.number);
-            console.log(links);
             links.push(link);
           } else {
             links.push(file);
           }
-          // links.push(link)
         }
-        console.log(links);
         furnit.images = links;
         new_furniture_list.push(furnit);
       } else {
@@ -178,7 +159,6 @@ function Two(props) {
       return URL.createObjectURL(slideImage);
     } else {
       return "https://drive.google.com/thumbnail?id=" + extractValue(slideImage) + "&sz=w1000"
-      // return slideImage;
     }
   }
   return (
