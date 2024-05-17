@@ -33,7 +33,7 @@ function One(props) {
       reader.readAsDataURL(file);
       reader.onloadend = function () {
         var base64data = reader.result;
-       
+
         let spt = base64data.split("base64,")[1];
         let obj = {
           base64: spt,
@@ -77,23 +77,20 @@ function One(props) {
     new_list[index_block] = obj;
 
     setRoom((prev) => ({ ...prev, furniture_list: new_list }));
-
-};
+  };
   const handleChangeRoom = (index_block, index, option, value) => {
     let obj = room.furniture_list[index_block];
     obj[index][option] = value;
     let new_list = room.furniture_list;
     new_list[index_block] = obj;
     setRoom((prev) => ({ ...prev, furniture_list: new_list }));
-     
-};
+  };
   const handleChangeFilled = (index) => {
     let filled = room.filled_form;
     filled[index] = true;
     setRoom((prev) => ({ ...prev, filled_form: filled }));
   };
   async function shrinkImage(image) {
-
     const options = {
       maxSizeMB: 0.05,
       maxWidthOrHeight: 1920,

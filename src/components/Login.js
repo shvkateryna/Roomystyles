@@ -9,8 +9,8 @@ import axios from "axios";
 import { CookiesProvider, useCookies } from "react-cookie";
 
 export default function Login() {
-  const [role, setRole] = useState(null)
-  const [cookies, setCookie] = useCookies(['user'])
+  const [role, setRole] = useState(null);
+  const [cookies, setCookie] = useCookies(["user"]);
   const [isHover, setIsHover] = useState(false);
   const handleMouseEnter = () => {
     setIsHover(true);
@@ -32,8 +32,8 @@ export default function Login() {
         password: password,
       })
       .then(function (response) {
-        setCookie('token', response.data.token)
-        window.location.href = "/"
+        setCookie("token", response.data.token);
+        window.location.href = "/";
 
         setRole(response.data.user_type);
       })
@@ -69,22 +69,22 @@ export default function Login() {
                   </h2>
                   {error && <Alert variant="danger">{error}</Alert>}
                   <Form onSubmit={handleSubmit} className="form_login">
-                    <Form.Group id="email" className = "input_group">
+                    <Form.Group id="email" className="input_group">
                       <Form.Label class="form_label">
                         Корпоративна пошта
                       </Form.Label>
                       <Form.Control
-                      className = "input_login"
+                        className="input_login"
                         placeholder="ucu@ucu.edu.ua"
                         type="email"
                         ref={emailRef}
                         required
                       ></Form.Control>
                     </Form.Group>
-                    <Form.Group id="password" className = "input_group">
+                    <Form.Group id="password" className="input_group">
                       <Form.Label class="form_label">Пароль</Form.Label>
                       <Form.Control
-                        className = "input_login"
+                        className="input_login"
                         placeholder="Пароль"
                         type="password"
                         ref={passwordRef}
@@ -98,13 +98,12 @@ export default function Login() {
                       onMouseEnter={handleMouseEnter}
                       onMouseLeave={handleMouseLeave}
                     >
-                      <span class = "login_button">Увійти</span>
+                      <span class="login_button">Увійти</span>
                     </Button>
                   </Form>
                 </Card.Body>
               </Card>
-              <div className="w-100 text-center mt-3">
-              </div>
+              <div className="w-100 text-center mt-3"></div>
             </Container>
           </div>
 

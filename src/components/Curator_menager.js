@@ -4,7 +4,7 @@ import { MultiSelect } from "react-multi-select-component";
 
 import { Form, Button, Card, Alert, Container, Navbar } from "react-bootstrap";
 import { useCookies } from "react-cookie";
-import NavBar  from "./navbarnew";
+import NavBar from "./navbarnew";
 import { fetcher } from "../services/ApiService";
 import "../styles/Curator_manager.css";
 const Curator_menager = (props) => {
@@ -74,13 +74,13 @@ const Curator_menager = (props) => {
       type: "post",
     })
       .then(() => {
-        window.location.href = '/manager';
+        window.location.href = "/manager";
       })
       .catch(() => setLoading(false));
   };
   return (
     <>
-        <NavBar role = {props.role}></NavBar>
+      <NavBar role={props.role}></NavBar>
       <Container
         className=" align-items-center justify-content-center"
         style={{
@@ -91,7 +91,7 @@ const Curator_menager = (props) => {
       >
         <div>
           {loading ? (
-              <span className="loader"></span>
+            <span className="loader"></span>
           ) : (
             <>
               <Card style={{ position: "unset" }}>
@@ -101,7 +101,6 @@ const Curator_menager = (props) => {
                     borderRadius: "5px",
                     borderColor: "#f3e8c9",
                     marginTop: "100px",
-
                   }}
                 >
                   <h2

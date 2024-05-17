@@ -26,7 +26,7 @@ function Two(props) {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    initialSlide: 1
+    initialSlide: 1,
   };
 
   async function shrinkImage(image) {
@@ -158,7 +158,11 @@ function Two(props) {
     if (typeof slideImage != "string") {
       return URL.createObjectURL(slideImage);
     } else {
-      return "https://drive.google.com/thumbnail?id=" + extractValue(slideImage) + "&sz=w1000"
+      return (
+        "https://drive.google.com/thumbnail?id=" +
+        extractValue(slideImage) +
+        "&sz=w1000"
+      );
     }
   }
   return (

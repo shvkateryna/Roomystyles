@@ -36,7 +36,6 @@ function Main_Form() {
                 <strong>Реєстрація кімнати №{response.number}</strong>
               </div>
               <Form_reg room={response} id_coded={id_coded} />
-
             </>
           ) : (
             <></>

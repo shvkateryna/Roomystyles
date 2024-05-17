@@ -32,8 +32,6 @@ export const Room = (props) => {
     }
   };
 
-
-
   window.addEventListener("scroll", toggleVisible);
 
   const [showModal, setShowModal] = useState(false);
@@ -94,7 +92,7 @@ export const Room = (props) => {
         new_room_ls[index] = saved;
         setCurrentRoom((prev) => ({ ...prev, verified: new_room_ls }));
       })
-      .catch((err) =>{});
+      .catch((err) => {});
   };
 
   const DeleteRoomUser = (index_block) => {
@@ -136,8 +134,7 @@ export const Room = (props) => {
     }));
     get_route(currentRoom.number).then(async (value) => {
       setAvailable(false);
-      fetcher(
-        {
+      fetcher({
         url: "room/" + value + "/delete",
         token: cookies.token,
         type: "post",
@@ -183,21 +180,19 @@ export const Room = (props) => {
     }));
     get_route(currentRoom.number).then(async (value) => {
       setAvailable(false);
-      
-      fetcher(
-        {
-          url: "room/" + value + "/delete",
-          token: cookies.token,
-          type: "post",
-          body: {
-            currentRoom,
-            index_block,
-            leave_date,
-          },
-        })
-        .then((res) => {
-          setAvailable(true);
-        });
+
+      fetcher({
+        url: "room/" + value + "/delete",
+        token: cookies.token,
+        type: "post",
+        body: {
+          currentRoom,
+          index_block,
+          leave_date,
+        },
+      }).then((res) => {
+        setAvailable(true);
+      });
     });
   };
 
@@ -291,7 +286,7 @@ export const Room = (props) => {
   return (
     <>
       {loading ? (
-          <span className="loader"></span>
+        <span className="loader"></span>
       ) : (
         <>
           <div
@@ -495,12 +490,9 @@ export const Room = (props) => {
           </div>
 
           <div className="roombody">
-            <NavBar role = {props.role}></NavBar>
+            <NavBar role={props.role}></NavBar>
             <div className="roommain">
-              <div
-                value={selectedOption}
-                className="roomcards"
-              >
+              <div value={selectedOption} className="roomcards">
                 <Slider
                   ref={(slider) => {
                     sliderRef = slider;
@@ -720,12 +712,10 @@ export const Room = (props) => {
                             className="finish_date_input"
                             type="date"
                             key={"inp_user" + 1}
-                            onChange={(e) =>{
+                            onChange={(e) => {
                               e.preventDefault();
                               handleChangeFinishDate(1, e.target.value);
-                            }
-                              
-                            }
+                            }}
                             value={currentRoom.finish_dates[1]}
                           />
                           <div
@@ -752,12 +742,10 @@ export const Room = (props) => {
                             className="finish_date_input"
                             type="date"
                             key={"inp_user" + 2}
-                            onChange={(e) =>
-                              {
-                                e.preventDefault();
-                                handleChangeFinishDate(2, e.target.value);
-                              }
-                            }
+                            onChange={(e) => {
+                              e.preventDefault();
+                              handleChangeFinishDate(2, e.target.value);
+                            }}
                             value={currentRoom.finish_dates[2]}
                           />
                           <div

@@ -1,6 +1,6 @@
 import "../styles/Form_reg.css";
 import "react-slideshow-image/dist/styles.css";
-import { useState} from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import imageCompression from "browser-image-compression";
@@ -27,7 +27,7 @@ function General(props) {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    initialSlide: 1
+    initialSlide: 1,
   };
   const room_type = ["Передпокій", "Спальня", "Вбиральня"];
   let navigate = useNavigate();
@@ -84,7 +84,6 @@ function General(props) {
     return input.substring(startIndex, endIndex); // Return the substring between "=" and "&"
   }
 
-
   async function shrinkImage(image) {
     const options = {
       maxSizeMB: 0.05,
@@ -126,7 +125,7 @@ function General(props) {
         return null;
       }
     }
-    document.documentElement.scrollIntoView({behavior: "smooth" });
+    document.documentElement.scrollIntoView({ behavior: "smooth" });
 
     setStageCounter(stageCounter + 1);
   };
@@ -176,7 +175,11 @@ function General(props) {
     if (typeof slideImage != "string") {
       return URL.createObjectURL(slideImage);
     } else {
-      return "https://drive.google.com/thumbnail?id=" + extractValue(slideImage) + "&sz=w1000"
+      return (
+        "https://drive.google.com/thumbnail?id=" +
+        extractValue(slideImage) +
+        "&sz=w1000"
+      );
       // return slideImage;
     }
   }
@@ -185,9 +188,7 @@ function General(props) {
       {sendingForm ? (
         <>
           <div className="sending_form">
-            <span>
-            Зачекайте, ми обробляємо Вашу відповідь...
-            </span>
+            <span>Зачекайте, ми обробляємо Вашу відповідь...</span>
           </div>
         </>
       ) : (
@@ -374,13 +375,13 @@ function General(props) {
                                     <Slider {...settings}>
                                       {ele.images.map((slideImage, index) => (
                                         <div>
-                                        <div className="image_wrapper">
-                                          <img
-                                            className="slider_image"
-                                            src={check_url(slideImage)}
-                                          />
+                                          <div className="image_wrapper">
+                                            <img
+                                              className="slider_image"
+                                              src={check_url(slideImage)}
+                                            />
                                           </div>
-                                          </div>
+                                        </div>
                                       ))}
                                     </Slider>
                                   </div>
@@ -416,31 +417,31 @@ function General(props) {
                         </a>
                       </p>
 
-                      <div class = "results_wrapper">
-                      <p style={{ fontSize: "16px" }}>
-                        Я ознайомився / -лася з правилами та <br /> підтверджую, що вся
-                        надана інформація достовірна.
+                      <div class="results_wrapper">
+                        <p style={{ fontSize: "16px" }}>
+                          Я ознайомився / -лася з правилами та <br />{" "}
+                          підтверджую, що вся надана інформація достовірна.
+                          <input
+                            style={{
+                              height: "15px",
+                              width: "15px",
+                              marginLeft: "10px",
+                            }}
+                            key="check_rules"
+                            type="checkbox"
+                            checked={ruleAccepted}
+                            onChange={() => setRuleAccepted(!ruleAccepted)}
+                          />
+                        </p>
                         <input
-                          style={{
-                            height: "15px",
-                            width: "15px",
-                            marginLeft: "10px",
-                          }}
-                          key="check_rules"
-                          type="checkbox"
-                          checked={ruleAccepted}
-                          onChange={() => setRuleAccepted(!ruleAccepted)}
+                          id={`element_3`}
+                          disabled={!ruleAccepted}
+                          className="submit_form"
+                          value="Відправити"
+                          onClick={handle_post}
+                          key="submit_button"
+                          type={"submit"}
                         />
-                      </p>
-                      <input
-                        id={`element_3`}
-                        disabled={!ruleAccepted}
-                        className="submit_form"
-                        value="Відправити"
-                        onClick={handle_post}
-                        key="submit_button"
-                        type={"submit"}
-                      />
                       </div>
                     </div>
                   </>

@@ -81,7 +81,6 @@ function Main_General() {
               <div className="student_form_frame">
                 <General room={response} id_coded={id_coded} />
               </div>
-
             </>
           ) : (
             <></>

@@ -64,7 +64,6 @@ const Rooms = (props) => {
   const [justcopied, setJustCopied] = useState(-1);
   const navigate = useNavigate();
 
-
   async function get_route(number) {
     setLoadingRoute([true, number]);
     setJustCopied(number);
@@ -92,27 +91,28 @@ const Rooms = (props) => {
   }, []);
   return (
     <div key={"main_div_rooms"} className="main" style={{ minHeight: "100vh" }}>
-      {
-        loading ? (
-          <div className="loader_div">
-            <span key={"loader"} className="loader"></span>
-          </div>
-        ) : (
-          <>
-            {" "}
-            <div className="roomsbody">
-              <NavBar role = {props.role}></NavBar>
-              <div className="roomsmain">
-                <div className="roomscards">
-                  {response.map((ele, index) => (
-                    <Card
-                      className="card_room">
-                      <Card.Body className = "card_header_wrapper">
-                        <Card.Title>{ele.number}</Card.Title>
-                        <i class="fa-regular fa-copy"
+      {loading ? (
+        <div className="loader_div">
+          <span key={"loader"} className="loader"></span>
+        </div>
+      ) : (
+        <>
+          {" "}
+          <div className="roomsbody">
+            <NavBar role={props.role}></NavBar>
+            <div className="roomsmain">
+              <div className="roomscards">
+                {response.map((ele, index) => (
+                  <Card className="card_room">
+                    <Card.Body className="card_header_wrapper">
+                      <Card.Title>{ele.number}</Card.Title>
+                      <i
+                        class="fa-regular fa-copy"
                         disabled={loadinRoute[0]}
                         className={
-                          justcopied === ele.number ? "fa-regular fa-copy link-copied" : " fa-regular fa-copy link"
+                          justcopied === ele.number
+                            ? "fa-regular fa-copy link-copied"
+                            : " fa-regular fa-copy link"
                         }
                         onClick={async () => {
                           navigator.clipboard.writeText(
@@ -121,42 +121,44 @@ const Rooms = (props) => {
                               (await get_route(ele.number))
                           );
                         }}
-                        ></i>
-                      </Card.Body>
-                      
-                      <ListGroup onClick={() => navigate(String(ele.number))} className="list-group-flush">
-                        {ele.names.map((name, index) => (
-                          <ListGroup.Item>
-                            {name ? name : "Мешканця немає"}
-                          </ListGroup.Item>
-                        ))}
-                      </ListGroup>
-                      <div className="submition_wrapper">
-                        <div className="heading_submition">
-                          <span>Підтвердження:</span>
-                        </div>
+                      ></i>
+                    </Card.Body>
 
-                        <div className="roomscardfooter2">
-                          {ele.verified.map((el_verified, index) => (
-                            <div className="spec_submition_wrapper">
-                              {SumbitionTitles[index]}
-                              <div
-                                className={
-                                  el_verified ? "roomaccepted" : "roomrejected"
-                                }
-                              ></div>
-                            </div>
-                          ))}
-                        </div>
+                    <ListGroup
+                      onClick={() => navigate(String(ele.number))}
+                      className="list-group-flush"
+                    >
+                      {ele.names.map((name, index) => (
+                        <ListGroup.Item>
+                          {name ? name : "Мешканця немає"}
+                        </ListGroup.Item>
+                      ))}
+                    </ListGroup>
+                    <div className="submition_wrapper">
+                      <div className="heading_submition">
+                        <span>Підтвердження:</span>
                       </div>
-                    </Card>
-                  ))}
-                </div>
+
+                      <div className="roomscardfooter2">
+                        {ele.verified.map((el_verified, index) => (
+                          <div className="spec_submition_wrapper">
+                            {SumbitionTitles[index]}
+                            <div
+                              className={
+                                el_verified ? "roomaccepted" : "roomrejected"
+                              }
+                            ></div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </Card>
+                ))}
               </div>
             </div>
-          </>
-        )
-      }
+          </div>
+        </>
+      )}
     </div>
   );
 };
