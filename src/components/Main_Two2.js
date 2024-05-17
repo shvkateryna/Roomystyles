@@ -4,12 +4,12 @@ import "../styles/Main_form.css"
 import axios from 'axios';
 import Two2 from './Two2'
 import path from "../path"
+
 function Main_Two2() {
     const { id_coded } = useParams();
     const [loading, setLoading] = useState(true)
     const [response, setResponse] = useState(null);
-    const [error, setError] = useState(
-        
+    const [error, setError] = useState(null
     );
     useEffect(() => {
         axios.get(path+`/room/${id_coded}`)

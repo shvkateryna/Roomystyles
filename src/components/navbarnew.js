@@ -1,55 +1,48 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../styles/navnew.css";
 import { useNavigate } from "react-router-dom";
-import Container from "react-bootstrap/Container";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import axios from "axios";
-import path from "../path";
-import { useCookies } from "react-cookie"; 
+import { useCookies } from "react-cookie";
 import { fetcher } from "../services/ApiService";
 
-export default function NavBar() {
+export default function NavBar(props) {
   const [isActive, setActive] = useState(false);
   let navigate = useNavigate();
 
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
-  const [showModalСlear, setShowModalСlear] = useState(false);
   const handleClose = () => {
-    setShowModal(false);
-    setShowModalСlear(false);
+    setShowModal("");
   };
 
   const download = function (data) {
-    // Creating a Blob for having a csv file format
-    // and passing the data with type
-    const blob = new Blob([data], { type: "text/csv" });
+    const encoding = "UTF-8";
 
-    // Creating an object for downloading url
+    const blob = new Blob([new TextEncoder(encoding).encode(data)], {
+      type: "text/csv;charset=" + encoding,
+    });
+
+    console.log(blob);
+
     const url = window.URL.createObjectURL(blob);
-
-    // Creating an anchor(a) tag of HTML
     const a = document.createElement("a");
-
-    // Passing the blob downloading url
     a.setAttribute("href", url);
-
-    // Setting the anchor tag attribute for downloading
-    // and passing the download file name
     a.setAttribute("download", "download.csv");
 
-    // Performing a download with click
     a.click();
   };
   let handleClick = () => {
     navigate("/");
   };
 
+  const clearReport = (e) => {
+    fetcher({ url: "clear_report", token: cookies.token, type: "post" })
+      .then((data) => {})
+      .catch((err) => console.log(err));
+  };
   const downladReport = (e) => {
-      fetcher({ url: "download_report", token: cookies.token, type: "post" })
+    fetcher({ url: "download_report", token: cookies.token, type: "post" })
       .then((data) => {
         const columns = [
           "Номер кімнати",
@@ -155,7 +148,6 @@ export default function NavBar() {
             "Cтіни двоповерх. ліжка (2 поверх)": "-",
           };
           for (let property of row) {
-
             if (typeof property === "object") {
               if (property.description === undefined) {
                 dict_col[property.type_expanded] = "-";
@@ -186,17 +178,21 @@ export default function NavBar() {
   };
 
   const handleShow = () => {
-    setShowModal(true);
+    setShowModal("download");
+  };
+
+  const handleShow1 = () => {
+    setShowModal("clear");
   };
 
   const navigateAdmin = () => {
-    window.location.href = "/manager"; 
+    window.location.href = "/manager";
   };
 
   return (
     <>
       <div
-        className={`modal ${showModal ? "show" : ""}`}
+        className={`modal ${showModal == "download" ? "show" : ""}`}
         tabIndex="-1"
         role="dialog"
         style={{ display: showModal ? "block" : "none" }}
@@ -245,35 +241,108 @@ export default function NavBar() {
         </div>
       </div>
 
+      <div
+        className={`modal ${showModal == "clear" ? "show" : ""}`}
+        tabIndex="-1"
+        role="dialog"
+        style={{ display: showModal == "clear" ? "block" : "none" }}
+      >
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5
+                style={{
+                  fontFamily: "Montserrat Medium 500",
+                  fontSize: "18px",
+                }}
+              >
+                Очистити звіт
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                onClick={handleClose}
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <p>Очистити звіт?</p>
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="discard_button"
+                onClick={handleClose}
+              >
+                Скасувати
+              </button>
+              <button
+                type="button"
+                className="confirm_button"
+                onClick={() => {
+                  clearReport();
+                  handleClose();
+                }}
+              >
+                Очистити
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <nav className="navbar_m">
         <div className="navbarbrand-title" onClick={handleClick}>
           Roomy
         </div>
         <div className={isActive ? "navbaroptions active" : "navbaroptions"}>
-        <div id="navoption" className="download_nav">
+          {props.role === "ADMIN" ? (
+            <>
+              <div id="navoption" className="download_nav">
+                <span
+                  onClick={() => {
+                    handleShow();
+                  }}
+                >
+                  Download Report
+                </span>
+              </div>
+
+              <div id="navoption">
+                <span
+                  onClick={() => {
+                    navigateAdmin();
+                  }}
+                >
+                  {" "}
+                  Admin{" "}
+                </span>
+              </div>
+              <div id="navoption">
+                <span
+                  onClick={() => {
+                    handleShow1();
+                  }}
+                >
+                  {" "}
+                  Clear Report{" "}
+                </span>
+              </div>
+            </>
+          ) : (
+            <></>
+          )}
+
+          <div styles={"margin-left: 100px"} id="navoption">
             <span
               onClick={() => {
-                handleShow();
+                removeCookie("token");
+                window.location.href = "/login";
               }}
             >
               {" "}
-              Download Report{" "}
+              Log out{" "}
             </span>
-          </div>
-          <div id="navoption">
-            <span onClick={()=>{
-            navigateAdmin();
-          }}> Admin </span>
-          </div>
-          <div id="navoption">
-            <span> Clear Report </span>
-          </div>
-          
-          <div styles = {"margin-left: 100px"} id="navoption">
-            <span onClick={()=>{
-              removeCookie("token");
-              window.location.href = '/login';
-            }}> Log out </span>
           </div>
         </div>
         <div id="mobile" onClick={() => setActive(!isActive)}>

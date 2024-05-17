@@ -206,7 +206,9 @@ function General(props) {
       {sendingForm ? (
         <>
           <div className="sending_form">
+            <span>
             Зачекайте, ми обробляємо Вашу відповідь...
+            </span>
           </div>
         </>
       ) : (

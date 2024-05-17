@@ -502,7 +502,7 @@ li .active::after {
 }
 .slider_image{
     max-width: 100%;
-    height: auto;
+    height: 200px;
 }
 .slider_div{
     display: flex;
@@ -544,10 +544,9 @@ li .active::after {
 }
 
 .sending_form {
-    font-size: 16px;
-    padding-left: 40%;
-    padding-top: 5%;
-    padding-bottom: 30%;
+display: flex;
+align-items: center;
+justify-content: center;
 }
 
 @media screen and (max-width:480px){
@@ -569,11 +568,6 @@ li .active::after {
     }
     .obj_input{
         width: 100%;
-    }
-    .sending_form {
-        padding-left: 12%;
-        padding-top: 10%;
-        padding-bottom: 120%;
     }
     .file_div{
         justify-content: space-between;

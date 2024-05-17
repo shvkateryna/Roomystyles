@@ -306,8 +306,11 @@ def login():
             'expiration': str(datetime.utcnow() + timedelta(minutes = 90))
         },
         app.config['SECRET_KEY'])
+        if user.user_type == "ADMIN":
+            if Report.objects().first() is None:
+                report = Report(rows = [])
+                report.save()
 
-        create_report()
         return jsonify({"user_type": user.user_type, "token": token})
     else:
         return "Invalid credentials"
@@ -475,9 +478,9 @@ def add_room_info(encoded, id):
 
 
 @app.route("/room/<encoded>/delete", methods = ["POST"])
-@token_required
 @cross_origin()
-def delete_room(encoded):
+@token_required
+def delete_room(_, encoded):
 
     data = json.loads(request.data.decode("utf-8"))
     room_data = data["currentRoom"]
@@ -518,8 +521,9 @@ def download_report(_):
     return report.to_json()
 
 @app.route("/clear_report", methods = ["POST"])
+@cross_origin()
 @token_required
-def clear_report():
+def clear_report(_):
     report = Report.objects().first()
     Report_Row.objects().delete()
     SaveFurn.objects().delete()
@@ -531,7 +535,7 @@ def clear_report():
 @cross_origin()
 @token_required
 def validate_token(user):
-    return jsonify({"response": "add"}), 200
+    return user.user_type
 
 @app.route("/create_report", methods = ["GET"])
 @token_required

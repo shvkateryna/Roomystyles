@@ -1,15 +1,13 @@
 import React from "react";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { MultiSelect } from "react-multi-select-component";
 
-import { Form, Button, Card, Alert, Container } from "react-bootstrap";
-import { type } from "@testing-library/user-event/dist/type";
+import { Form, Button, Card, Alert, Container, Navbar } from "react-bootstrap";
 import { useCookies } from "react-cookie";
-
+import NavBar  from "./navbarnew";
 import { fetcher } from "../services/ApiService";
-
-const Curator_menager = () => {
+import "../styles/Curator_manager.css";
+const Curator_menager = (props) => {
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState([]);
   const [error, setError] = useState("");
@@ -96,174 +94,162 @@ const Curator_menager = () => {
       token: cookies.token,
       type: "post",
     })
-      .then(() => setLoading(false))
+      .then(() => {
+        window.location.href = '/manager';
+      })
       .catch(() => setLoading(false));
   };
   return (
-    <div className="manager_div_main">
+    <>
+        <NavBar role = {props.role}></NavBar>
       <Container
         className=" align-items-center justify-content-center"
         style={{
           justifyContent: "center",
           minHeight: "60vh",
           maxWidth: "550px",
-          marginTop: "100px",
         }}
       >
-        <Card style={{ position: "unset" }}>
-          <Card.Body
-            style={{
-              backgroundColor: "#FDF2E9",
-              border: "none",
-              borderRadius: "5px",
-              borderColor: "#f3e8c9",
-            }}
-          >
-            <h2
-              className="text-center mb-4"
-              style={{
-                color: "black",
-                fontFamily: "Montserrat Medium 500",
-                fontSize: "18px",
-                textTransform: "uppercase",
-                letterSpacing: "5px",
-              }}
-            >
-              <strong>Додати куратора</strong>
-            </h2>
-            {error && <Alert variant="danger">{error}</Alert>}
-            <Form
-              onSubmit={(e) => create_new_user(e)}
-              style={{ height: "300px" }}
-            >
-              <Form.Group id="email">
-                <Form.Label
+        <div>
+          {loading ? (
+              <span className="loader"></span>
+          ) : (
+            <>
+              <Card style={{ position: "unset" }}>
+                <Card.Body
                   style={{
-                    color: "black",
-                    fontFamily: "Montserrat Medium 500",
-                    fontSize: "16px",
+                    border: "none",
+                    borderRadius: "5px",
+                    borderColor: "#f3e8c9",
+                    marginTop: "100px",
+
                   }}
                 >
-                  Корпоративна пошта
-                </Form.Label>
-                <Form.Control
-                  style={{
-                    color: "black",
-                    fontFamily: "Verdana",
-                    fontSize: "16px",
-                  }}
-                  type="email"
-                  onChange={(e) => setLogin_new(e.target.value)}
-                  required
-                ></Form.Control>
-              </Form.Group>
-              <Form.Group id="password">
-                <Form.Label
-                  style={{
-                    color: "black",
-                    fontFamily: "Montserrat Medium 500",
-                    fontSize: "16px",
-                  }}
-                >
-                  Пароль
-                </Form.Label>
-                <Form.Control
-                  style={{
-                    color: "black",
-                    fontFamily: "Verdana",
-                    fontSize: "16px",
-                  }}
-                  type="password"
-                  onChange={(e) => setPassword_new(e.target.value)}
-                  required
-                ></Form.Control>
-              </Form.Group>
-              <Form.Label
-                style={{
-                  color: "black",
-                  fontFamily: "Montserrat Medium 500",
-                  fontSize: "16px",
-                }}
-              >
-                Крило
-              </Form.Label>
-              <MultiSelect
-                style={{ color: "black", fontFamily: "Verdana" }}
-                options={options}
-                value={selected}
-                className="mutiselect_align"
-                onChange={setSelected}
-              />
-              <button
-                disabled={loading}
-                className="button_add_curators"
-                type="submit"
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              >
-                Додати
-              </button>
-              <div></div>
-            </Form>
-          </Card.Body>
-        </Card>
-        <br></br>
-        <details>
-          <summary
-            style={{
-              color: "black",
-              fontFamily: "Montserrat Medium 500",
-              fontSize: "16px",
-              marginLeft: "30px",
-            }}
-          >
-            Список кураторів
-          </summary>
-          <br></br>
-          <div>
-            {loading ? (
-              <>
-                <span key={"loader"} className="loader"></span>
-              </>
-            ) : (
-              <>
-                {response.length === 0 ? (
-                  <>Немає кураторів</>
-                ) : (
-                  <>
-                    {response.map((ele, index) => (
-                      <ol class="list-group" style={{ paddingRight: "-50px" }}>
-                        <li
-                          class="list-group-item"
-                          style={{
-                            marginRight: "50px",
-                            fontFamily: "Montserrat Medium 500",
-                            color: "black",
-                            fontSize: "16px",
-                          }}
-                        >
-                          {index + 1}. {ele.email}{" "}
-                          <strong>
-                            <label style={{ color: "black" }}>
-                              {"  " +
-                                ele.rooms[0] +
-                                "-" +
-                                ele.rooms[ele.rooms.length - 1]}
-                            </label>
-                          </strong>
-                        </li>
-                      </ol>
-                    ))}
-                  </>
-                )}
-              </>
-            )}
-          </div>
-        </details>
-        <br></br>
-        <br></br>
+                  <h2
+                    className="text-center mb-4"
+                    style={{
+                      color: "black",
+                      fontFamily: "Montserrat Medium 500",
+                      fontSize: "18px",
+                      textTransform: "uppercase",
+                      letterSpacing: "5px",
+                    }}
+                  >
+                    <strong>Додати куратора</strong>
+                  </h2>
+                  {error && <Alert variant="danger">{error}</Alert>}
+                  <Form
+                    onSubmit={(e) => create_new_user(e)}
+                    style={{ height: "300px" }}
+                  >
+                    <Form.Group id="email">
+                      <Form.Label
+                        style={{
+                          color: "black",
+                          fontFamily: "Montserrat Medium 500",
+                          fontSize: "16px",
+                        }}
+                      >
+                        Корпоративна пошта
+                      </Form.Label>
+                      <Form.Control
+                        style={{
+                          color: "black",
+                          fontFamily: "Verdana",
+                          fontSize: "16px",
+                        }}
+                        type="email"
+                        onChange={(e) => setLogin_new(e.target.value)}
+                        required
+                      ></Form.Control>
+                    </Form.Group>
+                    <Form.Group id="password">
+                      <Form.Label
+                        style={{
+                          color: "black",
+                          fontFamily: "Montserrat Medium 500",
+                          fontSize: "16px",
+                        }}
+                      >
+                        Пароль
+                      </Form.Label>
+                      <Form.Control
+                        style={{
+                          color: "black",
+                          fontFamily: "Verdana",
+                          fontSize: "16px",
+                        }}
+                        type="password"
+                        onChange={(e) => setPassword_new(e.target.value)}
+                        required
+                      ></Form.Control>
+                    </Form.Group>
+                    <Form.Label
+                      style={{
+                        color: "black",
+                        fontFamily: "Montserrat Medium 500",
+                        fontSize: "16px",
+                      }}
+                    >
+                      Крило
+                    </Form.Label>
+                    <MultiSelect
+                      style={{ color: "black", fontFamily: "Verdana" }}
+                      options={options}
+                      value={selected}
+                      className="mutiselect_align"
+                      onChange={setSelected}
+                    />
+                    <button
+                      disabled={loading}
+                      className="button_add_curators"
+                      type="submit"
+                      onMouseEnter={handleMouseEnter}
+                      onMouseLeave={handleMouseLeave}
+                    >
+                      Додати
+                    </button>
+                    <div></div>
+                  </Form>
+                </Card.Body>
+              </Card>
+              <br></br>
+              Список кураторів:
+              <br></br>
+              <br></br>
+              {response.length === 0 ? (
+                <>Немає кураторів</>
+              ) : (
+                <>
+                  {response.map((ele, index) => (
+                    <ol class="list-group" style={{ paddingRight: "-50px" }}>
+                      <li
+                        class="list-group-item"
+                        style={{
+                          fontFamily: "Montserrat Medium 500",
+                          color: "black",
+                          fontSize: "16px",
+                        }}
+                      >
+                        {index + 1}. {ele.email}{" "}
+                        <strong>
+                          <label style={{ color: "black" }}>
+                            {"  " +
+                              ele.rooms[0] +
+                              "-" +
+                              ele.rooms[ele.rooms.length - 1]}
+                          </label>
+                        </strong>
+                      </li>
+                    </ol>
+                  ))}
+                </>
+              )}
+            </>
+          )}
+        </div>
       </Container>
-    </div>
+    </>
   );
 };
 

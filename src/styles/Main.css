@@ -93,6 +93,8 @@ font-size: 23px;
   }
 
   .link{
+    margin-left: 15px;
+    color: black;
     display: inline-block;
     background-color: transparent;
     color: inherit;
@@ -107,6 +109,8 @@ font-size: 23px;
     margin-bottom: 0px!important;
 }
 .link-copied{
+    margin-left: 15px;
+    color: gray;
     display: inline-block;
     background-color: transparent;
     color: inherit;

@@ -11,6 +11,8 @@
 .card_header_wrapper{
     display: flex!important;
     flex-direction: row!important;
+    justify-content: center;
+    align-self: center;
 }
 .card-body{
     flex-direction: row!important;

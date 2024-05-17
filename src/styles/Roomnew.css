@@ -114,8 +114,14 @@ width: 40%;
     
   width: 70%;   
 }
+
+.card_header_wrapper{
+    display: flex;
+    flex-direction: row;
+}
 .roomcards{
-margin-top: 5px;
+
+margin-top: 8vh;
 width: 100%;
 position: relative;
 height: 100%;

@@ -55,9 +55,7 @@ const Rooms = (props) => {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
-      /* you can also use 'auto' behaviour
-          in place of 'smooth' */
+      behavior: "smooth"
     });
   };
   window.addEventListener("scroll", toggleVisible);
@@ -173,7 +171,7 @@ const Rooms = (props) => {
           <>
             {" "}
             <div className="roomsbody">
-              <NavBar></NavBar>
+              <NavBar role = {props.role}></NavBar>
               <div className="roomsmain">
                 <div className="roomscards">
                   {response.map((ele, index) => (
@@ -181,23 +179,19 @@ const Rooms = (props) => {
                       className="card_room">
                       <Card.Body className = "card_header_wrapper">
                         <Card.Title>{ele.number}</Card.Title>
-
-                        <button
-                          key={"button_room_link" + index}
-                          disabled={loadinRoute[0]}
-                          className={
-                            justcopied === ele.number ? "link-copied" : "link"
-                          }
-                          onClick={async () => {
-                            navigator.clipboard.writeText(
-                              "http://localhost:3000" +
-                                "/rooms/" +
-                                (await get_route(ele.number))
-                            );
-                          }}
-                        >
-                          <img class = "copy_logo" src={copy_logo}/>
-                        </button>
+                        <i class="fa-regular fa-copy"
+                        disabled={loadinRoute[0]}
+                        className={
+                          justcopied === ele.number ? "fa-regular fa-copy link-copied" : " fa-regular fa-copy link"
+                        }
+                        onClick={async () => {
+                          navigator.clipboard.writeText(
+                            "http://localhost:3000" +
+                              "/rooms/" +
+                              (await get_route(ele.number))
+                          );
+                        }}
+                        ></i>
                       </Card.Body>
                       
                       <ListGroup onClick={() => navigate(String(ele.number))} className="list-group-flush">

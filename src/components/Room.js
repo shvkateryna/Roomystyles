@@ -27,7 +27,6 @@ export const Room = (props) => {
     sliderRef.slickPrev();
   };
 
-
   const toggleVisible = () => {
     const scrolled = document.documentElement.scrollTop;
     if (scrolled > 300) {
@@ -124,27 +123,30 @@ export const Room = (props) => {
         .then((res) => {
           resolve(res.data);
         })
-        .catch((err) => { });
+        .catch((err) => {});
     });
   }
   const verify = (e, room_number, user_id, index) => {
-
-
     e.preventDefault();
     let new_room_ls = currentRoom.verified;
-    console.log(cookies.token)
+    console.log(cookies.token);
     let saved = !new_room_ls[index];
     new_room_ls[index] = null;
     setCurrentRoom((prev) => ({ ...prev, verified: new_room_ls }));
-    fetcher({ url: "verify", token: cookies.token, type: "post" , body: {
-      room_n: room_number,
-      index: index
-    }})
-    .then((res) => {
-      new_room_ls[index] = saved;
-      setCurrentRoom((prev) => ({ ...prev, verified: new_room_ls }));
+    fetcher({
+      url: "verify",
+      token: cookies.token,
+      type: "post",
+      body: {
+        room_n: room_number,
+        index: index,
+      },
     })
-    .catch((err) => console.log('Error'));
+      .then((res) => {
+        new_room_ls[index] = saved;
+        setCurrentRoom((prev) => ({ ...prev, verified: new_room_ls }));
+      })
+      .catch((err) => console.log("Error"));
 
     // console.log(currentRoom);
     // axios.post(path + "/verify", {
@@ -198,15 +200,19 @@ export const Room = (props) => {
     }));
     get_route(currentRoom.number).then(async (value) => {
       setAvailable(false);
-      axios
-        .post(path + "/room/" + value + "/delete", {
+      fetcher(
+        {
+        url: "room/" + value + "/delete",
+        token: cookies.token,
+        type: "post",
+        body: {
           currentRoom,
           index_block,
           leave_date,
-        })
-        .then((res) => {
-          setAvailable(true);
-        });
+        },
+      }).then((res) => {
+        setAvailable(true);
+      });
     });
   };
   const DeleteRoomGeneral = (index_block) => {
@@ -241,11 +247,17 @@ export const Room = (props) => {
     }));
     get_route(currentRoom.number).then(async (value) => {
       setAvailable(false);
-      axios
-        .post(path + "/room/" + value + "/delete", {
-          currentRoom,
-          index_block,
-          leave_date,
+      
+      fetcher(
+        {
+          url: "room/" + value + "/delete",
+          token: cookies.token,
+          type: "post",
+          body: {
+            currentRoom,
+            index_block,
+            leave_date,
+          },
         })
         .then((res) => {
           setAvailable(true);
@@ -281,7 +293,6 @@ export const Room = (props) => {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          
         },
       },
       {
@@ -289,9 +300,8 @@ export const Room = (props) => {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          
         },
-      }
+      },
     ],
   };
   const settings_image = {
@@ -300,12 +310,12 @@ export const Room = (props) => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    initialSlide: 1
+    initialSlide: 1,
   };
   const [selectedOption, setSelectedOption] = useState("");
 
   const handleOptionClick = (option) => {
-     console.log(option);
+    console.log(option);
     setSelectedOption(option);
   };
   function extractValue(input) {
@@ -319,8 +329,16 @@ export const Room = (props) => {
     if (typeof slideImage != "string") {
       return URL.createObjectURL(slideImage);
     } else {
-      console.log("https://drive.google.com/thumbnail?id=" + extractValue(slideImage) + "&sz=w1000")
-      return "https://drive.google.com/thumbnail?id=" + extractValue(slideImage) + "&sz=w1000"
+      console.log(
+        "https://drive.google.com/thumbnail?id=" +
+          extractValue(slideImage) +
+          "&sz=w1000"
+      );
+      return (
+        "https://drive.google.com/thumbnail?id=" +
+        extractValue(slideImage) +
+        "&sz=w1000"
+      );
       // return slideImage;
     }
   }
@@ -329,9 +347,9 @@ export const Room = (props) => {
     users_dates[index] = value;
     setCurrentRoom((prev) => ({ ...prev, finish_dates: users_dates }));
   };
-  const handleSelectChange = (event) => {
-    setSelectedOption(event.target.value);
-  };
+  // const handleSelectChange = (event) => {
+  //   setSelectedOption(event.target.value);
+  // };
 
   useEffect(() => {
     setLoading(true);
@@ -340,25 +358,223 @@ export const Room = (props) => {
       .then((res) => {
         console.log(res.data);
         setCurrentRoom(res.data);
-        setLoading(false)
+        setLoading(false);
       })
       .catch((err) => setLoading(false));
-      setSelectedOption(0);
+    setSelectedOption(0);
   }, []);
   return (
     <>
       {loading ? (
-        <div className="loader_div">
-          <span key={"loader"} className="loader_1"></span>
-        </div>
+          <span className="loader"></span>
       ) : (
         <>
+          <div
+            className={`modal ${showModal ? "show" : ""}`}
+            tabIndex="-1"
+            role="dialog"
+            style={{ display: showModal ? "block" : "none" }}
+          >
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5
+                    style={{
+                      fontFamily: "Montserrat Medium 500",
+                      fontSize: "18px",
+                    }}
+                  >
+                    Виселення
+                  </h5>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    onClick={handleClose}
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div className="modal-body">
+                  <p>Виселити мешканця {currentRoom.names[0]}?</p>
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="discard_button"
+                    onClick={handleClose}
+                  >
+                    Скасувати
+                  </button>
+                  <button
+                    type="button"
+                    className="confirm_button"
+                    onClick={() => {
+                      DeleteRoomUser(3);
+                      handleClose();
+                    }}
+                  >
+                    Виселити
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            className={`modal ${showModal1 ? "show" : ""}`}
+            tabIndex="-1"
+            role="dialog"
+            style={{ display: showModal1 ? "block" : "none" }}
+          >
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5
+                    style={{
+                      fontFamily: "Montserrat Medium 500",
+                      fontSize: "18px",
+                    }}
+                  >
+                    Виселення
+                  </h5>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    onClick={handleClose1}
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div className="modal-body">
+                  <p>Виселити мешканця {currentRoom.names[1]}?</p>
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="discard_button"
+                    onClick={handleClose1}
+                  >
+                    Скасувати
+                  </button>
+                  <button
+                    type="button"
+                    className="confirm_button"
+                    onClick={() => {
+                      DeleteRoomUser(4);
+                      handleClose1();
+                    }}
+                  >
+                    Виселити
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            className={`modal ${showModal2 ? "show" : ""}`}
+            tabIndex="-1"
+            role="dialog"
+            style={{ display: showModal2 ? "block" : "none" }}
+          >
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5
+                    style={{
+                      fontFamily: "Montserrat Medium 500",
+                      fontSize: "18px",
+                    }}
+                  >
+                    Виселення
+                  </h5>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    onClick={handleClose2}
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div className="modal-body">
+                  <p>Виселити мешканця {currentRoom.names[2]}?</p>
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="discard_button"
+                    onClick={handleClose2}
+                  >
+                    Скасувати
+                  </button>
+                  <button
+                    type="button"
+                    className="confirm_button"
+                    onClick={() => {
+                      DeleteRoomUser(5);
+                      handleClose2();
+                    }}
+                  >
+                    Виселити
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            className={`modal ${showModal3 ? "show" : ""}`}
+            tabIndex="-1"
+            role="dialog"
+            style={{ display: showModal3 ? "block" : "none" }}
+          >
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5
+                    style={{
+                      fontFamily: "Montserrat Medium 500",
+                      fontSize: "18px",
+                    }}
+                  >
+                    Загальна форма
+                  </h5>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    onClick={handleClose3}
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div className="modal-body">
+                  <p>Очистити загальну форму?</p>
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="discard_button"
+                    onClick={handleClose3}
+                  >
+                    Скасувати
+                  </button>
+                  <button
+                    type="button"
+                    className="confirm_button"
+                    onClick={() => {
+                      DeleteRoomGeneral(0);
+                      handleClose3();
+                    }}
+                  >
+                    Очистити
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="roombody">
-            <NavBar></NavBar>
+            <NavBar role = {props.role}></NavBar>
             <div className="roommain">
               <div
                 value={selectedOption}
-                onChange={handleSelectChange}
+                // onChange={handleSelectChange}
                 className="roomcards"
               >
                 <Slider
@@ -437,8 +653,7 @@ export const Room = (props) => {
                             </label>
                           ) : currentRoom.verified[0] === null ? (
                             <span className="loader_accept"></span>
-                          )
-                          : (
+                          ) : (
                             <label
                               style={{ color: "#ee6363", marginLeft: "5px" }}
                             >
@@ -463,11 +678,9 @@ export const Room = (props) => {
                             >
                               <strong>✓</strong>
                             </label>
-                          )
-                          : currentRoom.verified[1] === null ? (
+                          ) : currentRoom.verified[1] === null ? (
                             <span className="loader_accept"></span>
-                          ) 
-                          : (
+                          ) : (
                             <label
                               style={{ color: "#ee6363", marginLeft: "5px" }}
                             >
@@ -492,10 +705,9 @@ export const Room = (props) => {
                             >
                               <strong>✓</strong>
                             </label>
-                          ): currentRoom.verified[2] === null ? (
+                          ) : currentRoom.verified[2] === null ? (
                             <span className="loader_accept"></span>
-                          ) 
-                          : (
+                          ) : (
                             <label
                               style={{ color: "#ee6363", marginLeft: "5px" }}
                             >
@@ -520,10 +732,9 @@ export const Room = (props) => {
                             >
                               <strong>✓</strong>
                             </label>
-                          ): currentRoom.verified[3] === null ? (
+                          ) : currentRoom.verified[3] === null ? (
                             <span className="loader_accept"></span>
-                          ) 
-                          : (
+                          ) : (
                             <label
                               style={{ color: "#ee6363", marginLeft: "5px" }}
                             >
@@ -547,7 +758,7 @@ export const Room = (props) => {
                             </label>
                           ) : (
                             <label className="finish_date_text" for="myInput">
-                              Немає asd asd asda dsasd
+                              Немає мешканця
                             </label>
                           )}
                           <input
@@ -555,9 +766,10 @@ export const Room = (props) => {
                             className="finish_date_input"
                             type="date"
                             key={"inp_user" + 0}
-                            onChange={(e) =>
-                              handleChangeFinishDate(0, e.target.value)
-                            }
+                            onChange={(e) => {
+                              e.preventDefault();
+                              handleChangeFinishDate(0, e.target.value);
+                            }}
                             value={currentRoom.finish_dates[0]}
                           />
                           <div
@@ -576,8 +788,7 @@ export const Room = (props) => {
                             </label>
                           ) : (
                             <label className="finish_date_text" for="myInput">
-                              {" "}
-                              мешканця
+                              Немає мешканця
                             </label>
                           )}
                           <input
@@ -585,8 +796,11 @@ export const Room = (props) => {
                             className="finish_date_input"
                             type="date"
                             key={"inp_user" + 1}
-                            onChange={(e) =>
-                              handleChangeFinishDate(1, e.target.value)
+                            onChange={(e) =>{
+                              e.preventDefault();
+                              handleChangeFinishDate(1, e.target.value);
+                            }
+                              
                             }
                             value={currentRoom.finish_dates[1]}
                           />
@@ -615,7 +829,10 @@ export const Room = (props) => {
                             type="date"
                             key={"inp_user" + 2}
                             onChange={(e) =>
-                              handleChangeFinishDate(2, e.target.value)
+                              {
+                                e.preventDefault();
+                                handleChangeFinishDate(2, e.target.value);
+                              }
                             }
                             value={currentRoom.finish_dates[2]}
                           />
@@ -677,15 +894,15 @@ export const Room = (props) => {
                                         {furniture.images.map(
                                           (slideImage, index) => (
                                             <div>
-                                            <div
-                                              className="slider_div"
-                                              key={index}
-                                            >
-                                              <img
-                                                className="slider_image"
-                                                src={check_url(slideImage)}
-                                              />
-                                            </div>
+                                              <div
+                                                className="slider_div"
+                                                key={index}
+                                              >
+                                                <img
+                                                  className="slider_image"
+                                                  src={check_url(slideImage)}
+                                                />
+                                              </div>
                                             </div>
                                           )
                                         )}
