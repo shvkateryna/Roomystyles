@@ -136,12 +136,15 @@ function One(props) {
         let links = [];
         for (let file of furnit.images) {
           if (typeof file != "string") {
+            console.log(file)
             const link = await upload_google_drive(file);
+
             links.push(link);
           } else {
             links.push(file);
           }
         }
+
         furnit.images = links;
         new_furniture_list.push(furnit);
       } else {

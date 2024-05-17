@@ -155,7 +155,7 @@ input[disabled]:hover{
 }
 
 .file_input::-webkit-file-upload-button {
-    content: url('../assets/upload-image-icon.png') " | Додати фото";
+    content: "Додати фото";
     visibility: hidden;
 }
 
@@ -496,6 +496,7 @@ li .active::after {
     text-align: center;
 }
 .image_wrapper{
+    margin-top: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
