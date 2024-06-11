@@ -26,6 +26,7 @@
 .card_room{
     width: 18rem;
     cursor: pointer;
+    background-color: #ae1c1c;
 }
 .card_room:hover{
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -67,6 +68,19 @@
     margin-right: 10px;
     border: 1px solid #8D0709; /* Set border to 1px solid with the desired color */
     border-radius: 16px;
+}
+
+.card>.list-group {
+    --bs-list-group-border-color: #ffffff;
+    --bs-list-group-border-radius: 12px;
+}
+
+.card {
+    background-color:rgb(60, 139, 0)
+}
+
+.list-group-flush>.list-group-item {
+    background-color: #d9d9d9;
 }
 
 @media  only screen and (max-width: 1000px) {
@@ -131,10 +145,7 @@
 }
 .submition_wrapper{
     padding: 10px 15px;
-    /* width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center; */
+    background-color: #d9d9d9;
 }
 .roomscards{
     width: 100%;
@@ -249,3 +260,32 @@ background-color: aquamarine;
     box-shadow: 0 0 0 1px #8D0709; /* Add a box shadow when focused */
 }
   
+.name-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .circle {
+    width: 15px; /* Adjust the width and height as needed for the circle */
+    height: 15px;
+    border-radius: 50%; /* Make it a circle */
+  }
+  
+  .roomaccepted {
+    background-color: #429354; /* Style for accepted room */
+  }
+  
+  .roomrejected {
+    background-color: #8D0709; /* Style for rejected room */
+  }
+  
+.card_header_wrapper.card-body {
+    border-radius: 12px 12px 0 0;
+}
+
+.card>.list-group:last-child {
+    --bs-card-inner-border-radius: 12px;
+    border-bottom-right-radius: 12px
+}
+

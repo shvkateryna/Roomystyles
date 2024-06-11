@@ -146,34 +146,17 @@ const Rooms = (props) => {
                       ></i>
                     </Card.Body>
 
-                    <ListGroup
-                      onClick={() => navigate(String(ele.number))}
-                      className="list-group-flush"
-                    >
-                      {ele.names.map((name, index) => (
-                        <ListGroup.Item>
-                          {name ? name : "Мешканця немає"}
-                        </ListGroup.Item>
-                      ))}
-                    </ListGroup>
-                    <div className="submition_wrapper">
-                      <div className="heading_submition">
-                        <span>Підтвердження:</span>
-                      </div>
+                    <ListGroup onClick={() => navigate(String(ele.number))} className="list-group-flush">
+                    {ele.verified.map((el_verified, index) => (
+                      <ListGroup.Item key={index}>
+                        <div className="name-container">
+                          <span>{index === 3 ? "Загальне" : (ele.names[index] || "Мешканця немає")}</span>
+                          <div className={`circle ${el_verified ? "roomaccepted" : "roomrejected"}`}></div>
+                        </div>
+                      </ListGroup.Item>
+                    ))}
+                  </ListGroup>
 
-                      <div className="roomscardfooter2">
-                        {ele.verified.map((el_verified, index) => (
-                          <div className="spec_submition_wrapper">
-                            {SumbitionTitles[index]}
-                            <div
-                              className={
-                                el_verified ? "roomaccepted" : "roomrejected"
-                              }
-                            ></div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
                   </Card>
                 ))}
               </div>

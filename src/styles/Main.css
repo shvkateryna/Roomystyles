@@ -23,6 +23,7 @@
 
 .card{
     border: none!important;
+    background-color: #C81F21;
 }
 
 .login_header{
@@ -172,6 +173,9 @@
     justify-content: center;
     align-items: center;
     --bs-card-border-color: #FFFFFF;
+    --bs-card-border-radius: 12px;
+    --bs-card-inner-border-radius: 12px;
+    background-color: #d9d9d9;
 }
 .card-body-login{
     border: none;
