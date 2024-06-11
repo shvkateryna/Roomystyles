@@ -1,8 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert, Container } from "react-bootstrap";
-// import { useAuth } from "../contexts/AuthContexts";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../assets/collegium.jpg";
+import logo from "../assets/logo.png";
 import "../styles/Main.css";
 import path from "../path";
 import axios from "axios";
@@ -53,63 +52,58 @@ export default function Login() {
 
   return (
     <CookiesProvider>
-      <div>
-        <div className="new_main" style={{ minHeight: "100vh" }}>
-          <div class="image_aside">
-            <img class="aside_image_login" src={logo} />
-            <div class="blur_aside_image_login"></div>
+    <div>
+    <div className="background-image">
+        <div className="login_wrapper">
+          <div className="aside_login_container">
+          <h1 className="heading_login">Roo<span className="red_letter">M</span>y</h1>
+            <Card>
+              <Card.Body className="card-body-login">
+                <h2 className="login_header">
+                 Увійти
+                </h2>
+                {error && <Alert variant="danger">{error}</Alert>}
+                <Form onSubmit={handleSubmit} className="form_login">
+                  <Form.Group id="email" className="input_group">
+                    <Form.Label className="form_label">
+                      Корпоративна пошта
+                    </Form.Label>
+                    <Form.Control
+                      className="input_login"
+                      placeholder="ucu@ucu.edu.ua"
+                      type="email"
+                      ref={emailRef}
+                      required
+                    ></Form.Control>
+                  </Form.Group>
+                  <Form.Group id="password" className="input_group">
+                    <Form.Label className="form_label">Пароль</Form.Label>
+                    <Form.Control
+                      className="input_login"
+                      placeholder="Пароль"
+                      type="password"
+                      ref={passwordRef}
+                      required
+                    ></Form.Control>
+                  </Form.Group>
+                  <Button
+                    disabled={loading}
+                    className="button_submit"
+                    type="submit"
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <span className="login_button">Увійти</span>
+                  </Button>
+                  <img src={logo} className="logo-collegium" />
+                </Form>
+              </Card.Body>
+            </Card>
+            <div className="w-100 text-center mt-3"></div>
           </div>
-          <div class="login_wrapper">
-            <h1 class="heading_login"> Roommy </h1>
-            <Container className="aside_login_container">
-              <Card>
-                <Card.Body class="card-body-login">
-                  <h2 className="login_header">
-                    <strong>Увійти</strong>
-                  </h2>
-                  {error && <Alert variant="danger">{error}</Alert>}
-                  <Form onSubmit={handleSubmit} className="form_login">
-                    <Form.Group id="email" className="input_group">
-                      <Form.Label class="form_label">
-                        Корпоративна пошта
-                      </Form.Label>
-                      <Form.Control
-                        className="input_login"
-                        placeholder="ucu@ucu.edu.ua"
-                        type="email"
-                        ref={emailRef}
-                        required
-                      ></Form.Control>
-                    </Form.Group>
-                    <Form.Group id="password" className="input_group">
-                      <Form.Label class="form_label">Пароль</Form.Label>
-                      <Form.Control
-                        className="input_login"
-                        placeholder="Пароль"
-                        type="password"
-                        ref={passwordRef}
-                        required
-                      ></Form.Control>
-                    </Form.Group>
-                    <Button
-                      disabled={loading}
-                      className="button_submit"
-                      type="submit"
-                      onMouseEnter={handleMouseEnter}
-                      onMouseLeave={handleMouseLeave}
-                    >
-                      <span class="login_button">Увійти</span>
-                    </Button>
-                  </Form>
-                </Card.Body>
-              </Card>
-              <div className="w-100 text-center mt-3"></div>
-            </Container>
-          </div>
-
-          <img />
         </div>
       </div>
-    </CookiesProvider>
-  );
+    </div>
+  </CookiesProvider>
+);
 }

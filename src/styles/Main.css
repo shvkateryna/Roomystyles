@@ -2,67 +2,81 @@
     display: flex;
 }
 
-.image_aside{
-    width: 60%;
+.background-image {
+    background-image: url('../assets/collegium1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
     position: relative;
 }
-.login_wrapper{
-    width: 40%;
+
+.logo-collegium {
+    width: 45%;
+    align-self: center;
 }
+
 .form-control{
-    height: 50px!important;   
+    height: 100%;   
 }
+
 .card{
-    border: none    ;
+    border: none!important;
 }
-.blur_aside_image_login{
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  object-position: center;
-  background-color: rgb(230, 199, 151);
-  position: absolute;
-  opacity: 0.3;
-  z-index: 1;
-}
+
 .login_header{
 color: "black";
-font-family: "Montserrat", sans-serif;
-font-weight: 900; 
-font-size: 23px;
+font-family: "Lexend", sans-serif;
+font-size: x-large;
 }
+
 .input_group{
     display: flex;
     flex-direction: column;
 }
+
+.aside_login_container {
+    width: 35%;
+    height: 50%;
+    position: absolute;
+    top: 10%;
+    right: 10%;
+}
+
 @media only screen and (max-width: 600px)  {
     .image_aside{
         display: none!important;
     }
     .login_wrapper{
-        width: 100%;
-        gap: 14%!important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .aside_login_container {
+        top: 10%;
+        right: 10%;
+        width: 80%;
     }
 }   
 
 .login_button{
-    font-family: "Montserrat", sans-serif;
+    font-family: "Lexend", sans-serif;
+    color: #FFFFFF;
 
 }
-.aside_login_container{
-    padding-left: 10%!important;
-    padding-right: 10%!important;
-}
+
 .input_login {
     padding: 0px 10px;
     border-radius: 7px;
-    border: 1px solid #1B1C57;
+    border: 10px  #8D0709;
+    border-color: #8D0709;
 }
 .form_label{
     margin-bottom: 7px;
     color: "black";
-    font-family: "Montserrat", sans-serif;
-    font-weight: 700; 
+    font-family: "Lexend", sans-serif;
     font-size: "16px";
 }
 .form_login{
@@ -70,25 +84,26 @@ font-size: 23px;
     flex-direction: column;
     gap: 20px;
     width: 100%;
+    height: 100%;
     margin-top: 20px;
 }
 .button_submit {
-    border: none;
+    border: none !important;
     border-radius: 12px;
+    border-color: #FFFFFF;
     margin-top: 15px;
-    height: 60px;
-    font-family: 'Montserrat Medium 500';
+    height: 40%;
+    font-family: 'Lexend', sans-serif;
     font-size: 16px;
-    color: black;
     padding: 15px;
     width: 100%;
-    --bs-btn-bg:  #f7cf95!important;
-    --bs-btn-border-color:  #f7cf95!important;
+    --bs-btn-bg:  #8D0709!important;
   }
   
   .button_submit:hover {
-    background-color: #e7ba77!important;
+    background-color: #C81F21!important;
     color: black;
+    border: none!important;
     
   }
 
@@ -125,44 +140,56 @@ font-size: 23px;
     width: 20px;
     height: 20px;
 }
+.red_letter {
+    color: #8D0709;
+  }
 .card-body{
+    border: none;
     align-items: center;
     justify-content: center;
     align-items: center;
-    border-radius: '5px';
-    border: none!important;
+    --bs-card-border-color: #FFFFFF;
+    /* border-radius: '12px';
+    border: none!important; */
 }
 .card-body-login{
-
+    border: none;
     display: flex;
     flex-direction: column!important;
     align-items: center;
     justify-content: center;
     align-items: center;
-    border-radius: '5px';
-    padding: 15px;
-    /* border: none!important; */
+    --bs-card-border-color: #FFFFFF;
+    /* border-radius: '12px';
+    border: none!important; */
 }
 
 
-
 .aside_image_login{
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  position: absolute;z-index: 2;
-  object-position: center;
-  z-index: -1;
+    border: none;
+    height: 50%;
+    width: 0%;
+    object-fit: cover;
+    position: absolute;
+    z-index: 2;
+    object-position: center;
+    z-index: -1;
 }
 
 .heading_login{
     display: flex;
     justify-content: center;
     margin: 30px;
+    letter-spacing: 5px;
 }
+
 .login_wrapper{
+    border: none;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;  
+    width: 100vw;        
 }
 
 .button_add_curators{
