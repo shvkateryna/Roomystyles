@@ -3,7 +3,7 @@
 }
 
 .background-image {
-    background-image: url('../assets/collegium1.jpg');
+    background-image: url('../assets/collegium_back.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -26,9 +26,11 @@
 }
 
 .login_header{
-color: "black";
-font-family: "Lexend", sans-serif;
-font-size: x-large;
+    color: "black";
+    font-family: "Lexend", sans-serif;
+    font-size: 24px;
+    letter-spacing: 2px;
+    font-weight: 300;
 }
 
 .input_group{
@@ -37,14 +39,13 @@ font-size: x-large;
 }
 
 .aside_login_container {
-    width: 35%;
-    height: 50%;
+    width: 40%;
     position: absolute;
-    top: 10%;
+    top: 5%;
     right: 10%;
 }
 
-@media only screen and (max-width: 600px)  {
+@media only screen and (max-width: 1000px)  {
     .image_aside{
         display: none!important;
     }
@@ -56,15 +57,33 @@ font-size: x-large;
 
     .aside_login_container {
         top: 10%;
-        right: 10%;
-        width: 80%;
+        right: 15%;
+        width: 70%;
+    }
+}   
+
+@media only screen and (max-width: 1024px) and (min-height: 1366px)  {
+    .image_aside{
+        display: none!important;
+    }
+    .login_wrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .aside_login_container {
+        top: 10%;
+        right: 20%;
+        width: 60%;
     }
 }   
 
 .login_button{
     font-family: "Lexend", sans-serif;
     color: #FFFFFF;
-
+    letter-spacing: 2px;
+    font-weight: 300;
 }
 
 .input_login {
@@ -78,6 +97,8 @@ font-size: x-large;
     color: "black";
     font-family: "Lexend", sans-serif;
     font-size: "16px";
+    letter-spacing: 2px;
+    font-weight: 300;
 }
 .form_login{
     display: flex;
@@ -98,6 +119,8 @@ font-size: x-large;
     padding: 15px;
     width: 100%;
     --bs-btn-bg:  #8D0709!important;
+    letter-spacing: 2px;
+    font-weight: 300;
   }
   
   .button_submit:hover {
@@ -149,8 +172,6 @@ font-size: x-large;
     justify-content: center;
     align-items: center;
     --bs-card-border-color: #FFFFFF;
-    /* border-radius: '12px';
-    border: none!important; */
 }
 .card-body-login{
     border: none;
@@ -160,8 +181,8 @@ font-size: x-large;
     justify-content: center;
     align-items: center;
     --bs-card-border-color: #FFFFFF;
-    /* border-radius: '12px';
-    border: none!important; */
+    margin-left: 3%;
+    margin-right: 3%;
 }
 
 
@@ -180,7 +201,10 @@ font-size: x-large;
     display: flex;
     justify-content: center;
     margin: 30px;
-    letter-spacing: 5px;
+    letter-spacing: 8px;
+    font-family: 'Lexend', sans-serif;
+    font-size: 52px;
+    font-weight: 300;
 }
 
 .login_wrapper{
