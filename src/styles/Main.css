@@ -110,7 +110,7 @@
 }
 .button_submit {
     border: none !important;
-    border-radius: 12px;
+    border-radius: 16px;
     border-color: #FFFFFF;
     margin-top: 15px;
     height: 40%;
@@ -121,13 +121,13 @@
     --bs-btn-bg:  #8D0709!important;
     letter-spacing: 2px;
     font-weight: 300;
+    transition: background-color 300ms ease-out;
   }
   
   .button_submit:hover {
     background-color: #C81F21!important;
     color: black;
     border: none!important;
-    
   }
 
   .link{

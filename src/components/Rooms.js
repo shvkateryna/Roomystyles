@@ -63,6 +63,18 @@ const Rooms = (props) => {
   const [loadinRoute, setLoadingRoute] = useState([false, -1]);
   const [justcopied, setJustCopied] = useState(-1);
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState('');
+  
+  const handleSearch = () => {
+    // Logic to find the room number and scroll to it
+    const element = document.getElementById(`room${searchTerm}`);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      // window.scrollTo({ top: element.offsetTop, behavior: 'smooth' });
+    } else {
+      console.log("Room number not found");
+    }
+  };
 
   async function get_route(number) {
     setLoadingRoute([true, number]);
@@ -90,22 +102,32 @@ const Rooms = (props) => {
       .catch((err) => setLoading(false));
   }, []);
   return (
-    <div key={"main_div_rooms"} className="main" style={{ minHeight: "100vh" }}>
+    <div key={"main_div_rooms"} className="main" style={{ minHeight: "130vh" }}>
       {loading ? (
         <div className="loader_div">
           <span key={"loader"} className="loader"></span>
         </div>
       ) : (
         <>
-          {" "}
+        <div><NavBar role={props.role}></NavBar></div>
           <div className="roomsbody">
-            <NavBar role={props.role}></NavBar>
             <div className="roomsmain">
+            <div className="search">
+            <div className="my-rooms">Мої кімнати</div>
+            <div className="search-input">
+              <input className="input-room"
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              <button className="search-button" onClick={handleSearch}>Шукати</button>
+            </div>
+            </div>
               <div className="roomscards">
                 {response.map((ele, index) => (
                   <Card className="card_room">
                     <Card.Body className="card_header_wrapper">
-                      <Card.Title>{ele.number}</Card.Title>
+                      <Card.Title id={`room${ele.number}`}>{ele.number}</Card.Title>
                       <i
                         class="fa-regular fa-copy"
                         disabled={loadinRoute[0]}

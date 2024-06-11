@@ -187,6 +187,10 @@ export default function NavBar(props) {
     window.location.href = "/manager";
   };
 
+  const navigateRooms = () => {
+    window.location.href = "/";
+  };
+
   return (
     <>
       <div
@@ -291,11 +295,22 @@ export default function NavBar(props) {
 
       <nav className="navbar_m">
         <div className="navbarbrand-title" onClick={handleClick}>
-          Roomy
+          RooMy
         </div>
         <div className={isActive ? "navbaroptions active" : "navbaroptions"}>
           {props.role === "ADMIN" ? (
             <>
+            <div id="navoption">
+                <span
+                  onClick={() => {
+                    handleShow1();
+                  }}
+                >
+                  {" "}
+                  Очистити звіт{" "}
+                </span>
+              </div>
+            
               <div id="navoption" className="download_nav">
                 <span
                   onClick={() => {
@@ -313,19 +328,21 @@ export default function NavBar(props) {
                   }}
                 >
                   {" "}
-                  Адмін сторінка{" "}
+                  Додати куратора{" "}
                 </span>
               </div>
+
               <div id="navoption">
                 <span
                   onClick={() => {
-                    handleShow1();
+                    navigateRooms();
                   }}
                 >
                   {" "}
-                  Очистити звіт{" "}
+                  Кімнати{" "}
                 </span>
               </div>
+              
             </>
           ) : (
             <></>

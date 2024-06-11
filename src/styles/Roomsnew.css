@@ -6,6 +6,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    padding-left: 2%;
 }
 .roomsheader{
     width: 100%;
@@ -40,7 +41,35 @@
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     cursor: pointer;
 }  
-@media (min-width: 1400px) {
+
+.search {
+    display: flex;
+    justify-content: center; /* Horizontally center the items */
+    align-items: center; /* Vertically center the items */
+    
+    margin-top: 2%; /* Adjust margin as needed */
+}
+.search-input {
+    margin-left: 40%; /* Adjust margin as needed */
+    margin-top: 2%;
+}
+
+.my-rooms {
+    font-family: "Lexend", sans-serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+    font-weight: 300;
+}
+
+.input-room {
+    height: 45px;
+    width: 300px;
+    margin-right: 10px;
+    border: 1px solid #8D0709; /* Set border to 1px solid with the desired color */
+    border-radius: 16px;
+}
+
+@media  only screen and (max-width: 1000px) {
     .container,
     .container-lg,
     .container-md,
@@ -49,7 +78,26 @@
     .container-xxl {
       max-width: 1410px!important;
     }
-  }
+
+    .search {
+        display: inline;
+        margin-top: 5%;
+        flex-direction: column; 
+    }
+
+    .search-input {
+        margin-left: 5%;
+        margin-top: 2%;
+    }
+
+    .my-rooms {
+        margin-left: 5%;
+    }
+
+    .input-room {
+        width: 50%;
+    }
+}
   
 .roomscardfooter{
     display: flex;
@@ -93,7 +141,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 30px;
+    /* padding: 30px; */
     gap: 15px;
     margin-top: 7vh;
 }
@@ -177,6 +225,27 @@ background-color: aquamarine;
 .roomnumber{
     font-weight: 400;
     font-size: 30px;
-    border-bottom: 1px solid gray;
-    
+    border-bottom: 1px solid gray;  
 }
+
+.search-button {
+    background-color: #8D0709;
+    border: none;
+    border-radius: 12px;
+    height: 40px;
+    width: 127px;
+    font-family: "Lexend", sans-serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+    font-weight: 300;
+    color: #ffffff;
+    transition: background-color 300ms ease-out;
+}
+
+
+.input-room:focus {
+    outline: none; /* Remove default focus outline */
+    border-color: #8D0709; /* Change border color when focused */
+    box-shadow: 0 0 0 1px #8D0709; /* Add a box shadow when focused */
+}
+  

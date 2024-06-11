@@ -1,32 +1,67 @@
 .navbar_m {
     display: flex;
     align-items: center;
-    position: fixed;
     width: 100%;
     padding: 20px;
     justify-content: space-between;
     align-items: center;
-    background-color: #f8e3ab;
-    color: black;
-    height:7vh;
+    background-color: #8D0709;
+    color: #fff;
+    height:8vh;
     font-size: medium;
-    z-index: 1;
+    z-index: 1000;
 }
 .confirm_button{
-    background-color: #f8e3ab;
-    border: 1px solid gray;
-    border-radius: 5px;
-    padding: 5px;
+    background-color: #8D0709;
+    border: #8D0709;
+    border-radius: 16px;
+    height: 40px;
+    width: 127px;
+    font-family: "Lexend", sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 300;
+    color: #ffffff;
+    transition: background-color 300ms ease-out;
 }
+
+.confirm_button:hover {
+    background-color: #C81F21;
+    border: #C81F21;
+}
+
 .discard_button{
-    background-color: #f8e3ab;
-    border: 1px solid gray;
-    border-radius: 5px;
-    padding: 5px;
+    background-color: #8D0709;
+    border: #8D0709;
+    border-radius: 16px;
+    height: 40px;
+    width: 127px;
+    font-family: "Lexend", sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 300;
+    color: #ffffff;
+    transition: background-color 300ms ease-out;
 }
+
+.discard_button:hover {
+    background-color: #C81F21;
+    border: #C81F21;
+}
+
 .navbarbrand-title{
     cursor: pointer;
+    font-family: "Lexend", sans-serif;
+    font-size: 24px;
+    letter-spacing: 2px;
+    font-weight: 300;
+    transition: color 300ms ease-out;
 }
+
+.navbarbrand-title:hover{
+    color: #D9D9D9
+}
+
 .navbaroptions{
     display: flex;
 }
@@ -36,40 +71,29 @@
     margin: 5px;
     cursor: pointer;
     transition: 0.3 ease-in-out;
-}
-#navoption:hover{
-    color: #ffffff;
-}
-
-#navoption:hover::after{
-    content: "";
-    position: absolute;
-    width: 50%; 
-    height: 2px;
-    background-color: rgb(255, 255, 255);
-    left: 5px;
-    bottom: 5px;
+    font-family: "Lexend", sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 300;
+    transition: color 300ms ease-out;
 }
 
-#navoption.active::after{
-    content: "";
-    position: absolute;
-    width: 50%; 
-    height: 2px;
-    background-color: rgb(159, 193, 92);
-    left: 10px;
-    bottom: 10px;
+#navoption:hover {
+    color: #D9D9D9
 }
+
 #mobile{
     display: none;
 }
 #mobile i {
-color: rgb(0, 0, 0);
+color: #ffffff;
 
 cursor: pointer;
 }
 @media screen and (max-width:729px) {
-
+    #navoption{
+        margin-left: 8%;
+    }
     .navbaroptions{
         display: flex;
         flex-direction: column;
@@ -80,7 +104,7 @@ cursor: pointer;
         right: -300px;
         width: 300px;
         height: 100vh;
-        background-color:  #f8e3ab;
+        background-color:  #8D0709;
         transition: 1s;
         z-index: 1;
     }
