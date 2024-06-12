@@ -498,8 +498,8 @@ li .active::after {
     justify-content: center;
 }
 .slider_image{
-    max-width: 90%;
-    height: 200px;
+    max-width: 95%;
+    height: 400px;
 }
 .slider_div{
     display: flex;

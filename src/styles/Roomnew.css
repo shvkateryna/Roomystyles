@@ -13,9 +13,21 @@
 }
 .furniture_type{
     padding: 10px;
-    font-weight: 500;
-    background-color: rgb(252, 238, 219);
+    font-family: "Lexend", sans-serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+    font-weight: 300;
+    background-color: #d9d9d9;
 }
+
+.furniture_description {
+    padding-left: 10px;
+    font-family: "Lexend", sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 300;
+}
+
 .finish_date_input{
     padding: 8px 12px;
       border: 1px solid #ccc;
@@ -77,14 +89,42 @@ width: 40%;
     cursor: pointer;
     margin-top: 30px;
 }
+  
+.verify_button_container {
+    display: inline-block; /* Ensure container is inline */
+}
+
+
 .verify_button{
-    border: 1px solid gray;
-    border-radius: 10px;
-    padding: 10px;
+    display: inline-block;
+    border: 1px solid #8D0709;
+    background-color: #8D0709;
+    border-radius: 12px;
+    margin-left: 10px; 
+    padding: 5px 10px;
     margin: 5px;
-    width: 60%;
-    max-width: 600px;
-    font-weight: 500;
+    width: 100%;
+    height: 100%;
+    font-family: "Lexend", sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    text-align: center;
+    cursor: pointer;
+}
+
+.verify_button_confirmed{
+    display: inline-block;
+    border: 1px solid #429354;
+    background-color: #429354;
+    border-radius: 12px;
+    margin-left: 10px; 
+    padding: 5px 10px;
+    margin: 5px;
+    width: 100%;
+    height: 100%;
+    font-family: "Lexend", sans-serif;
+    font-size: 12px;
+    font-weight: 300;
     text-align: center;
     cursor: pointer;
 }
@@ -93,25 +133,26 @@ width: 40%;
     display: flex;
     flex-direction: column;
 }
-.furniture_navigation{
+.furniture_navigation {
     display: flex;
-    justify-content: flex-end;
-    gap:10px;
+    gap: 10px;
     padding: 10px 30px;
-}
+    align-items: center; /* Align arrows vertically center */
+  }
+  
 .furniture_navigation>div{
-    width: 50px;
-    border-radius: 10px;
-    border: 1px solid gray;
+    width: 70%;
+    border-radius: 12px;
+    border: 1px solid #8D0709;
     padding: 5px;
     text-align: center;
     cursor: pointer;
+    transition: background-color 300ms ease-out;
 }
 .furniture_navigation>div:hover{
-    background-color: #ececec;
+    background-color: #d9d9d9;
 }
-.furniture_div{
-    
+.furniture_div{  
   width: 70%;   
 }
 
@@ -121,10 +162,10 @@ width: 40%;
 }
 .roomcards{
 
-margin-top: 8vh;
-width: 100%;
-position: relative;
-height: 100%;
+    margin-top: 2vh;
+    width: 100%;
+    position: relative;
+    height: 100%;
 }
 .roomwings{
 width: 20%;
@@ -162,7 +203,7 @@ background-color: aquamarine;
     width: 100%;;
     display: flex;
 }
-.roomroominside{
+.roomroominside {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -172,27 +213,30 @@ background-color: aquamarine;
     border-radius: 10px;
     background-color: blueviolet;
 }
-/* .slick-slide1{
-    width: !important;
-} */
 
 .roomroomfur_active{
-    font-weight: 500;
+    font-weight: 600;
+    font-family: "Lexend", sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    display: flex;
+    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 2px 10px;
+    padding: 3px 3px;
+    border-radius: 10px;
+    background-color: #d9d9dd;
+    border: 1px solid #8D0709;
+    white-space: nowrap;
+}
 
-    display: flex;
-    cursor: pointer;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin: 2px 10px;
-    padding: 3px 3px;
-    border-radius: 10px;
-    background-color: rgb(238, 236, 236);
-    border: 1px solid gray;
-    white-space: nowrap;
-}
 .roomroomfur{
-    font-weight: 500;
+    font-weight: 300;
+    font-family: "Lexend", sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
     display: flex;
     cursor: pointer;
     flex-direction: column;
@@ -201,9 +245,15 @@ background-color: aquamarine;
     margin: 2px 10px;
     padding: 3px 3px;
     border-radius: 10px;
-    border: 1px solid gray;
+    border: 1px solid #8D0709;
     white-space: nowrap;
+    transition: background-color 300ms ease-out;
 }
+
+.roomroomfur:hover{
+    background-color: #d9d9d9;
+}
+
 .loader_div{
     height: 100vh;
     display: flex;
@@ -256,7 +306,10 @@ background-color: aquamarine;
         } 
     
 .roomroomfur_end{
-    font-weight: 500;
+    font-weight: 300;
+    font-family: "Lexend", sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
     display: flex;
     cursor: pointer;
     flex-direction: column;
@@ -265,12 +318,21 @@ background-color: aquamarine;
     margin: 2px 10px;
     padding: 3px 3px;
     border-radius: 10px;
-    border: 1px solid gray;
-    background-color: rgb(254, 215, 215);
+    border: 1px solid #8D0709;
+    background-color: #ffffff;
     white-space: nowrap;
+    transition: background-color 300ms ease-out;
 }
+
+.roomroomfur_end:hover{
+    background-color: #d9d9d9;
+}
+
 .roomroomfur_accept{
-    font-weight: 500;
+    font-weight: 300;
+    font-family: "Lexend", sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
     display: flex;
     cursor: pointer;
     flex-direction: column;
@@ -279,10 +341,16 @@ background-color: aquamarine;
     margin: 2px 10px;
     padding: 3px 3px;
     border-radius: 10px;
-    border: 1px solid gray;
-    background-color: rgb(254, 215, 215);
+    border: 1px solid #8D0709;
+    background-color: #ffffff;
     white-space: nowrap;
+    transition: background-color 300ms ease-out;
 }
+
+.roomroomfur_accept:hover{
+    background-color: #d9d9d9;
+}
+
 .roommaininfo{
     display: flex;
     flex-direction: column;
@@ -290,3 +358,100 @@ background-color: aquamarine;
     background-color: chartreuse;
     height: 100%;
 }
+
+.furn-description {
+    height: 550px;
+    width: 350px;
+    margin-left: 6%;
+    border-radius: 12px;
+}
+
+.furniture_container {
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 7vh;
+    margin-left: 5%;
+    margin-right: 40%;
+  }
+
+  .slick-prev,
+  .slick-next {
+    display: none !important;
+  }
+
+.furniture_navigation1 {
+    display: flex;
+    gap: 10px;
+    padding: 3% 43%;
+    align-items: center; /* Align arrows vertically center */
+}
+
+.furniture_navigation1-prev {
+    transition: color 300ms ease-out;
+}
+
+.furniture_navigation1-next {
+    transition: color 300ms ease-out;
+}
+
+.furniture_navigation1-prev:hover {
+    color: #d9d9d9
+}
+
+.furniture_navigation1-next:hover {
+    color: #d9d9d9
+}
+
+.text-with-border {
+    border-bottom: 1px solid white;
+    padding-bottom: 10px; /* Optional: to add some spacing */
+    margin-bottom: 10px; /* Optional: to add some spacing */
+  }
+
+.verification-card {
+    margin-left: 8%;
+    margin-right: 19%;
+    margin-top: 2%;
+    border-radius: 12px;
+}
+
+@media only screen and (max-width: 1000px)  {
+    .roomroomfur_accept{
+        font-size: 8px;
+        letter-spacing: 1px;
+        margin: 2px 10px;
+        padding: 1px 1px;
+    }
+
+    .roomroomfur_end{
+        font-size: 8px;
+        letter-spacing: 1px;
+        padding: 1px 1px;
+    }
+
+    .roomroomfur{
+        font-size: 8px;
+        letter-spacing: 1px;
+        padding: 1px 1px;
+    }
+
+    .roomroomfur_active{
+        font-size: 8px;
+        letter-spacing: 1px;
+        padding: 1px 1px;
+    }
+
+    .furniture_navigation>div{
+        padding: 4px;
+        font-size: 8px;
+        height: 30%;
+    }
+
+    .furniture_navigation {
+        gap: 5px;
+        padding: 5px 5px;
+    }
+    
+}  

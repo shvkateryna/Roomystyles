@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { MultiSelect } from "react-multi-select-component";
-
+import Select from 'react-select';
 import { Form, Button, Card, Alert, Container, Navbar } from "react-bootstrap";
 import { useCookies } from "react-cookie";
 import NavBar from "./navbarnew";
@@ -15,6 +15,7 @@ const Curator_menager = (props) => {
   const [login_new, setLogin_new] = useState([]);
   const [password_new, setPassword_new] = useState([]);
   const [cookies] = useCookies(["user"]);
+  const [isFocused, setIsFocused] = useState(false);
   // const { signup } = useAuth()
   const options = [
     { value: "201-218", label: "201-218" },
@@ -26,6 +27,20 @@ const Curator_menager = (props) => {
     { value: "501-518", label: "501-518" },
     { value: "519-534", label: "519-534" },
   ];
+
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      boxShadow: 'none',
+      borderColor: '#8D0709',
+      borderRadius: '16px',
+      borderWidth: state.isFocused ? '2px' : '1px',  // Increase border width when focused
+      '&:hover': {
+        borderColor: '#8D0709',
+      },
+    }),
+  };
+
   const [selected, setSelected] = useState([]);
   useEffect(() => {
     setLoading(true);
@@ -81,103 +96,77 @@ const Curator_menager = (props) => {
   return (
     <>
       <NavBar role={props.role}></NavBar>
-      <Container
-        className=" align-items-center justify-content-center"
-        style={{
-          justifyContent: "center",
-          minHeight: "60vh",
-          maxWidth: "550px",
-        }}
-      >
         <div>
           {loading ? (
             <span className="loader"></span>
           ) : (
             <>
-              <Card style={{ position: "unset" }}>
+            <div className="curators">Куратори</div>
+            <Container
+            style={{
+              justifyContent: "center",
+            }}>
+              <Card className='add-curators-card' style={{ position: "unset" }}>
                 <Card.Body
                   style={{
                     border: "none",
                     borderRadius: "5px",
                     borderColor: "#f3e8c9",
-                    marginTop: "100px",
+                    marginTop: "15%",
+                    padding: '7%',
                   }}
                 >
-                  <h2
-                    className="text-center mb-4"
-                    style={{
-                      color: "black",
-                      fontFamily: "Montserrat Medium 500",
-                      fontSize: "18px",
-                      textTransform: "uppercase",
-                      letterSpacing: "5px",
-                    }}
-                  >
-                    <strong>Додати куратора</strong>
+                  <h2 className="add-curators-header">
+                    Додати куратора
                   </h2>
                   {error && <Alert variant="danger">{error}</Alert>}
                   <Form
                     onSubmit={(e) => create_new_user(e)}
                     style={{ height: "300px" }}
                   >
-                    <Form.Group id="email">
+                    <Form.Group id="email" className="add-curators-headers">
                       <Form.Label
-                        style={{
-                          color: "black",
-                          fontFamily: "Montserrat Medium 500",
-                          fontSize: "16px",
-                        }}
                       >
                         Корпоративна пошта
                       </Form.Label>
                       <Form.Control
-                        style={{
-                          color: "black",
-                          fontFamily: "Verdana",
-                          fontSize: "16px",
-                        }}
                         type="email"
+                        className="form-control"
                         onChange={(e) => setLogin_new(e.target.value)}
+                        placeholder="ucu@ucu.edu.ua"
                         required
                       ></Form.Control>
                     </Form.Group>
-                    <Form.Group id="password">
+                    <Form.Group id="password" className="add-curators-headers">
                       <Form.Label
-                        style={{
-                          color: "black",
-                          fontFamily: "Montserrat Medium 500",
-                          fontSize: "16px",
-                        }}
                       >
                         Пароль
                       </Form.Label>
                       <Form.Control
-                        style={{
-                          color: "black",
-                          fontFamily: "Verdana",
-                          fontSize: "16px",
-                        }}
                         type="password"
+                        className="form-control"
                         onChange={(e) => setPassword_new(e.target.value)}
+                        placeholder="Пароль"
                         required
                       ></Form.Control>
                     </Form.Group>
+                    <Form.Group id="wing" className="add-curators-headers">
                     <Form.Label
-                      style={{
-                        color: "black",
-                        fontFamily: "Montserrat Medium 500",
-                        fontSize: "16px",
-                      }}
                     >
                       Крило
                     </Form.Label>
-                    <MultiSelect
-                      style={{ color: "black", fontFamily: "Verdana" }}
+                    <Select
+                      isMulti
+                      styles={customStyles}
                       options={options}
                       value={selected}
                       className="mutiselect_align"
                       onChange={setSelected}
+                      onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+                      placeholder="Вибрати крило"
                     />
+                    </Form.Group>
                     <button
                       disabled={loading}
                       className="button_add_curators"
@@ -190,41 +179,42 @@ const Curator_menager = (props) => {
                 </Card.Body>
               </Card>
               <br></br>
-              Список кураторів:
+            </Container>
+            <div className="curators">Список кураторів:</div>
               <br></br>
               <br></br>
               {response.length === 0 ? (
                 <>Немає кураторів</>
               ) : (
                 <>
-                  {response.map((ele, index) => (
-                    <ol class="list-group" style={{ paddingRight: "-50px" }}>
-                      <li
-                        class="list-group-item"
-                        style={{
-                          fontFamily: "Montserrat Medium 500",
-                          color: "black",
-                          fontSize: "16px",
-                        }}
-                      >
-                        {index + 1}. {ele.email}{" "}
-                        <strong>
-                          <label style={{ color: "black" }}>
-                            {"  " +
-                              ele.rooms[0] +
-                              "-" +
-                              ele.rooms[ele.rooms.length - 1]}
-                          </label>
-                        </strong>
-                      </li>
-                    </ol>
-                  ))}
+                  <table className="custom-table">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Корпоративна пошта
+                      </th>
+                      <th>Кімнати
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {response.map((ele, index) => (
+                      <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>{ele.email}</td>
+                        <td>
+                          {ele.rooms[0]} - {ele.rooms[ele.rooms.length - 1]}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
                 </>
               )}
             </>
           )}
         </div>
-      </Container>
+      
     </>
   );
 };

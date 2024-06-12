@@ -68,6 +68,7 @@
     margin-right: 10px;
     border: 1px solid #8D0709;
     border-radius: 16px;
+    padding-left: 2%;
 }
 
 .card>.list-group {
@@ -81,6 +82,22 @@
 
 .list-group-flush>.list-group-item {
     background-color: #d9d9d9;
+}
+
+.custom-table {
+    margin-left: 13%;
+    border-collapse: collapse;
+    width: 55%;
+    margin-bottom: 20%;
+}
+  
+.custom-table th,
+.custom-table td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: left;
+    font-family: "Lexend", sans-serif;
+    font-size: 16px;
 }
 
 @media  only screen and (max-width: 1000px) {
@@ -110,6 +127,15 @@
 
     .input-room {
         width: 50%;
+    }
+
+    .custom-table th,
+    .custom-table td {
+        font-size: 12px;
+    }
+
+    .custom-table {
+        width: 75%;
     }
 }
   
@@ -251,6 +277,7 @@ background-color: aquamarine;
     color: #ffffff;
     transition: background-color 300ms ease-out;
 }
+
 
 
 .input-room:focus {

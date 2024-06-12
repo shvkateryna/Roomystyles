@@ -103,13 +103,13 @@ const Rooms = (props) => {
   }, []);
   return (
     <div key={"main_div_rooms"} className="main" style={{ minHeight: "130vh" }}>
+      <div><NavBar role={props.role}></NavBar></div>
       {loading ? (
         <div className="loader_div">
           <span key={"loader"} className="loader"></span>
         </div>
       ) : (
         <>
-        <div><NavBar role={props.role}></NavBar></div>
           <div className="roomsbody">
             <div className="roomsmain">
             <div className="search">
@@ -119,6 +119,7 @@ const Rooms = (props) => {
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Введіть номер кімнати"
               />
               <button className="search-button" onClick={handleSearch}>Шукати</button>
             </div>

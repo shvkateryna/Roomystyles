@@ -1,9 +1,49 @@
+.curators {
+    font-family: "Lexend", sans-serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+    font-weight: 300;
+    margin-left: 8%;
+    margin-top: 3%;
+}
+
+.mutiselect_align {
+    border-radius: 16px;
+    border-color: #8D0709;
+    transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition for border and shadow */
+}
+
+/* Remove the default blue outline and set custom styles on focus */
+.mutiselect_align:focus {
+    outline: none;
+    border-color: #FF5733; /* Desired border color when focused */
+    box-shadow: 0 0 0px 1px rgba(255, 87, 51, 0.5); /* Optional: Change shadow on focus */
+}
+
+div.css-1uwv1iy-control {
+    box-shadow: none !important; /* Force removal of box shadow */
+    border-color: #8D0709 !important; /* Ensure border color is applied */
+    border-radius: 16px !important; /* Ensure border radius is applied */
+}
+
+div.css-1uwv1iy-control:focus {
+    outline: none !important;
+    border-color: #FF5733 !important; /* Custom border color when focused */
+    box-shadow: none !important; /* Ensure no box shadow on focus */
+}
+
+
 
 .loader_manager_div{
 display: flex;
 align-items: center;
 justify-content: center;
 }
+
+.add-curators-card {
+    padding-left: 30%;
+    padding-right: 30%;
+} 
 
 .loader_manager {
     width: 48px;
@@ -25,3 +65,24 @@ justify-content: center;
     }
     } 
 
+.add-curators-headers {
+    margin-bottom: 4%;
+}
+
+@media only screen and (max-width: 700px)  {
+    .add-curators-card {
+        padding-right: 10%;
+        padding-left: 10%
+    } 
+    .curators {
+        margin-top: 6%;
+    }
+
+    .add-curators-header {
+        font-size: 20px;
+    }
+
+    .form-label {
+        font-size: 12px;
+    }
+}   
