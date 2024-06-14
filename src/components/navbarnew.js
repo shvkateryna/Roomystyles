@@ -331,6 +331,13 @@ export default function NavBar(props) {
                   Додати куратора{" "}
                 </span>
               </div>
+              
+            </>
+          ) : (
+            <>
+
+            </>
+          )}
 
               <div id="navoption">
                 <span
@@ -342,11 +349,6 @@ export default function NavBar(props) {
                   Кімнати{" "}
                 </span>
               </div>
-              
-            </>
-          ) : (
-            <></>
-          )}
 
           <div styles={"margin-left: 100px"} id="navoption">
             <span

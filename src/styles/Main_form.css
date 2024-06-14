@@ -89,21 +89,28 @@
 }
 
 .form_button_nav {
-  display: block;
+  display: flex; /* Changed from block to flex */
   cursor: pointer;
-  font-size: 16px;
+  font-size: 12px;
   color: #000000;
   transition: .5s all;
   width: 400px;
   height: 45px;
   background-color: #ffffff;
   border: solid;
-  border-color: #f3e8c9;
-  border-width: 3px;
-  font-family: 'Montserrat Medium 500', sans-serif;
+  border-color: #8D0709;
+  border-width: 1px;
   border-radius: 12px;
   margin: 20px auto;
+  font-family: "Lexend", sans-serif;
+  letter-spacing: 2px;
+  justify-content: flex-start; /* Aligns the content to the left */
+  align-items: center; /* Vertically centers the content */
+  padding-left: 10px; /* Optional: Adds some padding to the left */
+  box-sizing: border-box; /* Ensures padding is included in the width */
+  text-align: left; /* Aligns text to the left */
 }
+
 
 .form_button_nav:hover {
   background-color: #f3e8c9;
@@ -121,6 +128,16 @@
   cursor: pointer;
   color: black;
 } */
+
+.register-text {
+  font-family: "Lexend", sans-serif;
+  font-size: 20px;
+  letter-spacing: 2px;
+  font-weight: 300;
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+}
 
 @keyframes spin {
   0% { transform: rotate(0deg); }

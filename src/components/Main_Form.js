@@ -32,8 +32,13 @@ function Main_Form() {
         <>
           {response ? (
             <>
-              <div className="register">
-                <strong>Реєстрація кімнати №{response.number}</strong>
+            <nav className="navbar_m">
+              <div className="navbarbrand-title">
+                RooMy
+              </div>
+            </nav>
+              <div className="register-text">
+                <strong>Кімната №{response.number}</strong>
               </div>
               <Form_reg room={response} id_coded={id_coded} />
             </>

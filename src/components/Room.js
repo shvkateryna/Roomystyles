@@ -569,7 +569,7 @@ export const Room = (props) => {
                       <Card>
                         <Card.Body className="verification-card">
                         <Card.Text className="text-with-border">
-                          Загальне{" "}
+                          Загальна форма{" "}
                           <span className="verify_button_container">
                             <div
                               onClick={(e) =>
@@ -594,7 +594,7 @@ export const Room = (props) => {
                             {currentRoom.names[0] !== "" ? (
                               <label>{currentRoom.names[0]} - одноповерхове ліжко</label>
                             ) : (
-                              <label>Немає мешканця</label>
+                              <label>Немає мешканця - одноповерхове ліжко</label>
                             )}{" "}
                             <span className="verify_button_container">
                             <div
@@ -620,7 +620,7 @@ export const Room = (props) => {
                             {currentRoom.names[1] !== "" ? (
                               <label>{currentRoom.names[1]} - двоповерхове ліжко (1 поверх)</label>
                             ) : (
-                              <label>Немає мешканця</label>
+                              <label>Немає мешканця - двоповерхове ліжко (1 поверх)</label>
                             )}{" "}
                             <span className="verify_button_container">
                             <div
@@ -642,11 +642,11 @@ export const Room = (props) => {
                             </div>
                           </span>
                           </Card.Text>
-                          <Card.Text>
+                          <Card.Text className="text-with-border">
                             {currentRoom.names[2] !== "" ? (
                               <label>{currentRoom.names[2]} - одноповерхове ліжко (2 поверх)</label>
                             ) : (
-                              <label>Немає мешканця</label>
+                              <label>Немає мешканця - двоповерхове ліжко (2 поверх)</label>
                             )}{" "}
                             <span className="verify_button_container">
                             <div
@@ -676,19 +676,19 @@ export const Room = (props) => {
                       <div className="curators">
                         Виселення
                       </div>
-
-                      <div className="verify">
-                        <div className="furniture_clear">
-                          {currentRoom.names[0] !== "" ? (
-                            <label className="finish_date_text">
-                              {currentRoom.names[0]}
-                            </label>
-                          ) : (
-                            <label className="finish_date_text" for="myInput">
-                              Немає мешканця
-                            </label>
-                          )}
-                          <input
+                      <Card>
+                        <Card.Body className="verification-card">
+                          <Card.Text className="text-with-border">
+                            {currentRoom.names[0] !== "" ? (
+                              <label className="finish_date_text">
+                                {currentRoom.names[0]}
+                              </label>
+                            ) : (
+                              <label className="finish_date_text" for="myInput">
+                                Немає мешканця
+                              </label>
+                            )}
+                            <input
                             placeholder="Введіть дату"
                             className="finish_date_input"
                             type="date"
@@ -698,27 +698,26 @@ export const Room = (props) => {
                               handleChangeFinishDate(0, e.target.value);
                             }}
                             value={currentRoom.finish_dates[0]}
-                          />
-                          <div
+                            />
+                            <div
                             className="move_out_button"
                             disabled={!available}
                             onClick={handleShow}
-                          >
+                            >
                             Виселити
-                          </div>
-                        </div>
-
-                        <div className="furniture_clear">
-                          {currentRoom.names[1] !== "" ? (
-                            <label className="finish_date_text">
-                              {currentRoom.names[1]}
-                            </label>
-                          ) : (
-                            <label className="finish_date_text" for="myInput">
-                              Немає мешканця
-                            </label>
-                          )}
-                          <input
+                            </div>
+                          </Card.Text>
+                          <Card.Text className="text-with-border">
+                            {currentRoom.names[1] !== "" ? (
+                              <label className="finish_date_text">
+                                {currentRoom.names[1]}
+                              </label>
+                            ) : (
+                              <label className="finish_date_text" for="myInput">
+                                Немає мешканця
+                              </label>
+                            )}
+                            <input
                             placeholder="Введіть дату"
                             className="finish_date_input"
                             type="date"
@@ -728,27 +727,26 @@ export const Room = (props) => {
                               handleChangeFinishDate(1, e.target.value);
                             }}
                             value={currentRoom.finish_dates[1]}
-                          />
-                          <div
+                            />
+                            <div
                             className="move_out_button"
                             disabled={!available}
-                            onClick={handleShow1}
-                          >
+                            onClick={handleShow}
+                            >
                             Виселити
-                          </div>
-                        </div>
-
-                        <div className="furniture_clear">
-                          {currentRoom.names[2] !== "" ? (
-                            <label className="finish_date_text">
-                              {currentRoom.names[2]}
-                            </label>
-                          ) : (
-                            <label className="finish_date_text" for="myInput">
-                              Немає мешканця
-                            </label>
-                          )}
-                          <input
+                            </div>
+                          </Card.Text>
+                          <Card.Text className="text-with-border">
+                            {currentRoom.names[2] !== "" ? (
+                              <label className="finish_date_text">
+                                {currentRoom.names[2]}
+                              </label>
+                            ) : (
+                              <label className="finish_date_text" for="myInput">
+                                Немає мешканця
+                              </label>
+                            )}
+                            <input
                             placeholder="Введіть дату"
                             className="finish_date_input"
                             type="date"
@@ -758,19 +756,19 @@ export const Room = (props) => {
                               handleChangeFinishDate(2, e.target.value);
                             }}
                             value={currentRoom.finish_dates[2]}
-                          />
-                          <div
+                            />
+                            <div
                             className="move_out_button"
                             disabled={!available}
-                            onClick={handleShow2}
-                          >
+                            onClick={handleShow1}
+                            >
                             Виселити
-                          </div>
-                        </div>
-
-                        <div className="general_move_out" onClick={handleShow3}>
-                          Очистити загальну форму
-                        </div>
+                            </div>
+                          </Card.Text>
+                        </Card.Body>
+                      </Card>
+                      <div className="general_move_out" onClick={handleShow3}>
+                        Очистити загальну форму
                       </div>
                     </>
                   ) : (

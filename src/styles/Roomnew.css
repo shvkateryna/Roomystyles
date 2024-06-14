@@ -30,12 +30,21 @@
 
 .finish_date_input{
     padding: 8px 12px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      width: 200px; /* Adjust width as needed */
-      box-sizing: border-box; /* Ensure padding and border are included in the width */
-      background-color: #f8f8f8;
+    border: 1px solid #8D0709;
+    border-radius: 12px;
+    width: 300px; /* Adjust width as needed */
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+    background-color: #f8f8f8;
+    margin-top: 10px;
+    margin-left: 10%;
 }
+
+.finish_date_input:focus{
+    outline: none;
+    border-color: #8D0709;
+    box-shadow: 0 0 0 1px #8D0709;
+}
+
 .furniture_info{
     margin: 10px 30px;
 }
@@ -78,20 +87,53 @@ width: 40%;
 .furniture_clear>div:hover{
     background-color: #ececec;
 }
-.general_move_out{
-    border-radius: 10px;
-    padding: 7px;
+
+.move_out_button {
+    background-color: #8D0709;
+    border: none;
+    border-radius: 12px;
+    margin-top: 10px;
+    margin-left: 3%;
+    padding: 8px;
+    font-family: "Lexend", sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 300;
+    color: #ffffff;
+    width: 10%;
     text-align: center;
-    width: 90%;
+    transition: background-color 300ms ease-out;
+}
+
+.move_out_button:hover {
+    background-color: #C81F21;
+}
+
+.general_move_out{
+    border-radius: 12px;
+    padding: 10px;
+    text-align: center;
+    width: 60%;
     max-width: 300px;
-    background-color: rgb(252, 196, 196);
-    border: 1px solid gray;
+    background-color: #8D0709;
+    border: 1px solid #8D0709;
+    color: #ffffff;
     cursor: pointer;
     margin-top: 30px;
+    margin-left: 8%;
+    font-family: "Lexend", sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 300;
+    transition: background-color 300ms ease-out;
+}
+
+.general_move_out:hover {
+    background-color: #C81F21;
 }
   
 .verify_button_container {
-    display: inline-block; /* Ensure container is inline */
+    margin-left: auto;
 }
 
 
@@ -110,6 +152,12 @@ width: 40%;
     font-weight: 300;
     text-align: center;
     cursor: pointer;
+    transition: background-color 300ms ease-out;
+}
+
+.verify_button:hover{
+    border: 1px solid #C81F21;
+    background-color: #C81F21;
 }
 
 .verify_button_confirmed{
@@ -127,7 +175,14 @@ width: 40%;
     font-weight: 300;
     text-align: center;
     cursor: pointer;
+    transition: background-color 300ms ease-out;
 }
+
+.verify_button_confirmed:hover{
+    border: 1px solid #64bd77;
+    background-color: #64bd77;
+}
+
 .furniture_wrapper{
     margin-top: 5px;
     display: flex;
@@ -285,16 +340,17 @@ background-color: aquamarine;
     justify-content: center;
     align-items: center;
 }
-    .loader_accept {
-        width: 10px;
-        height: 10px;
-        border: 2px solid #642a29;
-        border-bottom-color: transparent;
-        border-radius: 50%;
-        display: inline-block;
-        box-sizing: border-box;
-        animation: rotation 1s linear infinite;
-        }
+.loader_accept {
+    width: 25px;
+    height: 25px;
+    margin-right: 4px;
+    border: 2px solid #8D0709;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
     
         @keyframes rotation {
         0% {
@@ -371,7 +427,7 @@ background-color: aquamarine;
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
-    margin-top: 7vh;
+    margin-top: 3%;
     margin-left: 5%;
     margin-right: 40%;
   }
@@ -405,10 +461,26 @@ background-color: aquamarine;
 }
 
 .text-with-border {
-    border-bottom: 1px solid white;
-    padding-bottom: 10px; /* Optional: to add some spacing */
-    margin-bottom: 10px; /* Optional: to add some spacing */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    border-bottom: 1px solid white; 
+    padding-bottom: 10px;
   }
+
+  .text-with-border {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    border-bottom: 1px solid white;
+    padding-bottom: 10px;
+}
+
+.verification-card .text-with-border:last-child {
+    border-bottom: none;
+}
 
 .verification-card {
     margin-left: 8%;
@@ -419,28 +491,36 @@ background-color: aquamarine;
 
 @media only screen and (max-width: 1000px)  {
     .roomroomfur_accept{
+        border-radius: 12px;
         font-size: 8px;
         letter-spacing: 1px;
-        margin: 2px 10px;
-        padding: 1px 1px;
+        margin: 2px 2px;
+        padding: 5px 8px;
     }
 
     .roomroomfur_end{
+        border-radius: 12px;
         font-size: 8px;
         letter-spacing: 1px;
-        padding: 1px 1px;
+        margin: 2px 2px;
+        padding: 5px 8px;
     }
 
     .roomroomfur{
+        border-radius: 12px;
         font-size: 8px;
         letter-spacing: 1px;
-        padding: 1px 1px;
+        padding: 5px 8px;
+        margin: 2px 2px;
+        width: 92%
     }
 
     .roomroomfur_active{
+        border-radius: 12px;
         font-size: 8px;
         letter-spacing: 1px;
-        padding: 1px 1px;
+        margin: 2px 2px;
+        padding: 5px 8px;
     }
 
     .furniture_navigation>div{
@@ -452,6 +532,63 @@ background-color: aquamarine;
     .furniture_navigation {
         gap: 5px;
         padding: 5px 5px;
+    }
+
+    .verification-card {
+        margin-left: 8%;
+        margin-right: 8%
+    }
+
+    .loader_accept {
+        width: 25px;
+        height: 25px;
+        margin-right: 3px;
+        border: 2px solid #8D0709;
+        border-bottom-color: transparent;
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+    }
+    .furniture_info{
+        margin-top: 10px;
+        margin-left: 1px;
+        margin-right: 10px;
+    }
+    .furn-description {
+        height: 550px;
+        width: 320px;
+        margin-left: 3%;
+        border-radius: 12px;
+    }
+    .move_out_button {
+        font-size: 8px;
+        width: 25%;
+        margin-top: 2%;
+    }
+    .finish_date_input{
+        padding: 8px 12px;
+        border: 1px solid #8D0709;
+        border-radius: 12px;
+        width: 80px; /* Adjust width as needed */
+        box-sizing: border-box; /* Ensure padding and border are included in the width */
+        background-color: #f8f8f8;
+        margin-top: 2%;
+        margin-left: 5%;
+        font-weight: 300;
+        font-family: "Lexend", sans-serif;
+        font-size: 8px;
+        letter-spacing: 2px;
+    }
+    .roomroomfur_active{
+        font-weight: 300;
+        font-family: "Lexend", sans-serif;
+        font-size: 8px;
+        padding: 5px 8px;
+        margin: 2px 2px;
+        border-radius: 12px;
+        border: 1px solid #8D0709;
+        white-space: nowrap;
     }
     
 }  
