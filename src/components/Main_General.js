@@ -69,6 +69,11 @@ function Main_General() {
         <>
           {response ? (
             <>
+            <nav className="navbar_m">
+              <div className="navbarbrand-title">
+                RooMy
+              </div>
+            </nav>
               <div className="circle">
                 <FaArrowCircleUp
                   onClick={scrollToTop}
@@ -76,7 +81,7 @@ function Main_General() {
                 />
               </div>
               <div className="register">
-                <strong>Реєстрація кімнати №{response.number}</strong>
+                <strong>Кімната №{response.number}</strong>
               </div>
               <div className="student_form_frame">
                 <General room={response} id_coded={id_coded} />

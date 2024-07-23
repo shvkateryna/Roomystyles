@@ -31,8 +31,13 @@ function Main_Two() {
         <>
           {response ? (
             <>
+            <nav className="navbar_m">
+              <div className="navbarbrand-title">
+                RooMy
+              </div>
+            </nav>
               <div className="register">
-                <strong>Реєстрація кімнати №{response.number}</strong>
+                <strong>Кімната №{response.number}</strong>
               </div>
               <Two room={response} id_coded={id_coded} />
             </>

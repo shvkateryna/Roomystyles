@@ -39,25 +39,25 @@
 }
 
 .room_type_header{
-  padding: 30px;
-  padding-bottom: 10px;
-  font-size: 18px;
-  text-transform: uppercase;
-  font-family: 'Montserrat Medium 500', sans-serif;
-  letter-spacing: 5px;
+  font-family: "Lexend", sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  font-weight: 300;
+  padding-bottom: 2px;
   color: #000000;
   outline: none;
   text-align: center;
-  background-color: #ffffff;
 }
 
 .register {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 18px;
+  font-size: 20px;
+  font-family: 'Lexend', sans-serif;
+  letter-spacing: 2px;
+  font-weight: 300;
   height: 70px;
-  background-color: #f3e8c9;
 }
 
 .greet {
@@ -113,8 +113,7 @@
 
 
 .form_button_nav:hover {
-  background-color: #f3e8c9;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  background-color: #d9d9d9
 }
 
 /* .circle {
@@ -131,7 +130,7 @@
 
 .register-text {
   font-family: "Lexend", sans-serif;
-  font-size: 20px;
+  font-size: 16px;
   letter-spacing: 2px;
   font-weight: 300;
   display: flex;
@@ -146,7 +145,7 @@
 
 @media screen and (max-width:480px){
   .register {
-    font-size: 18px;
+    font-size: 20px;
   }
   .reg_text_div{
     font-size: 25px;
