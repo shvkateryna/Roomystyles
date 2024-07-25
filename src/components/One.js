@@ -244,7 +244,7 @@ function One(props) {
                             </div>
                           </div>
                           <div
-                            style={{ paddingLeft: "20px", fontSize: "16px" }}
+                            className="questions-text"
                           >
                             {ele.questions}
                           </div>

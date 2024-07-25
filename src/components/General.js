@@ -281,7 +281,7 @@ function General(props) {
                     {index_room === stageCounter ? (
                       <>
                         <div id={`element_${index_room}`} className="room_type">
-                          <strong>{room_type[index_room]}</strong>
+                          {room_type[index_room]}
                         </div>
                         {my_room.map((ele, index) => (
                           <>
@@ -306,9 +306,7 @@ function General(props) {
                                   </div>
                                 </div>
                                 <div
-                                  style={{
-                                    fontSize: "16px",
-                                  }}
+                                  className="questions-text"
                                 >
                                   {ele.questions}
                                 </div>
@@ -448,10 +446,10 @@ function General(props) {
                 ) : (
                   <>
                     <div className="next_stage_wrapper">
-                      <p>
+                      <div className="next-stage">
                         Перейти до наступного блоку:{" "}
-                        <strong>{room_type[stageCounter + 1]}</strong>
-                      </p>
+                        <div className="next-stage-name">{room_type[stageCounter + 1]}</div>
+                      </div>
                       <button
                         className="form_button_next_step"
                         onClick={next_stage}

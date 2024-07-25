@@ -38,7 +38,7 @@ function Main_Form() {
               </div>
             </nav>
               <div className="register-text">
-                <strong>Кімната №{response.number}</strong>
+                Кімната №{response.number}
               </div>
               <Form_reg room={response} id_coded={id_coded} />
             </>

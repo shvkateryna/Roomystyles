@@ -81,7 +81,7 @@ function Main_General() {
                 />
               </div>
               <div className="register">
-                <strong>Кімната №{response.number}</strong>
+                  Кімната №{response.number}
               </div>
               <div className="student_form_frame">
                 <General room={response} id_coded={id_coded} />

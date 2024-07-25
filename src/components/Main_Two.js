@@ -37,7 +37,7 @@ function Main_Two() {
               </div>
             </nav>
               <div className="register">
-                <strong>Кімната №{response.number}</strong>
+                Кімната №{response.number}
               </div>
               <Two room={response} id_coded={id_coded} />
             </>

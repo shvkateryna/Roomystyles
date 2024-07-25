@@ -47,10 +47,10 @@ function Form_reg(props) {
             <span className="closebtn" onClick={() => setInfo(false)}>
               &times;
             </span>
-            Для того щоб зареєструвати кімнату потрібно: <br />
+            Для того, щоб зареєструвати кімнату, потрібно: <br />
             1) Кожному мешканцю заповнити відповідне ліжко.
             <br />
-            2) комусь із кімнати (разом з іншими мешканцями) заповнити загальну
+            2) Комусь із кімнати (разом з іншими мешканцями) заповнити загальну
             частину.
           </div>
         </>
@@ -77,13 +77,9 @@ function Form_reg(props) {
             >
               Загальне{" "}
               {room.verified[0] ? (
-                <label style={{ color: "#4e8533", marginLeft: "5px" }}>
-                  <strong>✓</strong>
-                </label>
+                <div className="circle roomaccepted"></div>
               ) : (
-                <label style={{ color: "#ee6363", marginLeft: "5px" }}>
-                  <strong>✗</strong>
-                </label>
+                <div className="circle roomrejected"></div>
               )}
             </button>
             <button
@@ -94,13 +90,9 @@ function Form_reg(props) {
             >
               Одноповерхове ліжко{" "}
               {room.verified[1] ? (
-                <label style={{ color: "#4e8533", marginLeft: "5px" }}>
-                  <strong>✓</strong>
-                </label>
+                <div className="circle roomaccepted"></div>
               ) : (
-                <label style={{ color: "#ee6363", marginLeft: "5px" }}>
-                  <strong>✗</strong>
-                </label>
+                <div className="circle roomrejected"></div>
               )}
             </button>
             <button
@@ -111,13 +103,9 @@ function Form_reg(props) {
             >
               Двоповерхове ліжко (1 поверх){" "}
               {room.verified[2] ? (
-                <label style={{ color: "#4e8533", marginLeft: "5px" }}>
-                  <strong>✓</strong>
-                </label>
+                <div className="circle roomaccepted"></div>
               ) : (
-                <label style={{ color: "#ee6363", marginLeft: "5px" }}>
-                  <strong>✗</strong>
-                </label>
+                <div className="circle roomrejected"></div>
               )}
             </button>
             <button
@@ -128,13 +116,9 @@ function Form_reg(props) {
             >
               Двоповерхове ліжко (2 поверх){" "}
               {room.verified[3] ? (
-                <label style={{ color: "#4e8533", marginLeft: "5px" }}>
-                  <strong>✓</strong>
-                </label>
+                <div className="circle roomaccepted"></div>
               ) : (
-                <label style={{ color: "#ee6363", marginLeft: "5px" }}>
-                  <strong>✗</strong>
-                </label>
+                <div className="circle roomrejected"></div>
               )}
             </button>
           </form>

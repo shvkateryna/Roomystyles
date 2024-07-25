@@ -38,7 +38,7 @@ function Main_Two2() {
               </div>
             </nav>
               <div className="register">
-                <strong>Кімната №{response.number}</strong>
+                Кімната №{response.number}
               </div>
               <Two2 room={response} id_coded={id_coded} />
             </>
