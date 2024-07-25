@@ -352,7 +352,7 @@ function Two(props) {
                         type={"submit"}
                       />
                     </div>
-                  </div>{" "}
+                  </div>
                 </div>
               </form>
             </div>

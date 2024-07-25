@@ -13,6 +13,7 @@ function General(props) {
   const [room, setRoom] = useState(props.room);
   const [ruleAccepted, setRuleAccepted] = useState(false);
   const [errorFurniture, setErrorFurniture] = useState("");
+  const [showError, setShowError] = useState(false);
   const [sendingForm, setSendingForm] = useState(false);
   const [stageCounter, setStageCounter] = useState(0);
 
@@ -120,6 +121,9 @@ function General(props) {
     for (let elem of room.furniture_list[stageCounter]) {
       if ((elem.description === null) | (elem.description === "")) {
         setErrorFurniture("Немає опису об'єкту '" + elem.type_expanded + "'.");
+        setTimeout(() => {
+          setErrorFurniture('');
+        }, 10000);
         handleClick(4);
         setSendingForm(false);
         return null;
@@ -131,18 +135,21 @@ function General(props) {
   };
   const handle_post = async (e) => {
     e.preventDefault();
-    for (let i = 0; i < 3; i++) {
-      for (let elem of room.furniture_list[i]) {
-        if ((elem.description === null) | (elem.description === "")) {
+  
+      for (let elem of room.furniture_list[stageCounter]) {
+        if (elem.description === null || elem.description === "") {
           setErrorFurniture(
             "Немає опису об'єкту '" + elem.type_expanded + "'."
           );
+          setTimeout(() => {
+            setErrorFurniture('');
+          }, 10000);
           handleClick(4);
           setSendingForm(false);
-          return null;
+          return;
         }
       }
-    }
+  
     setSendingForm(true);
     handleChangeFilled(0);
     let new_furniture_list = [];
@@ -193,7 +200,6 @@ function General(props) {
         </>
       ) : (
         <>
-          {stageCounter === 0 ? (
             <>
               <div className="greet_big">
                 <p>Слава Ісусу Христу!</p>
@@ -213,7 +219,6 @@ function General(props) {
                 <p className="greet_big">Бажаємо успіху!</p>
               </div>
             </>
-          ) : (
             <>
               <div class="main">
                 <ul className="stage_wrapper">
@@ -230,7 +235,7 @@ function General(props) {
                     <p class="label">{room_type[0]}</p>
                   </li>
                   <li>
-                    <i class="icons awesome fa-solid fa-house"></i>
+                    <i class="icons awesome fa-solid fa-bed"></i>
                     <div
                       className={
                         stageCounter >= 2 ? "step second active" : "step second"
@@ -242,7 +247,7 @@ function General(props) {
                     <p class="label">{room_type[1]}</p>
                   </li>
                   <li>
-                    <i class="icons awesome fa-solid fa-house"></i>
+                    <i class="icons awesome fa-solid fa-bath"></i>
                     <div
                       className={
                         stageCounter >= 3 ? "step third active" : "step third"
@@ -254,7 +259,7 @@ function General(props) {
                     <p class="label">{room_type[2]}</p>
                   </li>
                   <li>
-                    <i class="icons awesome fa-regular fa-star-half-stroke"></i>
+                    <i class="icons awesome fa-regular fa-check-square"></i>
                     <div class="step fourth">
                       <p>4</p>
                       <i class="awesome fa-solid fa-check"></i>
@@ -264,7 +269,7 @@ function General(props) {
                 </ul>
               </div>
             </>
-          )}
+          
 
           <div className="main_div" key={"main_form_div"}>
             <form id={`element_${4}`} className="main_form" key="submit_form">

@@ -326,7 +326,7 @@ function One(props) {
 
                   <div className="submit_align_wrapper">
                     <br />
-                    <div style={{ fontSize: "16px" }}>
+                    <div style={{paddingLeft: "20px", fontSize: "16px" }}>
                       <p>
                         Перед підтвердженням форми уважно перегляньте правила
                         Колегіуму за посиланням.
@@ -341,9 +341,9 @@ function One(props) {
                       </p>
                     </div>
                     <div className="results_wrapper">
-                      <p style={{ fontSize: "16px" }}>
-                        Я ознайомився / -лася з правилами <br /> та підтверджую,
-                        що вся надана інформація достовірна.
+                      <p style={{ paddingLeft: "20px", fontSize: "16px" }}>
+                        Я ознайомився / -лася з правилами та підтверджую, що вся
+                        надана інформація достовірна.
                         <input
                           style={{
                             height: "15px",
@@ -356,7 +356,6 @@ function One(props) {
                           onChange={() => setRuleAccepted(!ruleAccepted)}
                         />
                       </p>
-
                       <input
                         disabled={!ruleAccepted}
                         className="submit_form"

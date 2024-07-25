@@ -505,11 +505,16 @@ li .active::after {
 }
 
 .error_block {
+    font-family: "Lexend", sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 300;
     width: 70%;
-    background-color: rgb(189, 48, 48);
+    background-color: #8D0709;
     color: #ffffff;
     padding: 10px;
     margin-bottom: 20px;
+    margin-left: 3%;
 }
 .submit_form{
     color: rgb(255, 255, 255);
@@ -658,6 +663,7 @@ justify-content: center;
     }
     .error_block {
         width: 100%;
+        margin-left: 0%;
     }
     .button_next{
       width: 290px;

@@ -330,8 +330,8 @@ function Two2(props) {
                     </div>
                     <div className="results_wrapper">
                       <p style={{ paddingLeft: "20px", fontSize: "16px" }}>
-                        Я ознайомився / -лася з правилами та <br /> підтверджую,
-                        що вся надана інформація достовірна.
+                        Я ознайомився / -лася з правилами та підтверджую, що вся
+                        надана інформація достовірна.
                         <input
                           style={{
                             height: "15px",
@@ -344,7 +344,6 @@ function Two2(props) {
                           onChange={() => setRuleAccepted(!ruleAccepted)}
                         />
                       </p>
-
                       <input
                         disabled={!ruleAccepted}
                         className="submit_form"
