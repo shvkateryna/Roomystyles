@@ -308,7 +308,8 @@ function One(props) {
                             value={room.furniture_list[3][index].description}
                             key={"inp_" + index + "" + 3}
                             type="text"
-                            placeholder={"Опишіть стан"}
+                            placeholder={"Опишіть стан (до 150 символів)"}
+                            maxLength={150}
                           />
                           <div
                             key={"div_image" + index + "" + 3}

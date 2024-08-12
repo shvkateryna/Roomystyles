@@ -416,7 +416,7 @@ background-color: aquamarine;
 }
 
 .furn-description {
-    height: 550px;
+    height: 630px;
     width: 350px;
     margin-left: 6%;
     border-radius: 12px;
@@ -556,7 +556,7 @@ background-color: aquamarine;
         margin-right: 10px;
     }
     .furn-description {
-        height: 550px;
+        height: 630px;
         width: 320px;
         margin-left: 3%;
         border-radius: 12px;

@@ -297,7 +297,8 @@ function Two2(props) {
                             value={room.furniture_list[5][index].description}
                             key={"inp_" + index + "" + 5}
                             type="text"
-                            placeholder={"Опишіть стан"}
+                            placeholder={"Опишіть стан (до 150 символів)"}
+                            maxLength={150}
                           />
                           <div
                             key={"div_image" + index + "" + 5}

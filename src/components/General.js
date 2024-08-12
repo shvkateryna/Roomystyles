@@ -342,19 +342,14 @@ function General(props) {
                               > */}
                               <textarea
                                 className="obj_description"
-                                onChange={(e) =>
-                                  handleChangeRoom(
-                                    index_room,
-                                    index,
-                                    "description",
-                                    e.target.value
-                                  )
-                                }
+                                onChange={(e) => handleChangeRoom(index_room, index, "description", e.target.value)}
                                 value={my_room[index].description}
                                 key={`div_inp_${index_room}_${index}_${ele.type_expanded}`}
                                 type="text"
-                                placeholder={"Опишіть стан"}
+                                placeholder={"Опишіть стан (до 150 символів)"}
+                                maxLength={150}
                               />
+
                               {/* </div> */}
                               <div
                                 key={`div_image_${index_room}_${index}_${ele.type_expanded}`}
