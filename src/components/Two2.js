@@ -14,6 +14,7 @@ function Two2(props) {
   const [error, setError] = useState("");
   const [errorFurniture, setErrorFurniture] = useState("");
   const [sendingForm, setSendingForm] = useState(false);
+  const [alertVisible, setAlertVisible] = useState(false);
   let navigate = useNavigate();
   const new_block = room.furniture_list[5];
   const settings = {
@@ -23,6 +24,39 @@ function Two2(props) {
     slidesToShow: 1,
     slidesToScroll: 1,
     initialSlide: 1,
+  };
+
+  const alertStyle = {
+    display: alertVisible ? 'block' : 'none', // Show or hide based on alertVisible state
+    position: 'fixed',
+    top: '20%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    color: '#8D0709',
+    backgroundColor: '#fdd',
+    border: '1px solid #8D0709',
+    padding: '2%',
+    width: '70%',
+    marginBottom: '10px',
+    zIndex: 1000,
+    fontFamily: 'Lexend, sans-serif',
+    fontSize: '12px',
+    letterSpacing: '2px',
+    fontWeight: 300,
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  };
+
+  const closeButtonStyle = {
+    background: 'none',
+    border: 'none',
+    color: '#8D0709',
+    fontSize: '18px',
+    cursor: 'pointer',
+    position: 'absolute',
+    top: '0%',
+    right: '1%',
   };
   const routeChange = (path) => {
     navigate(path);
@@ -100,21 +134,21 @@ function Two2(props) {
   const handle_post = async (e) => {
     e.preventDefault();
     if (room.names[2] === "") {
+      setAlertVisible(true)
       setErrorFurniture("Немає імені мешканця");
-      window.scrollTo(0, 0);
       setSendingForm(false);
       return;
     }
     if (room.start_dates[2] === "") {
+      setAlertVisible(true)
       setErrorFurniture("Немає дати");
-      window.scrollTo(0, 0);
       setSendingForm(false);
       return;
     }
     for (let elem of room.furniture_list[5]) {
       if ((elem.description === null) | (elem.description === "")) {
-        setErrorFurniture("Немає опису об'єкту '" + elem.type_expanded + "'.");
-        window.scrollTo(0, 0);
+        setAlertVisible(true)
+        setErrorFurniture("Немає опису об'єкту '" + elem.type_expanded + "'");
         setSendingForm(false);
         return;
       }
@@ -181,9 +215,12 @@ function Two2(props) {
             <div className="main_div" key={"main_form_div"}>
               <form className="main_form" key="submit_form">
                 <div className="furniture_list" key="furniture_div">
-                  {errorFurniture ? (
+                  {alertVisible ? (
                     <>
-                      <div className="error_block">{errorFurniture}</div>
+                      <div className="alert" style={alertStyle}>
+                    <span>{errorFurniture}</span>
+                    <button style={closeButtonStyle} onClick={() => setAlertVisible(false)}>×</button>
+                  </div>
                     </>
                   ) : (
                     <></>

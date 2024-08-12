@@ -16,6 +16,40 @@ function General(props) {
   const [showError, setShowError] = useState(false);
   const [sendingForm, setSendingForm] = useState(false);
   const [stageCounter, setStageCounter] = useState(0);
+  const [alertVisible, setAlertVisible] = useState(false);
+
+  const alertStyle = {
+    display: alertVisible ? 'block' : 'none', // Show or hide based on alertVisible state
+    position: 'fixed',
+    top: '20%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    color: '#8D0709',
+    backgroundColor: '#fdd',
+    border: '1px solid #8D0709',
+    padding: '2%',
+    width: '70%',
+    marginBottom: '10px',
+    zIndex: 1000,
+    fontFamily: 'Lexend, sans-serif',
+    fontSize: '12px',
+    letterSpacing: '2px',
+    fontWeight: 300,
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  };
+
+  const closeButtonStyle = {
+    background: 'none',
+    border: 'none',
+    color: '#8D0709',
+    fontSize: '18px',
+    cursor: 'pointer',
+    position: 'absolute',
+    top: '0%',
+    right: '1%',
+  };
 
   const rooms = [
     room.furniture_list[0],
@@ -119,19 +153,16 @@ function General(props) {
     e.preventDefault();
     for (let elem of room.furniture_list[stageCounter]) {
       if ((elem.description === null) | (elem.description === "")) {
-        setErrorFurniture("Немає опису об'єкту '" + elem.type_expanded + "'.");
-        setTimeout(() => {
-          setErrorFurniture('');
-        }, 10000);
-        handleClick(4);
+        setAlertVisible(true)
+        setErrorFurniture("Немає опису об'єкту '" + elem.type_expanded + "'")
         setSendingForm(false);
         return null;
       }
     }
-    document.documentElement.scrollIntoView({ behavior: "smooth" });
     if (stageCounter < 3) {
       setStageCounter(stageCounter + 1);
     }
+    document.documentElement.scrollIntoView({ behavior: "smooth" });
   };
   const handle_post = async (e) => {
     e.preventDefault();
@@ -262,13 +293,14 @@ function General(props) {
           <div className="main_div" key={"main_form_div"}>
             <form id={`element_${4}`} className="main_form" key="submit_form">
               <div className="furniture_list" key="furniture_div">
-                {errorFurniture ? (
-                  <>
-                    <div className="error_block">{errorFurniture}</div>
-                  </>
-                ) : (
-                  <></>
+                
+                {alertVisible && (
+                  <div className="alert" style={alertStyle}>
+                    <span>{errorFurniture}</span>
+                    <button style={closeButtonStyle} onClick={() => setAlertVisible(false)}>×</button>
+                  </div>
                 )}
+                 
                 {rooms.map((my_room, index_room) => (
                   <>
                     {index_room === stageCounter ? (
