@@ -323,16 +323,14 @@ input[disabled]:hover{
     position: absolute;
     z-index: -1;
     content: "";
-    width: 25vw;
-    max-width: 300px;
+    width: 20vw;
     height: 3px;
     background-color: #d9d9d9;
-    right: 30px;
 }
 
 .first::after {
-    width: 0;
-    height: 0;
+    width: 20vw;
+    height: 3px;
 }
 
 .stage_wrapper li .step .awesome {
@@ -350,7 +348,6 @@ input[disabled]:hover{
 
 li .active::after {
     position: absolute;
-    z-index: 2;
     background-color: #8D0709;
 
 }
@@ -422,6 +419,16 @@ li .active::after {
     }
     .main_div {
         width: 90%;
+    }
+    .step::after 
+    {
+        position: absolute;
+        z-index: -1;
+        content: "";
+        width: 22vw;
+        max-width: 300px;
+        height: 3px;
+        background-color: #d9d9d9;
     }
 }
 

@@ -383,7 +383,7 @@ def hello():
             furniture1_15.save()
             furniture1_16 = Furniture(type= "ceiling bedroom", type_expanded = "Стеля спальні", questions = "Перевірте, чи не пошкоджена стеля, світильник.", priority = 16)
             furniture1_16.save()
-            furniture1_17 = Furniture(type= "floor bedroom", type_expanded = "Стеля спальні", questions = "Перевірте, чи не пошкоджений лінолеум.", priority = 17)
+            furniture1_17 = Furniture(type= "floor bedroom", type_expanded = "Підлога спальні", questions = "Перевірте, чи не пошкоджений лінолеум.", priority = 17)
             furniture1_17.save()
             furniture1_18 = Furniture(type= "radiator", type_expanded = "Батарея", questions = "Огляньте батарею, решітку та регулятор.", priority = 18)
             furniture1_18.save()

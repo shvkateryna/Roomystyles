@@ -30,7 +30,7 @@ function General(props) {
     slidesToScroll: 1,
     initialSlide: 1,
   };
-  const room_type = ["Передпокій", "Спальня", "Вбиральня"];
+  const room_type = ["Передпокій", "Спальня", "Вбиральня", "Підтвердження"];
   let navigate = useNavigate();
   const routeChange = (path) => {
     navigate(path);
@@ -117,7 +117,6 @@ function General(props) {
 
   const next_stage = (e) => {
     e.preventDefault();
-
     for (let elem of room.furniture_list[stageCounter]) {
       if ((elem.description === null) | (elem.description === "")) {
         setErrorFurniture("Немає опису об'єкту '" + elem.type_expanded + "'.");
@@ -130,27 +129,16 @@ function General(props) {
       }
     }
     document.documentElement.scrollIntoView({ behavior: "smooth" });
-
-    setStageCounter(stageCounter + 1);
+    if (stageCounter < 3) {
+      setStageCounter(stageCounter + 1);
+    }
   };
   const handle_post = async (e) => {
     e.preventDefault();
   
-      for (let elem of room.furniture_list[stageCounter]) {
-        if (elem.description === null || elem.description === "") {
-          setErrorFurniture(
-            "Немає опису об'єкту '" + elem.type_expanded + "'."
-          );
-          setTimeout(() => {
-            setErrorFurniture('');
-          }, 10000);
-          handleClick(4);
-          setSendingForm(false);
-          return;
-        }
-      }
-  
-    setSendingForm(true);
+    if (stageCounter > 3) {
+      setSendingForm(true);
+    }
     handleChangeFilled(0);
     let new_furniture_list = [];
     for (let j = 0; j < 3; j++) {
@@ -226,7 +214,7 @@ function General(props) {
                     <i class="icons awesome fa-solid fa-house"></i>
                     <div
                       className={
-                        stageCounter >= 1 ? "step second active" : "step first"
+                        stageCounter >= 1 ? "step first active" : "step first"
                       }
                     >
                       <p>1</p>
