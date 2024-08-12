@@ -32,11 +32,11 @@
     padding: 8px 12px;
     border: 1px solid #8D0709;
     border-radius: 12px;
-    width: 300px; /* Adjust width as needed */
     box-sizing: border-box; /* Ensure padding and border are included in the width */
     background-color: #f8f8f8;
     margin-top: 10px;
-    margin-left: 10%;
+    margin-left: 40%;
+    width: 25%;
 }
 
 .finish_date_input:focus{
@@ -443,7 +443,9 @@ background-color: aquamarine;
     padding: 3% 43%;
     align-items: center; /* Align arrows vertically center */
 }
-
+.finish_date_text{
+    width: 20%;
+}
 .furniture_navigation1-prev {
     transition: color 300ms ease-out;
 }
@@ -563,22 +565,25 @@ background-color: aquamarine;
     }
     .move_out_button {
         font-size: 8px;
-        width: 25%;
+        width: 20%;
         margin-top: 2%;
     }
     .finish_date_input{
         padding: 8px 12px;
         border: 1px solid #8D0709;
         border-radius: 12px;
-        width: 80px; /* Adjust width as needed */
         box-sizing: border-box; /* Ensure padding and border are included in the width */
         background-color: #f8f8f8;
         margin-top: 2%;
-        margin-left: 5%;
+        width: 20%;
+        right: 20%;
         font-weight: 300;
         font-family: "Lexend", sans-serif;
         font-size: 8px;
         letter-spacing: 2px;
+    }
+    .finish_date_text{
+        width: 20%;
     }
     .roomroomfur_active{
         font-weight: 300;
