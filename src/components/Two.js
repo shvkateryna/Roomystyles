@@ -7,6 +7,7 @@ import { Slide } from "react-slideshow-image";
 import path from "../path";
 import Slider from "react-slick";
 import trash_logo from "../assets/trash.png";
+import CircularProgressWithLabel from "./CircularProgressWithLabel";
 
 function Two(props) {
   const id_coded = props.id_coded;
@@ -14,6 +15,8 @@ function Two(props) {
   const [ruleAccepted, setRuleAccepted] = useState(false);
   const [errorFurniture, setErrorFurniture] = useState("");
   const [sendingForm, setSendingForm] = useState(false);
+  const [imageCounter, setImageCounter] = useState(0);
+  const [progress, setProgress] = useState(0);
   const new_block = room.furniture_list[4];
   const [alertVisible, setAlertVisible] = useState(false);
 
@@ -158,12 +161,26 @@ function Two(props) {
     setSendingForm(true);
     handleChangeFilled(2);
     let new_furniture_list = [];
+    let totalImages = 0;
+
+    // Count total images for progress calculation
+    for (let furnit of room.furniture_list[3]) {
+      if (furnit.images !== null) {
+        totalImages += furnit.images.length;
+      }
+    }
+
+    let uploadedImages = 0;
     for (let furnit of room.furniture_list[4]) {
       if (furnit.images !== null) {
         let links = [];
         for (let file of furnit.images) {
           if (typeof file != "string") {
             const link = await upload_google_drive(file);
+            uploadedImages++;
+            setImageCounter(imageCounter + 1);
+            // Update progress
+            setProgress(Math.round((uploadedImages / totalImages) * 100));
             links.push(link);
           } else {
             links.push(file);
@@ -204,15 +221,16 @@ function Two(props) {
     <div>
       {sendingForm ? (
         <>
-          <div className="sending_form">
-            <span>Зачекайте, ми обробляємо Вашу відповідь...</span>
-          </div>
+         <div className="progress-bar-container">
+          <div className="progress-bar" style={{ width: `${progress}%` }}></div>
+          <CircularProgressWithLabel value={progress} />
+        </div>
         </>
       ) : (
         <>
           <div>
             <div className="room_type_header">
-              <strong>Двоповерхове ліжко (1 поверх)</strong>
+              Двоповерхове ліжко (1 поверх)
             </div>
             <div className="main_div" key={"main_form_div"}>
               <form className="main_form">
@@ -352,7 +370,7 @@ function Two(props) {
                   ))}
                   <div className="submit_align_wrapper">
                     <br />
-                    <div style={{ paddingLeft: "20px", fontSize: "16px" }}>
+                    <div className="sent-text">
                       <p>
                         Перед підтвердженням форми уважно перегляньте правила
                         Колегіуму за посиланням.

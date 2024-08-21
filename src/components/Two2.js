@@ -7,6 +7,8 @@ import imageCompression from "browser-image-compression";
 import path from "../path";
 import trash_logo from "../assets/trash.png";
 import Slider from "react-slick";
+import CircularProgressWithLabel from "./CircularProgressWithLabel";
+
 function Two2(props) {
   const id_coded = props.id_coded;
   const [room, setRoom] = useState(props.room);
@@ -14,6 +16,8 @@ function Two2(props) {
   const [error, setError] = useState("");
   const [errorFurniture, setErrorFurniture] = useState("");
   const [sendingForm, setSendingForm] = useState(false);
+  const [imageCounter, setImageCounter] = useState(0);
+  const [progress, setProgress] = useState(0);
   const [alertVisible, setAlertVisible] = useState(false);
   let navigate = useNavigate();
   const new_block = room.furniture_list[5];
@@ -156,12 +160,26 @@ function Two2(props) {
     setSendingForm(true);
     handleChangeFilled(3);
     let new_furniture_list = [];
+    let totalImages = 0;
+
+    // Count total images for progress calculation
+    for (let furnit of room.furniture_list[3]) {
+      if (furnit.images !== null) {
+        totalImages += furnit.images.length;
+      }
+    }
+
+    let uploadedImages = 0;
     for (let furnit of room.furniture_list[5]) {
       if (furnit.images !== null) {
         let links = [];
         for (let file of furnit.images) {
           if (typeof file != "string") {
             const link = await upload_google_drive(file);
+            uploadedImages++;
+            setImageCounter(imageCounter + 1);
+            // Update progress
+            setProgress(Math.round((uploadedImages / totalImages) * 100));
             links.push(link);
           } else {
             links.push(file);
@@ -204,6 +222,10 @@ function Two2(props) {
         <>
           <div className="sending_form">
             <span>Зачекайте, ми обробляємо Вашу відповідь...</span>
+            <div className="progress-bar-container">
+              <div className="progress-bar" style={{ width: `${progress}%` }}></div>
+              <span>{progress}%</span>
+            </div>
           </div>
         </>
       ) : (

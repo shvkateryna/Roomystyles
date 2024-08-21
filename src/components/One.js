@@ -6,6 +6,7 @@ import imageCompression from "browser-image-compression";
 import path from "../path";
 import Slider from "react-slick";
 import trash_logo from "../assets/trash.png";
+import CircularProgressWithLabel from "./CircularProgressWithLabel";
 function One(props) {
   const id_coded = props.id_coded;
   const [room, setRoom] = useState(props.room);
@@ -13,6 +14,8 @@ function One(props) {
   const [errorFurniture, setErrorFurniture] = useState("");
   const [sendingForm, setSendingForm] = useState(false);
   const [alertVisible, setAlertVisible] = useState(false);
+  const [imageCounter, setImageCounter] = useState(0);
+  const [progress, setProgress] = useState(0);
   const new_block = room.furniture_list[3];
   let navigate = useNavigate();
   const routeChange = (path) => {
@@ -164,6 +167,16 @@ function One(props) {
     setSendingForm(true);
     handleChangeFilled(1);
     let new_furniture_list = [];
+    let totalImages = 0;
+
+    // Count total images for progress calculation
+    for (let furnit of room.furniture_list[3]) {
+      if (furnit.images !== null) {
+        totalImages += furnit.images.length;
+      }
+    }
+
+    let uploadedImages = 0;
     for (let furnit of room.furniture_list[3]) {
       if (furnit.images !== null) {
         let links = [];
@@ -172,12 +185,16 @@ function One(props) {
             console.log(file)
             const link = await upload_google_drive(file);
 
+            uploadedImages++;
+            setImageCounter(imageCounter + 1);
+            // Update progress
+            setProgress(Math.round((uploadedImages / totalImages) * 100));
+
             links.push(link);
           } else {
             links.push(file);
           }
         }
-
         furnit.images = links;
         new_furniture_list.push(furnit);
       } else {
@@ -214,13 +231,17 @@ function One(props) {
         <>
           <div className="sending_form">
             <span>Зачекайте, ми обробляємо Вашу відповідь...</span>
+            <div className="progress-bar-container">
+              <div className="progress-bar" style={{ width: `${progress}%` }}></div>
+              <span>{progress}%</span>
+            </div>
           </div>
         </>
       ) : (
         <>
           <div>
             <div className="room_type_header">
-              <strong>Одноповерхове ліжко</strong>
+              Одноповерхове ліжко
             </div>
             <div className="main_div" key={"main_form_div"}>
               <form className="main_form" key="submit_form">
@@ -364,7 +385,8 @@ function One(props) {
 
                   <div className="submit_align_wrapper">
                     <br />
-                    <div style={{paddingLeft: "20px", fontSize: "16px" }}>
+                    <div className="send-text-main">
+                    <div className="send-text">
                       <p>
                         Перед підтвердженням форми уважно перегляньте правила
                         Колегіуму за посиланням.
@@ -379,7 +401,7 @@ function One(props) {
                       </p>
                     </div>
                     <div className="results_wrapper">
-                      <p style={{ paddingLeft: "20px", fontSize: "16px" }}>
+                      <p className="send-text">
                         Я ознайомився / -лася з правилами та підтверджую, що вся
                         надана інформація достовірна.
                         <input
@@ -402,6 +424,7 @@ function One(props) {
                         key="submit_button"
                         type={"submit"}
                       />
+                    </div>
                     </div>
                   </div>
                 </div>

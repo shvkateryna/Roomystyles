@@ -421,7 +421,8 @@ function General(props) {
 
                 {3 === stageCounter ? (
                   <>
-                    <div style={{ fontSize: "16px" }}>
+                  <div className="send-text-main">
+                    <div className="send-text">
                       <p>
                         Перед підтвердженням форми уважно перегляньте правила
                         Колегіуму за посиланням.
@@ -436,13 +437,13 @@ function General(props) {
                       </p>
 
                       <div class="results_wrapper">
-                        <p style={{ fontSize: "16px" }}>
+                        <p className="send-text">
                           Я ознайомився / -лася з правилами та <br />{" "}
                           підтверджую, що вся надана інформація достовірна.
                           <input
                             style={{
-                              height: "15px",
-                              width: "15px",
+                              height: "16px",
+                              width: "16px",
                               marginLeft: "10px",
                             }}
                             key="check_rules"
@@ -462,6 +463,7 @@ function General(props) {
                         />
                       </div>
                     </div>
+                  </div>
                   </>
                 ) : (
                   <>

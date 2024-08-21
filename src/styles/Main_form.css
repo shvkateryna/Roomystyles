@@ -39,10 +39,9 @@
 }
 
 .room_type_header{
-  font-family: "Lexend", sans-serif;
+  font-family: "Roboto Flex", sans-serif;
   font-size: 16px;
-  letter-spacing: 2px;
-  font-weight: 300;
+  padding-top: 3%;
   padding-bottom: 2px;
   color: #000000;
   outline: none;
@@ -54,31 +53,26 @@
   justify-content: center;
   align-items: center;
   font-size: 20px;
-  font-family: 'Lexend', sans-serif;
-  letter-spacing: 2px;
-  font-weight: 600;
+  font-family: "Roboto Flex", sans-serif;
   height: 70px;
+  padding-top: 7%;
 }
 
 .greet {
-  font-family: "Lexend", sans-serif;
+  font-family: "Roboto Flex", sans-serif;
   font-size: 16px;
-  letter-spacing: 2px;
-  font-weight: 300;
   text-align: justify;
   padding-left: 40px;
   padding-right: 40px;
 }
 
 .greet_big {
-  font-family: "Lexend", sans-serif;
+  font-family: "Roboto Flex", sans-serif;
   font-size: 16px;
-  letter-spacing: 2px;
-  font-weight: 300;
   text-align: center;
   padding-left: 52px;
   padding-right: 52px;
-  margin-top: 16px;
+  margin-top: 3%;
 }
 
 .form_nav_back {
@@ -148,27 +142,24 @@
 
 @media screen and (max-width:480px){
   .greet {
-    font-family: "Lexend", sans-serif;
+    font-family: "Roboto Flex", sans-serif;
     font-size: 12px;
-    letter-spacing: 2px;
-    font-weight: 300;
     text-align: justify;
     padding-left: 40px;
     padding-right: 40px;
   }
   
   .greet_big {
-    font-family: "Lexend", sans-serif;
+    font-family: "Roboto Flex", sans-serif;
     font-size: 12px;
-    letter-spacing: 2px;
-    font-weight: 300;
     text-align: center;
     padding-left: 52px;
     padding-right: 52px;
-    margin-top: 16px;
+    margin-top: 8%;
   }
   .register {
     font-size: 20px;
+    padding-top: 22%;
   }
   .reg_text_div{
     font-size: 25px;
