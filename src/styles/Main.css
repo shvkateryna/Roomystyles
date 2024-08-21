@@ -7,9 +7,11 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 100vh;
-    width: 100vw;
-    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .logo-collegium {
@@ -40,10 +42,8 @@
 
 .login_header{
     color: "black";
-    font-family: "Lexend", sans-serif;
+    font-family: "Roboto Flex", sans-serif;
     font-size: 24px;
-    letter-spacing: 2px;
-    font-weight: 300;
 }
 
 .input_group{
@@ -53,7 +53,6 @@
 
 .aside_login_container {
     width: 40%;
-    position: absolute;
     top: 5%;
     right: 10%;
 }
@@ -93,10 +92,8 @@
 }   
 
 .login_button{
-    font-family: "Lexend", sans-serif;
+    font-family: "Roboto Flex", sans-serif;
     color: #FFFFFF;
-    letter-spacing: 2px;
-    font-weight: 300;
 }
 
 .input_login {
@@ -114,10 +111,8 @@
 .form_label{
     margin-bottom: 7px;
     color: "black";
-    font-family: "Lexend", sans-serif;
-    font-size: "16px";
-    letter-spacing: 2px;
-    font-weight: 300;
+    font-family: "Roboto Flex", sans-serif;
+    font-size: 16px;
 }
 .form_login{
     display: flex;
@@ -133,13 +128,11 @@
     border-color: #FFFFFF;
     margin-top: 15px;
     height: 40%;
-    font-family: 'Lexend', sans-serif;
+    font-family: "Roboto Flex", sans-serif;
     font-size: 16px;
     padding: 15px;
     width: 100%;
     --bs-btn-bg:  #8D0709!important;
-    letter-spacing: 2px;
-    font-weight: 300;
     transition: background-color 300ms ease-out;
   }
   
@@ -222,28 +215,27 @@
 .heading_login{
     display: flex;
     justify-content: center;
-    margin: 30px;
-    letter-spacing: 8px;
-    font-family: 'Lexend', sans-serif;
-    font-size: 52px;
-    font-weight: 300;
+    margin: 10px;
+    font-family: "Roboto Flex", sans-serif;
+    font-size: 48px;
+    letter-spacing: 2px;
 }
 
-.login_wrapper{
+.login_wrapper {
     border: none;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;  
-    width: 100vw;        
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    z-index: 1;
 }
 
 .add-curators-header {
     color: "black";
-    font-family: "Lexend", sans-serif;
+    font-family: "Roboto Flex", sans-serif;
     font-size: 24px;
-    letter-spacing: 2px;
-    font-weight: 300;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -257,10 +249,8 @@
     border-radius: 16px;
     margin-top: 10px;
     padding: 10px;
-    font-family: "Lexend", sans-serif;
+    font-family: "Roboto Flex", sans-serif;
     font-size: 16px;
-    letter-spacing: 2px;
-    font-weight: 300;
     color: #ffffff;
     transition: background-color 300ms ease-out;
 }

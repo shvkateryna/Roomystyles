@@ -1,4 +1,18 @@
 .navbar_m {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #8D0709;
+    color: #fff;
+    height:8vh;
+    font-size: medium;
+    z-index: 1000;
+}
+.navbar_m2 {
     display: flex;
     align-items: center;
     width: 100%;

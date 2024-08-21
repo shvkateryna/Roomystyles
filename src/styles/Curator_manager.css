@@ -1,10 +1,15 @@
 .curators {
-    font-family: "Lexend", sans-serif;
+    font-family: "Roboto Flex", sans-serif;
     font-size: 20px;
-    letter-spacing: 2px;
-    font-weight: 300;
     margin-left: 8%;
-    margin-top: 3%;
+    padding-top: 15%;
+}
+
+.chapter {
+    font-family: "Roboto Flex", sans-serif;
+    font-size: 20px;
+    margin-left: 8%;
+    padding-top: 5%;
 }
 
 .mutiselect_align {
@@ -34,10 +39,10 @@ div.css-1uwv1iy-control:focus {
 
 
 
-.loader_manager_div{
-display: flex;
-align-items: center;
-justify-content: center;
+.loader_manager_div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .add-curators-card {
@@ -75,8 +80,13 @@ justify-content: center;
         padding-left: 10%
     } 
     .curators {
-        margin-top: 6%;
+        padding-top: 22%;
     }
+
+    .chapter {
+        padding-top: 7%;
+    }
+
 
     .add-curators-header {
         font-size: 20px;

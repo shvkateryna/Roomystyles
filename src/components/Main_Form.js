@@ -32,7 +32,7 @@ function Main_Form() {
         <>
           {response ? (
             <>
-            <nav className="navbar_m">
+            <nav className="navbar_m2">
               <div className="navbarbrand-title">
                 RooMy
               </div>

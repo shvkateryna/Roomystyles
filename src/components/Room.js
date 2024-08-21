@@ -423,6 +423,7 @@ export const Room = (props) => {
                   ></button>
                 </div>
                 <div className="modal-body">
+                  {console.log(currentRoom.names)}
                   <p>Виселити мешканця {currentRoom.names[2]}?</p>
                 </div>
                 <div className="modal-footer">
@@ -497,9 +498,8 @@ export const Room = (props) => {
               </div>
             </div>
           </div>
-
+          <NavBar role={props.role}></NavBar>
           <div className="roombody">
-            <NavBar role={props.role}></NavBar>
             <div className="curators">Кімната {number}</div>
             <div className="roommain">
               <div value={selectedOption} className="roomcards">
@@ -562,7 +562,7 @@ export const Room = (props) => {
                 <div className="furniture_wrapper">
                   {selectedOption === 6 ? (
                     <>
-                      <div className="curators">
+                      <div className="chapter">
                         Підтвердження форм
                       </div>
 
@@ -673,7 +673,7 @@ export const Room = (props) => {
                     </>
                   ) : selectedOption === 7 ? (
                     <>
-                      <div className="curators">
+                      <div className="chapter">
                         Виселення
                       </div>
                       <Card>
@@ -731,7 +731,7 @@ export const Room = (props) => {
                             <div
                             className="move_out_button"
                             disabled={!available}
-                            onClick={handleShow}
+                            onClick={handleShow1}
                             >
                             Виселити
                             </div>
@@ -760,7 +760,7 @@ export const Room = (props) => {
                             <div
                             className="move_out_button"
                             disabled={!available}
-                            onClick={handleShow1}
+                            onClick={handleShow2}
                             >
                             Виселити
                             </div>
@@ -778,8 +778,8 @@ export const Room = (props) => {
                         <div>
                           {selectedOption === index_fur && (
                             <>
-                              <div className="curators">
-                                <strong>{headers[index_fur]}</strong>
+                              <div className="chapter">
+                                {headers[index_fur]}
                               </div>
                               <div className="furniture_container">
                               {list_fur.map((furniture, index) => (
@@ -814,10 +814,7 @@ export const Room = (props) => {
                                     </div>
                                   ) : (
                                     <>
-                                      <img
-                                        className="slider_image"
-                                        src={default_pic}
-                                      />
+                                      <div className="no-pictures">Немає фото</div>
                                     </>
                                   )}
                                   <Card.Title> 

@@ -126,7 +126,7 @@ function Form_reg(props) {
             <Link
               style={{
                 color: "black",
-                fontFamily: "Montserrat Medium 500",
+                fontFamily: "Roboto Flex",
                 marginTop: "40px",
                 fontSize: "16px",
               }}

@@ -106,8 +106,7 @@
   border-width: 1px;
   border-radius: 12px;
   margin: 20px auto;
-  font-family: "Lexend", sans-serif;
-  letter-spacing: 2px;
+  font-family: "Roboto Flex", sans-serif;
   justify-content: space-between; /* Ensures content is spaced out */
   align-items: center;
   padding-left: 10px;
@@ -137,9 +136,7 @@
   justify-content: center;
   align-items: center;
   font-size: 20px;
-  font-family: 'Lexend', sans-serif;
-  letter-spacing: 2px;
-  font-weight: 600;
+  font-family: "Roboto Flex", sans-serif;
   height: 70px;
   margin-top: 5%;
 }
