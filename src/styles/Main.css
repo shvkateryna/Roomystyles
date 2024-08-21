@@ -149,7 +149,7 @@
     background-color: transparent;
     color: inherit;
     border: none;
-    font-size: inherit;
+    font-size: "Roboto Flex", sans-serif;
     cursor: pointer;
     text-decoration: none;
     outline: none;
@@ -165,7 +165,7 @@
     background-color: transparent;
     color: inherit;
     border: none;
-    font-size: inherit;
+    font-size: "Roboto Flex", sans-serif;;
     cursor: pointer;
     text-decoration: none;
     outline: none;

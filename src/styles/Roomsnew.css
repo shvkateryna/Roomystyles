@@ -55,17 +55,15 @@
 }
 
 .my-rooms {
-    font-family: "Lexend", sans-serif;
+    font-family: "Roboto Flex", sans-serif;
     font-size: 20px;
     letter-spacing: 2px;
-    font-weight: 300;
 }
 
 .input-room {
-    font-family: "Lexend", sans-serif;
+    font-family: "Roboto Flex", sans-serif;
     letter-spacing: 2px;
     font-size: 16px;
-    font-weight: 300;
     height: 45px;
     width: 300px;
     margin-right: 10px;
@@ -99,14 +97,13 @@
     border: 1px solid #dddddd;
     padding: 8px;
     text-align: left;
-    font-family: "Lexend", sans-serif;
+    font-family: "Roboto Flex", sans-serif;
     font-size: 16px;
 }
   
 .roomscardfooter{
     display: flex;
     flex-direction: row;
-    font-weight: 400;
     gap: 10px;
     padding: 5px;
 }
@@ -182,7 +179,7 @@ background-color: aquamarine;
     padding: 10px 3px;
     margin: 0px 3px;
     border-radius: 10px;
-    font-size: 15px;
+    font-size: 16px;
 }
 .roomswing:hover{
     background-color: red;    
@@ -235,10 +232,9 @@ background-color: aquamarine;
     border-color: #8D0709;
     height: 40px;
     width: 127px;
-    font-family: "Lexend", sans-serif;
+    font-family:  "Roboto Flex", sans-serif;
     font-size: 16px;
     letter-spacing: 2px;
-    font-weight: 300;
     color: #ffffff;
     transition: 300ms ease-out;
 }
@@ -327,19 +323,15 @@ background-color: aquamarine;
         border-radius: 12px;
         height: 40px;
         width: 127px;
-        font-family: "Lexend", sans-serif;
+        font-family:  "Roboto Flex", sans-serif;
         font-size: 12px;
-        letter-spacing: 2px;
-        font-weight: 300;
         color: #ffffff;
         transition: 300ms ease-out;
         margin-top: 3%;
     }
     .input-room {
-        font-family: "Lexend", sans-serif;
-        letter-spacing: 2px;
+        font-family:  "Roboto Flex", sans-serif;
         font-size: 12px;
-        font-weight: 300;
         height: 45px;
         width: 310px;
         margin-right: 10px;

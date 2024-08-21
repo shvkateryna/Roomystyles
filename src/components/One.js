@@ -229,13 +229,10 @@ function One(props) {
     <div>
       {sendingForm ? (
         <>
-          <div className="sending_form">
-            <span>Зачекайте, ми обробляємо Вашу відповідь...</span>
-            <div className="progress-bar-container">
-              <div className="progress-bar" style={{ width: `${progress}%` }}></div>
-              <span>{progress}%</span>
-            </div>
-          </div>
+          <div className="progress-bar-container">
+          <div className="progress-bar" style={{ width: `${progress}%` }}></div>
+          <CircularProgressWithLabel value={progress} />
+        </div>
         </>
       ) : (
         <>

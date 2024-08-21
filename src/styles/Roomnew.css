@@ -9,7 +9,7 @@
 
 .roombody{
     height: 100vh;
-    font-size: small;
+    font-size: 12px;
 }
 .roommain{
     display: flex;

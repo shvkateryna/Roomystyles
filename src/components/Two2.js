@@ -220,19 +220,16 @@ function Two2(props) {
     <div>
       {sendingForm ? (
         <>
-          <div className="sending_form">
-            <span>Зачекайте, ми обробляємо Вашу відповідь...</span>
-            <div className="progress-bar-container">
-              <div className="progress-bar" style={{ width: `${progress}%` }}></div>
-              <span>{progress}%</span>
-            </div>
-          </div>
+          <div className="progress-bar-container">
+          <div className="progress-bar" style={{ width: `${progress}%` }}></div>
+          <CircularProgressWithLabel value={progress} />
+        </div>
         </>
       ) : (
         <>
           <div>
             <div className="room_type_header">
-              <strong>Двоповерхове ліжко (2 поверх)</strong>
+              Двоповерхове ліжко (2 поверх)
             </div>
             <div className="main_div" key={"main_form_div"}>
               <form className="main_form" key="submit_form">
@@ -292,7 +289,7 @@ function Two2(props) {
                             </div>
                           </div>
                           <div
-                            style={{ paddingLeft: "20px", fontSize: "16px" }}
+                            className="questions-text"
                           >
                             {ele.questions}
                           </div>
@@ -374,7 +371,8 @@ function Two2(props) {
 
                   <div className="submit_align_wrapper">
                     <br />
-                    <div style={{ paddingLeft: "20px", fontSize: "16px" }}>
+                    <div className="send-text-main">
+                    <div className="send-text">
                       <p>
                         Перед підтвердженням форми уважно перегляньте правила
                         Колегіуму за посиланням.
@@ -389,7 +387,7 @@ function Two2(props) {
                       </p>
                     </div>
                     <div className="results_wrapper">
-                      <p style={{ paddingLeft: "20px", fontSize: "16px" }}>
+                      <p className="send-text">
                         Я ознайомився / -лася з правилами та підтверджую, що вся
                         надана інформація достовірна.
                         <input
@@ -412,6 +410,7 @@ function Two2(props) {
                         key="submit_button"
                         type={"submit"}
                       />
+                      </div>
                     </div>
                   </div>
                 </div>

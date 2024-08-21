@@ -370,7 +370,8 @@ function Two(props) {
                   ))}
                   <div className="submit_align_wrapper">
                     <br />
-                    <div className="sent-text">
+                    <div className="send-text-main">
+                    <div className="send-text">
                       <p>
                         Перед підтвердженням форми уважно перегляньте правила
                         Колегіуму за посиланням.
@@ -385,7 +386,7 @@ function Two(props) {
                       </p>
                     </div>
                     <div className="results_wrapper">
-                      <p style={{ paddingLeft: "20px", fontSize: "16px" }}>
+                      <p className="send-text">
                         Я ознайомився / -лася з правилами та підтверджую, що вся
                         надана інформація достовірна.
                         <input
@@ -408,6 +409,7 @@ function Two(props) {
                         key="submit_button"
                         type={"submit"}
                       />
+                      </div>
                     </div>
                   </div>
                 </div>

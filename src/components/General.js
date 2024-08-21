@@ -31,10 +31,8 @@ function General(props) {
     width: '70%',
     marginBottom: '10px',
     zIndex: 1000,
-    fontFamily: 'Lexend, sans-serif',
+    fontFamily: "Roboto Flex",
     fontSize: '12px',
-    letterSpacing: '2px',
-    fontWeight: 300,
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -147,6 +145,15 @@ function General(props) {
     new_list[index_block] = obj;
 
     setRoom((prev) => ({ ...prev, furniture_list: new_list }));
+  };
+
+
+  const previous_stage = (e) => {
+    e.preventDefault();
+    if (stageCounter > 0) {
+      setStageCounter(stageCounter - 1);
+    }
+    document.documentElement.scrollIntoView({ behavior: "smooth" });
   };
 
   const next_stage = (e) => {
@@ -452,6 +459,13 @@ function General(props) {
                             onChange={() => setRuleAccepted(!ruleAccepted)}
                           />
                         </p>
+                        <div className="next_stage_wrapper">
+                        <button
+                        className="form_button_next_step"
+                        onClick={previous_stage}
+                      >
+                        <img className="arrow_back" src={arrow_image} /> {room_type[stageCounter - 1]}
+                      </button>
                         <input
                           id={`element_3`}
                           disabled={!ruleAccepted}
@@ -462,21 +476,29 @@ function General(props) {
                           type={"submit"}
                         />
                       </div>
+                      </div>
                     </div>
                   </div>
                   </>
                 ) : (
                   <>
                     <div className="next_stage_wrapper">
-                      <div className="next-stage">
-                        Перейти до наступного блоку:{" "}
-                        <div className="next-stage-name">{room_type[stageCounter + 1]}</div>
-                      </div>
+                    {stageCounter > 0 ? (
+                      <>
+                        <button
+                        className="form_button_next_step"
+                        onClick={previous_stage}
+                      >
+                        <img className="arrow_back" src={arrow_image} /> {room_type[stageCounter - 1]}
+                      </button>
+                      </>
+                    ) : (
+                    <></>)}
                       <button
                         className="form_button_next_step"
                         onClick={next_stage}
                       >
-                        Перейти <img className="arrow" src={arrow_image} />
+                        {room_type[stageCounter + 1]} <img className="arrow" src={arrow_image} />
                       </button>
                     </div>
                   </>

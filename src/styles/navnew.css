@@ -9,7 +9,7 @@
     background-color: #8D0709;
     color: #fff;
     height:8vh;
-    font-size: medium;
+    font-size: 16px;
     z-index: 1000;
 }
 .navbar_m2 {
@@ -22,7 +22,7 @@
     background-color: #8D0709;
     color: #fff;
     height:8vh;
-    font-size: medium;
+    font-size: 16px;
     z-index: 1000;
 }
 .confirm_button{
@@ -31,10 +31,8 @@
     border-radius: 16px;
     height: 40px;
     width: 127px;
-    font-family: "Lexend", sans-serif;
+    font-family:  "Roboto Flex", sans-serif;
     font-size: 12px;
-    letter-spacing: 2px;
-    font-weight: 300;
     color: #ffffff;
     transition: background-color 300ms ease-out;
 }
@@ -50,10 +48,8 @@
     border-radius: 16px;
     height: 40px;
     width: 127px;
-    font-family: "Lexend", sans-serif;
+    font-family:  "Roboto Flex", sans-serif;
     font-size: 12px;
-    letter-spacing: 2px;
-    font-weight: 300;
     color: #ffffff;
     transition: background-color 300ms ease-out;
 }
@@ -65,10 +61,8 @@
 
 .navbarbrand-title{
     cursor: pointer;
-    font-family: "Lexend", sans-serif;
+    font-family:  "Roboto Flex", sans-serif;
     font-size: 24px;
-    letter-spacing: 2px;
-    font-weight: 300;
     transition: color 300ms ease-out;
 }
 
@@ -85,10 +79,8 @@
     margin: 5px;
     cursor: pointer;
     transition: 0.3 ease-in-out;
-    font-family: "Lexend", sans-serif;
-    font-size: 12px;
-    letter-spacing: 2px;
-    font-weight: 300;
+    font-family: "Roboto Flex", sans-serif;
+    font-size: 16px;
     transition: color 300ms ease-out;
 }
 
@@ -127,5 +119,9 @@ cursor: pointer;
     }
     #mobile{
         display: block;
+    }
+
+    #navoption{
+        font-size: 12px;
     }
 }

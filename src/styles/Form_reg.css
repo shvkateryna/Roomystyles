@@ -23,7 +23,7 @@
     margin-left: 15px;
     color: black;
     float: right;
-    font-size: 22px;
+    font-size: 20px;
     line-height: 20px;
     cursor: pointer;
     transition: 0.3s;
@@ -78,6 +78,12 @@
     width: 20px;
     height: 20px;
 }
+
+.arrow_back{
+    width: 20px;
+    height: 20px;
+    transform: rotate(180deg);
+}
 .header_furniture label {
     font-size: 16px;
 }
@@ -87,7 +93,6 @@
     justify-self: start;
 }
 .clear_images{
-    /* background: rgb(234, 103, 103); */
     color: white;
     text-decoration: none;
     margin-left: 5px;
@@ -96,8 +101,8 @@
     display: inline-block;
     border: none;
     cursor: pointer;
-    font-family: 'Montserrat Medium 500', sans-serif;
-    font-size: 14px;
+    font-family: "Roboto Flex", sans-serif;
+    font-size: 12px;
     width: 25px;
     height: 25px;
     text-align: center
@@ -212,7 +217,7 @@ input[disabled]:hover{
 
 .step_2 {
     font-size: 30px;
-    font-family: Forum;
+    font-family: "Roboto Flex", sans-serif;
 }
 
 .main_div {
@@ -235,7 +240,7 @@ input[disabled]:hover{
     margin-bottom: 50px;
     padding: 0px 10px 20px 7px;
     width: auto;
-    font-family: 'Verdana';
+    font-family: "Roboto Flex", sans-serif;
     background-color: #ffffff;
     border-radius: 15px;
 }
@@ -248,7 +253,7 @@ input[disabled]:hover{
 }
 
 .user_div_inner {
-    font-family: Forum;
+    font-family: "Roboto Flex", sans-serif;
     font-size: 150%;
     text-align: center;
     padding-top: 30px;
@@ -263,7 +268,7 @@ input[disabled]:hover{
     width: 400px;
     height: 40px;
     background-color: #f3e8c9;
-    font-family: 'Montserrat Medium 500', sans-serif;
+    font-family: "Roboto Flex", sans-serif;
     border-radius: 7px;
     border: none;
     margin: 20px auto;
@@ -516,21 +521,22 @@ li .active::after {
     margin-left: 3%;
 }
 .submit_form{
+    display: block;
     color: rgb(255, 255, 255);
     border-radius: 12px;
-    display: inline-block;
-    border: none;
     cursor: pointer;
     font-family: "Roboto Flex", sans-serif;
     font-size: 16px;
     padding: 12px;
     background-color: #8D0709;
     width: 200px;
-    height: 50px;
+    height: 45px;
+    border-color: #8D0709;
+    border-width: 3px;
     text-align: center;
     transition: background-color 300ms ease-out;
-    margin-right: 8%;
 }
+
 .submit_form:hover {
     background-color: #C81F21;
 }
@@ -663,7 +669,6 @@ justify-content: center;
         max-width: 300px;
     }
     .file_input::before {
-        /* width: 100px; */
         font-size: 12px;
         width: 150px;
         height: 45px;
@@ -672,22 +677,23 @@ justify-content: center;
         font-size: 12px;
         width: 25px;
         height: 25px;
-        /* margin-top: 10px; */
-        /* margin-left: 30px; */
     }
+
     .submit_form{
+        display: block;
         color: rgb(255, 255, 255);
         border-radius: 12px;
-        display: inline-block;
-        border: none;
         cursor: pointer;
         font-family: "Roboto Flex", sans-serif;
         font-size: 12px;
         padding: 12px;
         background-color: #8D0709;
-        width: 150px;
+        width: 40%;
         height: 45px;
-        text-align: center
+        border-width: 3px;
+        text-align: center;
+        transition: background-color 300ms ease-out;
+        border: solid;
     }
     .next-stage {
         font-family: "Roboto Flex", sans-serif;
