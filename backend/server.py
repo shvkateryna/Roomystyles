@@ -507,7 +507,15 @@ def delete_room(_, encoded):
         report.add_row(room.names[index_block - 3], room.start_dates[index_block - 3], time,
                        room, index_block)
 
+
+    
     room.update_json(room_data, id=index_block)
+
+
+    report.add_row(" ".join(room.names), room.start_dates[index_block - 3], time,
+                       room, index_block)
+    
+
     room.save()
 
     return "add"
