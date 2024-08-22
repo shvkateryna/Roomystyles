@@ -208,23 +208,23 @@ export const Room = (props) => {
   var settings = {
     infinite: false,
     speed: 200,
-    slidesToShow: 5,
-    slidesToScroll: 5,
+    slidesToShow: 4,
+    slidesToScroll: 1,
     initialSlide: 0,
     responsive: [
       {
         breakpoint: 1500,
         settings: {
           slidesToShow: 4,
-          slidesToScroll: 4,
+          slidesToScroll: 1,
           infinite: true,
         },
       },
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToShow: 2,
+          slidesToScroll: 1,
           infinite: true,
         },
       },
@@ -232,14 +232,14 @@ export const Room = (props) => {
         breakpoint: 800,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToScroll: 1,
         },
       },
       {
         breakpoint: 500,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
         },
       },
     ],
@@ -504,56 +504,58 @@ export const Room = (props) => {
             <div className="roommain">
               <div value={selectedOption} className="roomcards">
                 <div style={{ display: 'flex', alignItems: 'center' , marginLeft: '7%', marginRight: '7%'}}>
-                <Slider
-                  ref={(slider) => {
-                    sliderRef = slider;
-                  }}
-                  {...settings}
-                  style={{overflow: 'hidden' }} // Adjust slider style
-                >
-                  {currentRoom.furniture_list.map((list_fur, index_fur) => (
-                    <div>
-                      <div
-                        className={
-                          index_fur !== selectedOption
-                            ? "roomroomfur"
-                            : "roomroomfur_active"
-                        }
-                        onClick={() => handleOptionClick(index_fur)}
-                      >
-                        <span>{headers[index_fur]}</span>{" "}
-                      </div>
-                    </div>
-                  ))}
-                  <div>
-                    <div
-                      className={
-                        6 !== selectedOption
-                          ? "roomroomfur_accept"
-                          : "roomroomfur_active"
-                      }
-                      onClick={() => handleOptionClick(6)}
-                    >
-                      <span>Підтвердження форми</span>
-                    </div>
-                  </div>
-                  <div>
-                    <div
-                      className={
-                        7 !== selectedOption
-                          ? "roomroomfur_end"
-                          : "roomroomfur_active"
-                      }
-                      onClick={() => handleOptionClick(7)}
-                    >
-                      <span>Виселення</span>
-                    </div>
-                  </div>
-                </Slider>
                 <div className="furniture_navigation">
                   <div onClick={previous}>
                     <i class="fa-solid fa-arrow-left"></i>
                   </div>
+                </div>
+                <Slider
+  ref={(slider) => {
+    sliderRef = slider;
+  }}
+  {...settings}
+  className="slider-container" // Apply slider container class
+>
+  {currentRoom.furniture_list.map((list_fur, index_fur) => (
+    <div className="slide-wrapper" key={index_fur}>
+      <div
+        className={
+          index_fur !== selectedOption
+            ? "slide-item roomroomfur"
+            : "slide-item slide-item_active roomroomfur_active"
+        }
+        onClick={() => handleOptionClick(index_fur)}
+      >
+        <span>{headers[index_fur]}</span>
+      </div>
+    </div>
+  ))}
+  <div className="slide-wrapper">
+    <div
+      className={
+        6 !== selectedOption
+          ? "slide-item roomroomfur_accept"
+          : "slide-item slide-item_active roomroomfur_active"
+      }
+      onClick={() => handleOptionClick(6)}
+    >
+      <span>Підтвердження форми</span>
+    </div>
+  </div>
+  <div className="slide-wrapper">
+    <div
+      className={
+        7 !== selectedOption
+          ? "slide-item roomroomfur_end"
+          : "slide-item slide-item_active roomroomfur_active"
+      }
+      onClick={() => handleOptionClick(7)}
+    >
+      <span>Виселення</span>
+    </div>
+  </div>
+</Slider>
+                <div className="furniture_navigation">
                   <div onClick={next}>
                     <i class="fa-solid fa-arrow-right"></i>
                   </div>
