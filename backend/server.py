@@ -239,8 +239,16 @@ class User(db.Document):
             })
         else:
             numbers= [room.number for room in self.rooms]
+            min_val = 0
+            max_val = 0
+            if len(numbers) == 0:
+                min_val = "NAN"
+                max_val = "NAN"
+            else:
+                max_val = max(numbers)
+                min_val = min(numbers)
             return ({
-                "rooms": [min(numbers),max(numbers)],
+                "rooms": [min_val,max_val],
                 "user_type":self.user_type,
                 "email":self.email
             })

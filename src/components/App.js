@@ -12,6 +12,8 @@ import { Room } from "./Room";
 import { useCookies } from "react-cookie";
 import { fetcher } from "../services/ApiService";
 import "../styles/app.css";
+import { CSVParserMain } from "./csv_parser/CSVParserMain";
+import GroupDetail from "./csv_parser/GroupDetail";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -51,6 +53,9 @@ function App() {
                 <>
                   {role === "ADMIN" ? (
                     <>
+                    <Route path="/csv_parser" element={<CSVParserMain />} />
+                    <Route path="/csv_parser/:number" element={<GroupDetail />} />
+
                       <Route
                         path="/:number"
                         element={<Room role={role} user_id={1} />}
@@ -67,6 +72,9 @@ function App() {
                         path="/:number"
                         element={<Room role={role} user_id={1} />}
                       />
+                      <Route path="/csv_parser" element={<CSVParserMain />} />
+                      <Route path="/csv_parser/:number" element={<GroupDetail />} />
+
                     </>
                   )}
                   <Route
@@ -82,6 +90,7 @@ function App() {
               )}
             </>
           )}
+
           <Route path="/rooms/:id_coded" element={<Main_Form />} />
           <Route path="/rooms/:id_coded/general" element={<Main_General />} />
           <Route path="/rooms/:id_coded/one" element={<Main_One />} />
