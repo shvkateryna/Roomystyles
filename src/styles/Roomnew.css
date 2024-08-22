@@ -56,7 +56,7 @@
 .furniture_description {
     padding-left: 10px;
     font-family: "Roboto Flex", sans-serif;
-    font-size: 12px;
+    font-size: 16px;
 }
 
 .finish_date_input{
@@ -325,6 +325,7 @@ background-color: aquamarine;
     border-radius: 10px;
     border: 1px solid #8D0709;
     white-space: nowrap;
+    background-color: #ffffff;
     transition: background-color 300ms ease-out;
 }
 
@@ -511,6 +512,22 @@ background-color: aquamarine;
     border-radius: 12px;
 }
 
+.fa-arrow-right {
+    transition: color 300ms ease-out;
+}
+
+.fa-arrow-right:hover {
+    color: #ffffff;
+}
+
+.fa-arrow-left {
+    transition: color 300ms ease-out;
+}
+
+.fa-arrow-left:hover {
+    color: #ffffff;
+}
+
 @media only screen and (max-width: 1000px)  {
     .no-pictures{
         margin-top: 60%;
@@ -629,6 +646,9 @@ background-color: aquamarine;
         font-size: 12px;
       }
     .general_move_out{
+        font-size: 12px;
+    }
+    .furniture_description {
         font-size: 12px;
     }
     
