@@ -60,17 +60,17 @@ const GroupDetail = ({ headers, rows, groupName, onBack }) => {
 
                   {cell.indexOf("http") == -1 ? (
                     <>
-                      {" "}
-                      <div>{cell}</div>
+                      {/* {" "} */}
+                      <div className = "description_block_text">{cell}</div>
                     </>
                   ) : (
                     <>
-                    <div>{cell.slice(0, cell.indexOf("http"))}</div>
+                    <div className = "description_block_text">{cell.slice(0, cell.indexOf("http"))}</div>
                       {cell
                         .slice(cell.indexOf("http"))
                         .split(" ")
                         .map((cell_piece, cellIndex) => (
-                          <img src={check_url(cell_piece)} />
+                          <img className = "img_description" src={check_url(cell_piece)} />
                         ))}
                     </>
                   )}
@@ -80,25 +80,6 @@ const GroupDetail = ({ headers, rows, groupName, onBack }) => {
           ))}
         </div>
       ))}
-
-      {/* <table>
-        <thead>
-          <tr>
-            {headers.map((header, index) => (
-              <th key={index}>{header}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row, rowIndex) => (
-            <tr key={rowIndex}>
-              {row.map((cell, cellIndex) => (
-                <td key={cellIndex}>{cell}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table> */}
     </div>
   );
 };

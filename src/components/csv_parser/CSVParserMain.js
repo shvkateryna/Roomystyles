@@ -87,12 +87,10 @@ export const CSVParserMain = (props) => {
             <label for="images" className="drop-container" id="dropcontainer">
               <span className="drop-title">Drop file here</span>
               <input type="file" accept=".csv" onChange={handleFileChange} />
-              {/* <input type="file" id="images" accept="image/*" required> */}
             </label>
           )}
 
           <div className="mainWrapper">
-            {/* <input type="file" accept=".csv" onChange={handleFileChange} /> */}
             {currentGroup ? (
               <GroupDetail
                 headers={headers}
