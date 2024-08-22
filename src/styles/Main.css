@@ -20,7 +20,8 @@
 }
 
 .form-control{
-    height: 100%;  
+    height: 100%; 
+    font-family: "Roboto Flex", sans-serif;
     --bs-border-color: #8D0709;
     --bs-border-radius: 16px;
     border-color: #8D0709 
@@ -235,7 +236,7 @@
 .add-curators-header {
     color: "black";
     font-family: "Roboto Flex", sans-serif;
-    font-size: 24px;
+    font-size: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -257,4 +258,10 @@
 
 .button_add_curators:hover {
     background-color: #C81F21;
+}
+
+@media screen and (max-width:480px){
+    .button_add_curators{
+        font-size: 12px;
+    }
 }

@@ -20,6 +20,7 @@ function General(props) {
   const [imageCounter, setImageCounter] = useState(0);
   const [progress, setProgress] = useState(0);
   const [alertVisible, setAlertVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const alertStyle = {
     display: alertVisible ? 'block' : 'none', // Show or hide based on alertVisible state
@@ -132,7 +133,9 @@ function General(props) {
   const handleChangeRoomFile = async (index_block, index, option, value) => {
     let compressedFiles = [];
     for (var i = 0; i < value.length; i++) {
+      setLoading(true)
       compressedFiles.push(await shrinkImage(value[i]));
+      setLoading(false)
     }
     let new_list = room.furniture_list;
     let obj = room.furniture_list[index_block];
@@ -417,20 +420,26 @@ function General(props) {
                               </div>
                               {ele.images.length != 0 ? (
                                 <>
-                                  <div className="slider_wrapper">
-                                    <Slider {...settings}>
-                                      {ele.images.map((slideImage, index) => (
-                                        <div>
-                                          <div className="image_wrapper">
-                                            <img
-                                              className="slider_image"
-                                              src={check_url(slideImage)}
-                                            />
-                                          </div>
-                                        </div>
-                                      ))}
-                                    </Slider>
+                                {loading ? (
+                                  <div className="loader_block">
+                                    <div className="loader"></div>
                                   </div>
+                                ) : (
+                                <></>)}
+                                <div className="slider_wrapper">
+                                  <Slider {...settings}>
+                                    {ele.images.map((slideImage, index) => (
+                                      <div>
+                                        <div className="image_wrapper">
+                                          <img
+                                            className="slider_image"
+                                            src={check_url(slideImage)}
+                                          />
+                                        </div>
+                                      </div>
+                                    ))}
+                                  </Slider>
+                                </div>
                                 </>
                               ) : (
                                 <></>

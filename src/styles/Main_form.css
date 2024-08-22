@@ -36,7 +36,7 @@
 
 .room_type_header{
   font-family: "Roboto Flex", sans-serif;
-  font-size: 16px;
+  font-size: 20px;
   padding-top: 3%;
   padding-bottom: 2px;
   color: #000000;
@@ -48,10 +48,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
+  font-size: 24px;
   font-family: "Roboto Flex", sans-serif;
   height: 70px;
-  padding-top: 7%;
+  padding-top: 8%;
 }
 
 .greet {

@@ -2,14 +2,14 @@
     font-family: "Roboto Flex", sans-serif;
     font-size: 20px;
     margin-left: 8%;
-    padding-top: 10%;
+    padding-top: 140px;
 }
 
 .chapter {
     font-family: "Roboto Flex", sans-serif;
     font-size: 20px;
     margin-left: 8%;
-    padding-top: 5%;
+    padding-top: 20px;
 }
 
 .mutiselect_align {
@@ -74,22 +74,34 @@ div.css-1uwv1iy-control:focus {
     margin-bottom: 4%;
 }
 
+.no-curators {
+    font-family: "Roboto Flex", sans-serif;
+    font-size: 16px;
+    margin-left: 8%;
+    padding-bottom: 8%;
+}
+
 @media only screen and (max-width: 700px)  {
+    .no-curators {
+        font-size: 12px;
+    }
     .add-curators-card {
         padding-right: 10%;
         padding-left: 10%
     } 
     .curators {
         padding-top: 22%;
+        font-size: 16px;
     }
 
     .chapter {
         padding-top: 7%;
+        font-size: 16px;
     }
 
 
     .add-curators-header {
-        font-size: 20px;
+        font-size: 16px;
     }
 
     .form-label {

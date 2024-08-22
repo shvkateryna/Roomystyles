@@ -184,7 +184,7 @@ const Curator_menager = (props) => {
               <br></br>
               <br></br>
               {response.length === 0 ? (
-                <>Немає кураторів</>
+                <div className="no-curators">Немає кураторів</div>
               ) : (
                 <>
                   <table className="custom-table">

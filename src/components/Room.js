@@ -539,7 +539,7 @@ export const Room = (props) => {
       }
       onClick={() => handleOptionClick(6)}
     >
-      <span>Підтвердження форми</span>
+      <span>Підтвердження</span>
     </div>
   </div>
   <div className="slide-wrapper">
