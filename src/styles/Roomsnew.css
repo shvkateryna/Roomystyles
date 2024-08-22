@@ -292,7 +292,7 @@ background-color: aquamarine;
 
     .search {
         display: inline;
-        margin-top: 25%;
+        margin-top: 10vh;
         flex-direction: column; 
     }
 

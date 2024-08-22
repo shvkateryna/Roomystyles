@@ -69,8 +69,8 @@ function Two(props) {
 
   async function shrinkImage(image) {
     const options = {
-      maxSizeMB: 0.05,
-      maxWidthOrHeight: 1920,
+      maxSizeMB: 0.01,
+      maxWidthOrHeight: 800,
       useWebWorker: true,
     };
     const compressedFile = await imageCompression(image, options);
@@ -164,7 +164,7 @@ function Two(props) {
     let totalImages = 0;
 
     // Count total images for progress calculation
-    for (let furnit of room.furniture_list[3]) {
+    for (let furnit of room.furniture_list[4]) {
       if (furnit.images !== null) {
         totalImages += furnit.images.length;
       }

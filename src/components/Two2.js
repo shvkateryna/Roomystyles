@@ -163,7 +163,7 @@ function Two2(props) {
     let totalImages = 0;
 
     // Count total images for progress calculation
-    for (let furnit of room.furniture_list[3]) {
+    for (let furnit of room.furniture_list[5]) {
       if (furnit.images !== null) {
         totalImages += furnit.images.length;
       }

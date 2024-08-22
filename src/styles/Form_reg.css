@@ -528,10 +528,10 @@ li .active::after {
     cursor: pointer;
     font-family: "Roboto Flex", sans-serif;
     font-size: 16px;
-    padding: 12px;
     background-color: #8D0709;
     width: 200px;
     height: 45px;
+    border: solid;
     border-color: #8D0709;
     border-width: 3px;
     text-align: center;

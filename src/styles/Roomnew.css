@@ -413,19 +413,19 @@ background-color: aquamarine;
 .furn-description {
     height: 630px;
     width: 350px;
-    margin-left: 6%;
     border-radius: 12px;
+    /* Other styles for the card */
 }
 
 .furniture_container {
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
+    justify-content: center; /* Center items horizontally */
+    gap: 20px; /* Add some gap between items */
     margin-top: 3%;
-    margin-left: 5%;
-    margin-right: 40%;
-  }
+}
+
 
   .slick-prev,
   .slick-next {

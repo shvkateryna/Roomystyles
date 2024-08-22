@@ -8,6 +8,7 @@ import path from "../path";
 import trash_logo from "../assets/trash.png";
 import arrow_image from "../assets/arrow.png";
 import Slider from "react-slick";
+import CircularProgressWithLabel from "./CircularProgressWithLabel";
 function General(props) {
   const id_coded = props.id_coded;
   const [room, setRoom] = useState(props.room);
@@ -16,6 +17,8 @@ function General(props) {
   const [showError, setShowError] = useState(false);
   const [sendingForm, setSendingForm] = useState(false);
   const [stageCounter, setStageCounter] = useState(0);
+  const [imageCounter, setImageCounter] = useState(0);
+  const [progress, setProgress] = useState(0);
   const [alertVisible, setAlertVisible] = useState(false);
 
   const alertStyle = {
@@ -174,11 +177,22 @@ function General(props) {
   const handle_post = async (e) => {
     e.preventDefault();
   
-    if (stageCounter > 3) {
-      setSendingForm(true);
-    }
+    setSendingForm(true);
+    
     handleChangeFilled(0);
     let new_furniture_list = [];
+    let totalImages = 0;
+
+    // Count total images for progress calculation
+    for (let i = 0; i < 3; i++) {
+      for (let furnit of room.furniture_list[i]) {
+        if (furnit.images !== null) {
+          totalImages += furnit.images.length;
+        }
+      }
+    }
+
+    let uploadedImages = 0;
     for (let j = 0; j < 3; j++) {
       for (let furnit of room.furniture_list[j]) {
         if (furnit.images !== null) {
@@ -186,6 +200,12 @@ function General(props) {
           for (let file of furnit.images) {
             if (typeof file != "string") {
               const link = await upload_google_drive(file);
+              
+              uploadedImages++;
+              setImageCounter(imageCounter + 1);
+              // Update progress
+              setProgress(Math.round((uploadedImages / totalImages) * 100));
+
               links.push(link);
             } else {
               links.push(file);
@@ -220,9 +240,10 @@ function General(props) {
     <div>
       {sendingForm ? (
         <>
-          <div className="sending_form">
-            <span>Зачекайте, ми обробляємо Вашу відповідь...</span>
-          </div>
+          <div className="progress-bar-container">
+          <div className="progress-bar" style={{ width: `${progress}%` }}></div>
+          <CircularProgressWithLabel value={progress} />
+        </div>
         </>
       ) : (
         <>
