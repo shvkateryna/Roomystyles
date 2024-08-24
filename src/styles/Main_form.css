@@ -136,6 +136,18 @@
   100% { transform: rotate(360deg); }
 }
 
+@media screen and (max-width:820px){
+  .register {
+    padding-top: 15%;
+  }
+}
+
+@media screen and (max-width:1024px){
+  .register {
+    padding-top: 120px;
+  }
+}
+
 @media screen and (max-width:480px){
   .greet {
     font-family: "Roboto Flex", sans-serif;

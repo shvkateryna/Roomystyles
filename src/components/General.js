@@ -22,8 +22,7 @@ function General(props) {
   const [alertVisible, setAlertVisible] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const alertStyle = {
-    display: alertVisible ? 'block' : 'none', // Show or hide based on alertVisible state
+  const baseAlertStyle = {
     position: 'fixed',
     top: '20%',
     left: '50%',
@@ -36,10 +35,23 @@ function General(props) {
     marginBottom: '10px',
     zIndex: 1000,
     fontFamily: "Roboto Flex",
-    fontSize: '12px',
+    fontSize: '16px',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+  };
+  
+  const mobileAlertStyle = {
+    ...baseAlertStyle,
+    fontSize: '12px', // Adjust font size for mobile
+  };
+  
+  // Determine if the screen is mobile (width < 768px is a common breakpoint)
+  const isMobile = window.innerWidth < 768;
+  
+  const alertStyle = {
+    ...baseAlertStyle,
+    ...(isMobile ? mobileAlertStyle : {}),
   };
 
   const closeButtonStyle = {
@@ -489,7 +501,11 @@ function General(props) {
                             onChange={() => setRuleAccepted(!ruleAccepted)}
                           />
                         </p>
-                        <div className="next_stage_wrapper">
+                        
+                      </div>
+                    </div>
+                  </div>
+                  <div className="next_stage_wrapper">
                         <button
                         className="form_button_next_step"
                         onClick={previous_stage}
@@ -506,9 +522,6 @@ function General(props) {
                           type={"submit"}
                         />
                       </div>
-                      </div>
-                    </div>
-                  </div>
                   </>
                 ) : (
                   <>
