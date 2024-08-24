@@ -19,6 +19,7 @@ function Two(props) {
   const [progress, setProgress] = useState(0);
   const new_block = room.furniture_list[4];
   const [alertVisible, setAlertVisible] = useState(false);
+  const [successVisible, setSuccessVisible] = useState(false);
 
   let navigate = useNavigate();
   const routeChange = (path) => {
@@ -39,12 +40,40 @@ function Two(props) {
     marginBottom: '10px',
     zIndex: 1000,
     fontFamily: 'Lexend, sans-serif',
-    fontSize: '12px',
+    fontSize: '16px',
     letterSpacing: '2px',
     fontWeight: 300,
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    '@media (max-width: 600px)': {
+      fontSize: '12px',
+    }
+  };
+
+  const successStyle = {
+    display: successVisible ? 'block' : 'none', // Show or hide based on successVisible state
+    position: 'fixed',
+    top: '30%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    border: 'solid 1px',
+    borderColor: '#8D0709',
+    color: '#8D0709',
+    backgroundColor: '#ffffff',
+    border: '1px solid #c3e6cb',
+    padding: '2%',
+    width: '70%',
+    marginBottom: '10px',
+    zIndex: 1000,
+    fontFamily: 'Roboto Flex, sans-serif',
+    fontSize: '16px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    '@media (max-width: 600px)': {
+      fontSize: '12px',
+    }
   };
 
   const closeButtonStyle = {
@@ -195,7 +224,10 @@ function Two(props) {
 
     setRoom((prev) => ({ ...prev, furniture_list: new_furniture_list }));
     axios.post(path + `/room/${id_coded}/submit/4`, room).then((res) => {
-      routeChange("/rooms/" + id_coded);
+      setSuccessVisible(true); // Show success alert
+      setTimeout(() => {
+        routeChange("/rooms/" + id_coded);
+      }, 3000); // Redirect after 2 seconds to allow user to see the success alert
     });
   };
   function extractValue(input) {
@@ -245,7 +277,7 @@ function Two(props) {
                   ) : (
                     <></>
                   )}
-                  <label className="text_header" key={"user_"}>
+                  <label className="text_header2" key={"user_"}>
                     <div>Ім'я та прізвище мешканця</div>
                   </label>
                   <input
@@ -256,7 +288,7 @@ function Two(props) {
                     onChange={(e) => handleChangeUser(1, e.target.value)}
                     value={room.names[1]}
                   />
-                  <label className="text_header" key={"user_"}>
+                  <label className="text_header2" key={"user_"}>
                     <div>Дата поселення</div>
                   </label>
                   <input
@@ -282,11 +314,8 @@ function Two(props) {
                           <div
                             key={"que_body_" + index + "" + 4}
                             className="text_header"
-                          > </div>
-                            <div key={"strong_" + index + "" + 4}>
-                              {index + 1 + ")    "} {ele.type_expanded}
-                              <br />
-                            </div>
+                          >{index + 1 + ")    "} {ele.type_expanded}
+                              <br /> </div>
                           <div
                             className="questions-text"
                           >
@@ -417,6 +446,14 @@ function Two(props) {
           </div>
         </>
       )}
+    {successVisible ? (
+      <>
+        <div className="alert" style={successStyle}>
+            <span>Форму успішно відправлено!</span>
+            <button style={closeButtonStyle} onClick={() => setSuccessVisible(false)}>×</button>
+        </div>
+      </>
+    ) : null}
     </div>
   );
 }

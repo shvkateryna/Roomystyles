@@ -16,6 +16,51 @@ import default_pic from "../assets/default.png";
 export const Room = (props) => {
   const [visible, setVisible] = useState(false);
   const [cookies] = useCookies(["user"]);
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [errorMoveOut, setErrorMoveOut] = useState("");
+
+  const baseAlertStyle = {
+    position: 'fixed',
+    top: '20%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    color: '#8D0709',
+    backgroundColor: '#fdd',
+    border: '1px solid #8D0709',
+    padding: '2%',
+    width: '70%',
+    marginBottom: '10px',
+    zIndex: 1000,
+    fontFamily: "Roboto Flex",
+    fontSize: '16px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  };
+  
+  const mobileAlertStyle = {
+    ...baseAlertStyle,
+    fontSize: '12px', // Adjust font size for mobile
+  };
+  
+  // Determine if the screen is mobile (width < 768px is a common breakpoint)
+  const isMobile = window.innerWidth < 768;
+  
+  const alertStyle = {
+    ...baseAlertStyle,
+    ...(isMobile ? mobileAlertStyle : {}),
+  };
+
+  const closeButtonStyle = {
+    background: 'none',
+    border: 'none',
+    color: '#8D0709',
+    fontSize: '18px',
+    cursor: 'pointer',
+    position: 'absolute',
+    top: '0%',
+    right: '1%',
+  };
 
   let sliderRef = useRef(null);
   let sliderRef1 = useRef(null);
@@ -106,6 +151,12 @@ export const Room = (props) => {
 
   const DeleteRoomUser = (index_block) => {
     if (available === false) {
+      return;
+    }
+
+    if (currentRoom.finish_dates[index_block - 3] === "") {
+      setAlertVisible(true)
+      setErrorMoveOut("Введіть дату виселення")
       return;
     }
 
@@ -298,6 +349,16 @@ export const Room = (props) => {
         <span className="loader"></span>
       ) : (
         <>
+        {alertVisible ? (
+                    <>
+                      <div className="alert" style={alertStyle}>
+                        <span>{errorMoveOut}</span>
+                        <button style={closeButtonStyle} onClick={() => setAlertVisible(false)}>×</button>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
           <div
             className={`modal ${showModal ? "show" : ""}`}
             tabIndex="-1"
@@ -423,7 +484,6 @@ export const Room = (props) => {
                   ></button>
                 </div>
                 <div className="modal-body">
-                  {console.log(currentRoom.names)}
                   <p>Виселити мешканця {currentRoom.names[2]}?</p>
                 </div>
                 <div className="modal-footer">

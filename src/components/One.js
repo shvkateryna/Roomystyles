@@ -17,6 +17,8 @@ function One(props) {
   const [imageCounter, setImageCounter] = useState(0);
   const [progress, setProgress] = useState(0);
   const new_block = room.furniture_list[3];
+  const [successVisible, setSuccessVisible] = useState(false);
+  
   let navigate = useNavigate();
   const routeChange = (path) => {
     navigate(path);
@@ -24,23 +26,48 @@ function One(props) {
   const alertStyle = {
     display: alertVisible ? 'block' : 'none', // Show or hide based on alertVisible state
     position: 'fixed',
-    top: '20%',
+    top: '40%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    color: '#8D0709',
     backgroundColor: '#fdd',
     border: '1px solid #8D0709',
     padding: '2%',
     width: '70%',
     marginBottom: '10px',
     zIndex: 1000,
-    fontFamily: 'Lexend, sans-serif',
-    fontSize: '12px',
-    letterSpacing: '2px',
-    fontWeight: 300,
+    fontFamily: 'Roboto Flex, sans-serif',
+    fontSize: '16px',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    '@media (max-width: 600px)': {
+      fontSize: '12px',
+    }
+  };
+
+  const successStyle = {
+    display: successVisible ? 'block' : 'none', // Show or hide based on successVisible state
+    position: 'fixed',
+    top: '30%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    border: 'solid 1px',
+    borderColor: '#8D0709',
+    color: '#8D0709',
+    backgroundColor: '#ffffff',
+    border: '1px solid #c3e6cb',
+    padding: '2%',
+    width: '70%',
+    marginBottom: '10px',
+    zIndex: 1000,
+    fontFamily: 'Roboto Flex, sans-serif',
+    fontSize: '16px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    '@media (max-width: 600px)': {
+      fontSize: '12px',
+    }
   };
 
   const closeButtonStyle = {
@@ -145,20 +172,20 @@ function One(props) {
   const handle_post = async (e) => {
     e.preventDefault();
     if (room.names[0] === "") {
-      setAlertVisible(true)
+      setAlertVisible(true);
       setErrorFurniture("Немає імені мешканця");
       setSendingForm(false);
       return;
     }
     if (room.start_dates[0] === "") {
-      setAlertVisible(true)
+      setAlertVisible(true);
       setErrorFurniture("Немає дати");
       setSendingForm(false);
       return;
     }
     for (let elem of room.furniture_list[3]) {
       if ((elem.description === null) | (elem.description === "")) {
-        setAlertVisible(true)
+        setAlertVisible(true);
         setErrorFurniture("Немає опису об'єкту '" + elem.type_expanded + "'");
         setSendingForm(false);
         return;
@@ -182,7 +209,6 @@ function One(props) {
         let links = [];
         for (let file of furnit.images) {
           if (typeof file != "string") {
-            console.log(file)
             const link = await upload_google_drive(file);
 
             uploadedImages++;
@@ -203,9 +229,13 @@ function One(props) {
     }
     setRoom((prev) => ({ ...prev, furniture_list: new_furniture_list }));
     axios.post(path + `/room/${id_coded}/submit/3`, room).then((res) => {
-      routeChange("/rooms/" + id_coded);
-    });
+      setSuccessVisible(true); // Show success alert
+      setTimeout(() => {
+        routeChange("/rooms/" + id_coded);
+      }, 3000); // Redirect after 2 seconds to allow user to see the success alert
+    })
   };
+
   function extractValue(input) {
     const startIndex = input.indexOf("=") + 1; // Find the index of the first "="
     if (startIndex === 0) return null; // If "=" is not found, return null
@@ -242,18 +272,27 @@ function One(props) {
             </div>
             <div className="main_div" key={"main_form_div"}>
               <form className="main_form" key="submit_form">
-                <div className="furniture_list" key="furniture_div">
+                {/* <div className="furniture_list" key="furniture_div"> */}
                   {alertVisible ? (
                     <>
                       <div className="alert" style={alertStyle}>
-                    <span>{errorFurniture}</span>
-                    <button style={closeButtonStyle} onClick={() => setAlertVisible(false)}>×</button>
-                  </div>
+                        <span>{errorFurniture}</span>
+                        <button style={closeButtonStyle} onClick={() => setAlertVisible(false)}>×</button>
+                      </div>
                     </>
                   ) : (
                     <></>
                   )}
-                  <label className="text_header" key={"user_label_1"}>
+                  {/* {successVisible ? (
+                    <>
+                      <div className="alert" style={successStyle}>
+                        <span>Форму успішно відправлено!</span>
+                        <button style={closeButtonStyle} onClick={() => setSuccessVisible(false)}>×</button>
+                      </div>
+                    </>
+                  ) : null} */}
+                  <div className="furniture_list" key="furniture_div">
+                  <label className="text_header2" key={"user_label_1"}>
                     <div>Ім'я та прізвище мешканця </div>
                   </label>
                   <input
@@ -264,7 +303,7 @@ function One(props) {
                     onChange={(e) => handleChangeUser(0, e.target.value)}
                     value={room.names[0]}
                   />
-                  <label className="text_header" key={"user_label_2"}>
+                  <label className="text_header2" key={"user_label_2"}>
                     <div>Дата поселення</div>
                   </label>
                   <input
@@ -291,11 +330,8 @@ function One(props) {
                           <div
                             key={"que_body_" + index + "" + 3}
                             className="text_header"
-                          ></div>
-                          <div key={"strong_" + index + "" + 3}>
-                              {index + 1 + ")    "} {ele.type_expanded}
-                              <br />
-                          </div>
+                          > {index + 1 + ")    "} {ele.type_expanded}
+                              <br /></div>
                           <div
                             className="questions-text"
                           >
@@ -379,7 +415,8 @@ function One(props) {
                   ))}
 
                   <div className="submit_align_wrapper">
-                    <br />
+                    <br></br>
+                    </div>
                     <div className="send-text-main">
                     <div className="send-text">
                       <p>
@@ -421,13 +458,20 @@ function One(props) {
                       />
                     </div>
                     </div>
-                  </div>
                 </div>
               </form>
             </div>
           </div>
         </>
       )}
+    {successVisible ? (
+      <>
+        <div className="alert" style={successStyle}>
+            <span>Форму успішно відправлено!</span>
+            <button style={closeButtonStyle} onClick={() => setSuccessVisible(false)}>×</button>
+        </div>
+      </>
+    ) : null}
     </div>
   );
 }

@@ -21,6 +21,7 @@ function General(props) {
   const [progress, setProgress] = useState(0);
   const [alertVisible, setAlertVisible] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [successVisible, setSuccessVisible] = useState(false);
 
   const baseAlertStyle = {
     position: 'fixed',
@@ -52,6 +53,31 @@ function General(props) {
   const alertStyle = {
     ...baseAlertStyle,
     ...(isMobile ? mobileAlertStyle : {}),
+  };
+
+  const successStyle = {
+    display: successVisible ? 'block' : 'none', // Show or hide based on successVisible state
+    position: 'fixed',
+    top: '30%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    border: 'solid 1px',
+    borderColor: '#8D0709',
+    color: '#8D0709',
+    backgroundColor: '#ffffff',
+    border: '1px solid #c3e6cb',
+    padding: '2%',
+    width: '70%',
+    marginBottom: '10px',
+    zIndex: 1000,
+    fontFamily: 'Roboto Flex, sans-serif',
+    fontSize: '16px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    '@media (max-width: 600px)': {
+      fontSize: '12px',
+    }
   };
 
   const closeButtonStyle = {
@@ -236,7 +262,10 @@ function General(props) {
 
     setRoom((prev) => ({ ...prev, furniture_list: new_furniture_list }));
     axios.post(path + `/room/${id_coded}/submit/0`, room).then((res) => {
-      routeChange("/rooms/" + id_coded);
+      setSuccessVisible(true); // Show success alert
+      setTimeout(() => {
+        routeChange("/rooms/" + id_coded);
+      }, 3000); // Redirect after 2 seconds to allow user to see the success alert
     });
   };
   function check_url(slideImage) {
@@ -537,6 +566,10 @@ function General(props) {
                       </>
                     ) : (
                     <></>)}
+                    <div className="current-room">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    {room_type[stageCounter]}
+                    </div>
                       <button
                         className="form_button_next_step"
                         onClick={next_stage}
@@ -551,6 +584,14 @@ function General(props) {
           </div>
         </>
       )}
+      {successVisible ? (
+      <>
+        <div className="alert" style={successStyle}>
+            <span>Форму успішно відправлено!</span>
+            <button style={closeButtonStyle} onClick={() => setSuccessVisible(false)}>×</button>
+        </div>
+      </>
+    ) : null}
       <a
         className="link_author"
         href="https://www.flaticon.com/free-icons/trash-can"
