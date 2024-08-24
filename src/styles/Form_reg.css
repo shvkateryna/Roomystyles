@@ -190,6 +190,11 @@ input[disabled]:hover{
     width: 200px;
     height: 50px;
     text-align: center;
+    transition: background-color 300ms ease-out;
+}
+
+.images-button:hover {
+    background-color: #C81F21;
 }
 
 .file_input::-webkit-file-upload-button {
