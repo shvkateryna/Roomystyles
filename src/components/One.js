@@ -253,7 +253,6 @@ function One(props) {
                   ) : (
                     <></>
                   )}
-
                   <label className="text_header" key={"user_label_1"}>
                     <div>Ім'я та прізвище мешканця </div>
                   </label>
@@ -283,7 +282,7 @@ function One(props) {
                         key={"div_" + index + "" + 3}
                         className="furniture_block"
                       >
-                        <div className="horizontal_line_separator"></div>
+                      <div className="horizontal_line_separator"></div>
 
                         <div
                           key={"div_header_" + index + "" + 3}
@@ -292,17 +291,17 @@ function One(props) {
                           <div
                             key={"que_body_" + index + "" + 3}
                             className="text_header"
-                          >
-                            <div key={"strong_" + index + "" + 3}>
+                          ></div>
+                          <div key={"strong_" + index + "" + 3}>
                               {index + 1 + ")    "} {ele.type_expanded}
                               <br />
-                            </div>
                           </div>
                           <div
                             className="questions-text"
                           >
                             {ele.questions}
                           </div>
+                        </div>
                         </div>
                         <div
                           key={"div_body_" + index + "" + 3}
@@ -376,7 +375,6 @@ function One(props) {
                             <></>
                           )}
                         </div>
-                      </div>
                     </>
                   ))}
 

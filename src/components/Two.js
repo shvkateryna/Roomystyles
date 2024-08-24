@@ -282,17 +282,17 @@ function Two(props) {
                           <div
                             key={"que_body_" + index + "" + 4}
                             className="text_header"
-                          >
+                          > </div>
                             <div key={"strong_" + index + "" + 4}>
                               {index + 1 + ")    "} {ele.type_expanded}
                               <br />
                             </div>
-                          </div>
                           <div
                             className="questions-text"
                           >
                             {ele.questions}
                           </div>
+                        </div>
                         </div>
                         <div
                           key={"div_body_" + index + "" + 4}
@@ -365,7 +365,6 @@ function Two(props) {
                             <></>
                           )}
                         </div>
-                      </div>
                     </>
                   ))}
                   <div className="submit_align_wrapper">

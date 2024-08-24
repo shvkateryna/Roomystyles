@@ -72,8 +72,9 @@
     align-items: center;
 }
 .header_furniture {
+    font-family: "Roboto Flex", sans-serif;;
     padding: 10px 10px 10px 10px;
-    margin-left: 18%;
+    margin-left: 20%;
 }
 .arrow{
     width: 20px;
@@ -489,7 +490,7 @@ li .active::after {
     margin-bottom: 5px;
     border: 1px solid #8D0709;
     margin-top: 10px;
-    margin-left: 20px;
+    margin-left: 15%;
 }
 
 .user_input:focus {
@@ -503,14 +504,13 @@ li .active::after {
     font-size: 16px;
     margin-top: 10px;
     padding: 10px 0px 0px 0px;
-    margin-left: 20px;
+    margin-left: 15%;
 }
 
 .questions-text {
     font-family: "Roboto Flex", sans-serif;
     font-size: 16px;
     padding-top: 5px;
-    margin-left: 20px;
 }
 
 .obj_description {

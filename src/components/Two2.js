@@ -282,17 +282,17 @@ function Two2(props) {
                           <div
                             key={"que_body_" + index + "" + 5}
                             className="text_header"
-                          >
+                          ></div>
                             <div key={"strong_" + index + "" + 5}>
                               {index + 1 + ")    "} {ele.type_expanded}
                               <br />
                             </div>
-                          </div>
                           <div
                             className="questions-text"
                           >
                             {ele.questions}
                           </div>
+                        </div>
                         </div>
                         <div
                           key={"div_body_" + index + "" + 5}
@@ -365,7 +365,6 @@ function Two2(props) {
                             <></>
                           )}
                         </div>
-                      </div>
                     </>
                   ))}
 
