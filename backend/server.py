@@ -21,8 +21,8 @@ a = f.encrypt(b"641ed28737f82abe15c1ef83")
 app = Flask(__name__)
 cors = CORS(app)
 app.config['MONGODB_SETTINGS'] = {
-    'host': 'mongodb+srv://user:hqsydgafst#1@cluster0.md6y0vq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
-    # 'host':'mongodb+srv://nick:AFwhXGFyNZUtWvkY@cluster0.rg450ga.mongodb.net/database?retryWrites=true&w=majority'
+    # 'host': 'mongodb+srv://user:hqsydgafst#1@cluster0.md6y0vq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
+    'host': 'mongodb+srv://new_user_32:new_user_32@cluster0.mjo5p.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
 }
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['SECRET_KEY'] = "ASGJHSFVJANJCS67AGSD7A6SDGDASDg%&aSD8"

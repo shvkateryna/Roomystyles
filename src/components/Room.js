@@ -503,181 +503,242 @@ export const Room = (props) => {
             <div className="curators">Кімната {number}</div>
             <div className="roommain">
               <div value={selectedOption} className="roomcards">
-                <div style={{ display: 'flex', alignItems: 'center' , marginLeft: '7%', marginRight: '7%'}}>
-                <div className="furniture_navigation">
-                  <div onClick={previous}>
-                    <i class="fa-solid fa-arrow-left"></i>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginLeft: "7%",
+                    marginRight: "7%",
+                  }}
+                >
+                  <div className="furniture_navigation">
+                    <div onClick={previous}>
+                      <i class="fa-solid fa-arrow-left"></i>
+                    </div>
                   </div>
-                </div>
-                <Slider
-  ref={(slider) => {
-    sliderRef = slider;
-  }}
-  {...settings}
-  className="slider-container" // Apply slider container class
->
-  {currentRoom.furniture_list.map((list_fur, index_fur) => (
-    <div className="slide-wrapper" key={index_fur}>
-      <div
-        className={
-          index_fur !== selectedOption
-            ? "slide-item roomroomfur"
-            : "slide-item slide-item_active roomroomfur_active"
-        }
-        onClick={() => handleOptionClick(index_fur)}
-      >
-        <span>{headers[index_fur]}</span>
-      </div>
-    </div>
-  ))}
-  <div className="slide-wrapper">
-    <div
-      className={
-        6 !== selectedOption
-          ? "slide-item roomroomfur_accept"
-          : "slide-item slide-item_active roomroomfur_active"
-      }
-      onClick={() => handleOptionClick(6)}
-    >
-      <span>Підтвердження</span>
-    </div>
-  </div>
-  <div className="slide-wrapper">
-    <div
-      className={
-        7 !== selectedOption
-          ? "slide-item roomroomfur_end"
-          : "slide-item slide-item_active roomroomfur_active"
-      }
-      onClick={() => handleOptionClick(7)}
-    >
-      <span>Виселення</span>
-    </div>
-  </div>
-</Slider>
-                <div className="furniture_navigation">
-                  <div onClick={next}>
-                    <i class="fa-solid fa-arrow-right"></i>
+                  <Slider
+                    ref={(slider) => {
+                      sliderRef = slider;
+                    }}
+                    {...settings}
+                    className="slider-container" // Apply slider container class
+                  >
+                    {currentRoom.furniture_list.map((list_fur, index_fur) => (
+                      <div className="slide-wrapper" key={index_fur}>
+                        <div
+                          className={
+                            index_fur !== selectedOption
+                              ? "slide-item roomroomfur"
+                              : "slide-item slide-item_active roomroomfur_active"
+                          }
+                          onClick={() => handleOptionClick(index_fur)}
+                        >
+                          <span>{headers[index_fur]}</span>
+                        </div>
+                      </div>
+                    ))}
+                    <div className="slide-wrapper">
+                      <div
+                        className={
+                          6 !== selectedOption
+                            ? "slide-item roomroomfur_accept"
+                            : "slide-item slide-item_active roomroomfur_active"
+                        }
+                        onClick={() => handleOptionClick(6)}
+                      >
+                        <span>Підтвердження</span>
+                      </div>
+                    </div>
+                    <div className="slide-wrapper">
+                      <div
+                        className={
+                          7 !== selectedOption
+                            ? "slide-item roomroomfur_end"
+                            : "slide-item slide-item_active roomroomfur_active"
+                        }
+                        onClick={() => handleOptionClick(7)}
+                      >
+                        <span>Виселення</span>
+                      </div>
+                    </div>
+                  </Slider>
+                  <div className="furniture_navigation">
+                    <div onClick={next}>
+                      <i class="fa-solid fa-arrow-right"></i>
+                    </div>
                   </div>
-                </div>
                 </div>
                 <div className="furniture_wrapper">
                   {selectedOption === 6 ? (
                     <>
-                      <div className="chapter">
-                        Підтвердження форм
-                      </div>
+                      <div className="chapter">Підтвердження форм</div>
 
                       <Card>
                         <Card.Body className="verification-card">
-                        <Card.Text className="text-with-border">
-                          Загальна форма{" "}
-                          <span className="verify_button_container">
-                            <div
-                              onClick={(e) =>
-                                verify(e, currentRoom.number, props.user_id, 0)
-                              }
-                            >
-                              {currentRoom.verified[0] ? (
-                                <label className="verify_button_confirmed" style={{ color: "#ffffff" }}>
-                                  ✓
-                                </label>
-                              ) : currentRoom.verified[0] === null ? (
-                                <span className="loader_accept"></span>
-                              ) : (
-                                <label className="verify_button" style={{ color: "#ffffff" }}>
-                                  ✗
-                                </label>
-                              )}
-                            </div>
-                          </span>
-                        </Card.Text>
+                          <Card.Text className="text-with-border">
+                            Загальна форма{" "}
+                            <span className="verify_button_container">
+                              <div
+                                onClick={(e) =>
+                                  verify(
+                                    e,
+                                    currentRoom.number,
+                                    props.user_id,
+                                    0
+                                  )
+                                }
+                              >
+                                {currentRoom.verified[0] ? (
+                                  <label
+                                    className="verify_button_confirmed"
+                                    style={{ color: "#ffffff" }}
+                                  >
+                                    ✓
+                                  </label>
+                                ) : currentRoom.verified[0] === null ? (
+                                  <span className="loader_accept"></span>
+                                ) : (
+                                  <label
+                                    className="verify_button"
+                                    style={{ color: "#ffffff" }}
+                                  >
+                                    ✗
+                                  </label>
+                                )}
+                              </div>
+                            </span>
+                          </Card.Text>
                           <Card.Text className="text-with-border">
                             {currentRoom.names[0] !== "" ? (
-                              <label>{currentRoom.names[0]} - одноповерхове ліжко</label>
+                              <label>
+                                {currentRoom.names[0]} - одноповерхове ліжко
+                              </label>
                             ) : (
-                              <label>Немає мешканця - одноповерхове ліжко</label>
+                              <label>
+                                Немає мешканця - одноповерхове ліжко
+                              </label>
                             )}{" "}
                             <span className="verify_button_container">
-                            <div
-                              onClick={(e) =>
-                                verify(e, currentRoom.number, props.user_id, 1)
-                              }
-                            >
-                              {currentRoom.verified[1] ? (
-                                <label className="verify_button_confirmed" style={{ color: "#ffffff" }}>
-                                  ✓
-                                </label>
-                              ) : currentRoom.verified[1] === null ? (
-                                <span className="loader_accept"></span>
-                              ) : (
-                                <label className="verify_button" style={{ color: "#ffffff" }}>
-                                  ✗
-                                </label>
-                              )}
-                            </div>
-                          </span>
+                              <div
+                                onClick={(e) =>
+                                  verify(
+                                    e,
+                                    currentRoom.number,
+                                    props.user_id,
+                                    1
+                                  )
+                                }
+                              >
+                                {currentRoom.verified[1] ? (
+                                  <label
+                                    className="verify_button_confirmed"
+                                    style={{ color: "#ffffff" }}
+                                  >
+                                    ✓
+                                  </label>
+                                ) : currentRoom.verified[1] === null ? (
+                                  <span className="loader_accept"></span>
+                                ) : (
+                                  <label
+                                    className="verify_button"
+                                    style={{ color: "#ffffff" }}
+                                  >
+                                    ✗
+                                  </label>
+                                )}
+                              </div>
+                            </span>
                           </Card.Text>
                           <Card.Text className="text-with-border">
                             {currentRoom.names[1] !== "" ? (
-                              <label>{currentRoom.names[1]} - двоповерхове ліжко (1 поверх)</label>
+                              <label>
+                                {currentRoom.names[1]} - двоповерхове ліжко (1
+                                поверх)
+                              </label>
                             ) : (
-                              <label>Немає мешканця - двоповерхове ліжко (1 поверх)</label>
+                              <label>
+                                Немає мешканця - двоповерхове ліжко (1 поверх)
+                              </label>
                             )}{" "}
                             <span className="verify_button_container">
-                            <div
-                              onClick={(e) =>
-                                verify(e, currentRoom.number, props.user_id, 2)
-                              }
-                            >
-                              {currentRoom.verified[2] ? (
-                                <label className="verify_button_confirmed" style={{ color: "#ffffff" }}>
-                                  ✓
-                                </label>
-                              ) : currentRoom.verified[2] === null ? (
-                                <span className="loader_accept"></span>
-                              ) : (
-                                <label className="verify_button" style={{ color: "#ffffff" }}>
-                                  ✗
-                                </label>
-                              )}
-                            </div>
-                          </span>
+                              <div
+                                onClick={(e) =>
+                                  verify(
+                                    e,
+                                    currentRoom.number,
+                                    props.user_id,
+                                    2
+                                  )
+                                }
+                              >
+                                {currentRoom.verified[2] ? (
+                                  <label
+                                    className="verify_button_confirmed"
+                                    style={{ color: "#ffffff" }}
+                                  >
+                                    ✓
+                                  </label>
+                                ) : currentRoom.verified[2] === null ? (
+                                  <span className="loader_accept"></span>
+                                ) : (
+                                  <label
+                                    className="verify_button"
+                                    style={{ color: "#ffffff" }}
+                                  >
+                                    ✗
+                                  </label>
+                                )}
+                              </div>
+                            </span>
                           </Card.Text>
                           <Card.Text className="text-with-border">
                             {currentRoom.names[2] !== "" ? (
-                              <label>{currentRoom.names[2]} - одноповерхове ліжко (2 поверх)</label>
+                              <label>
+                                {currentRoom.names[2]} - одноповерхове ліжко (2
+                                поверх)
+                              </label>
                             ) : (
-                              <label>Немає мешканця - двоповерхове ліжко (2 поверх)</label>
+                              <label>
+                                Немає мешканця - двоповерхове ліжко (2 поверх)
+                              </label>
                             )}{" "}
                             <span className="verify_button_container">
-                            <div
-                              onClick={(e) =>
-                                verify(e, currentRoom.number, props.user_id, 3)
-                              }
-                            >
-                              {currentRoom.verified[3] ? (
-                                <label className="verify_button_confirmed" style={{ color: "#ffffff" }}>
-                                  ✓
-                                </label>
-                              ) : currentRoom.verified[3] === null ? (
-                                <span className="loader_accept"></span>
-                              ) : (
-                                <label className="verify_button" style={{ color: "#ffffff" }}>
-                                  ✗
-                                </label>
-                              )}
-                            </div>
-                          </span>
+                              <div
+                                onClick={(e) =>
+                                  verify(
+                                    e,
+                                    currentRoom.number,
+                                    props.user_id,
+                                    3
+                                  )
+                                }
+                              >
+                                {currentRoom.verified[3] ? (
+                                  <label
+                                    className="verify_button_confirmed"
+                                    style={{ color: "#ffffff" }}
+                                  >
+                                    ✓
+                                  </label>
+                                ) : currentRoom.verified[3] === null ? (
+                                  <span className="loader_accept"></span>
+                                ) : (
+                                  <label
+                                    className="verify_button"
+                                    style={{ color: "#ffffff" }}
+                                  >
+                                    ✗
+                                  </label>
+                                )}
+                              </div>
+                            </span>
                           </Card.Text>
                         </Card.Body>
                       </Card>
                     </>
                   ) : selectedOption === 7 ? (
                     <>
-                      <div className="chapter">
-                        Виселення
-                      </div>
+                      <div className="chapter">Виселення</div>
                       <Card>
                         <Card.Body className="verification-card">
                           <Card.Text className="text-with-border">
@@ -691,22 +752,22 @@ export const Room = (props) => {
                               </label>
                             )}
                             <input
-                            placeholder="Введіть дату"
-                            className="finish_date_input"
-                            type="date"
-                            key={"inp_user" + 0}
-                            onChange={(e) => {
-                              e.preventDefault();
-                              handleChangeFinishDate(0, e.target.value);
-                            }}
-                            value={currentRoom.finish_dates[0]}
+                              placeholder="Введіть дату"
+                              className="finish_date_input"
+                              type="date"
+                              key={"inp_user" + 0}
+                              onChange={(e) => {
+                                e.preventDefault();
+                                handleChangeFinishDate(0, e.target.value);
+                              }}
+                              value={currentRoom.finish_dates[0]}
                             />
                             <div
-                            className="move_out_button"
-                            disabled={!available}
-                            onClick={handleShow}
+                              className="move_out_button"
+                              disabled={!available}
+                              onClick={handleShow}
                             >
-                            Виселити
+                              Виселити
                             </div>
                           </Card.Text>
                           <Card.Text className="text-with-border">
@@ -720,22 +781,22 @@ export const Room = (props) => {
                               </label>
                             )}
                             <input
-                            placeholder="Введіть дату"
-                            className="finish_date_input"
-                            type="date"
-                            key={"inp_user" + 1}
-                            onChange={(e) => {
-                              e.preventDefault();
-                              handleChangeFinishDate(1, e.target.value);
-                            }}
-                            value={currentRoom.finish_dates[1]}
+                              placeholder="Введіть дату"
+                              className="finish_date_input"
+                              type="date"
+                              key={"inp_user" + 1}
+                              onChange={(e) => {
+                                e.preventDefault();
+                                handleChangeFinishDate(1, e.target.value);
+                              }}
+                              value={currentRoom.finish_dates[1]}
                             />
                             <div
-                            className="move_out_button"
-                            disabled={!available}
-                            onClick={handleShow1}
+                              className="move_out_button"
+                              disabled={!available}
+                              onClick={handleShow1}
                             >
-                            Виселити
+                              Виселити
                             </div>
                           </Card.Text>
                           <Card.Text className="text-with-border">
@@ -749,22 +810,22 @@ export const Room = (props) => {
                               </label>
                             )}
                             <input
-                            placeholder="Введіть дату"
-                            className="finish_date_input"
-                            type="date"
-                            key={"inp_user" + 2}
-                            onChange={(e) => {
-                              e.preventDefault();
-                              handleChangeFinishDate(2, e.target.value);
-                            }}
-                            value={currentRoom.finish_dates[2]}
+                              placeholder="Введіть дату"
+                              className="finish_date_input"
+                              type="date"
+                              key={"inp_user" + 2}
+                              onChange={(e) => {
+                                e.preventDefault();
+                                handleChangeFinishDate(2, e.target.value);
+                              }}
+                              value={currentRoom.finish_dates[2]}
                             />
                             <div
-                            className="move_out_button"
-                            disabled={!available}
-                            onClick={handleShow2}
+                              className="move_out_button"
+                              disabled={!available}
+                              onClick={handleShow2}
                             >
-                            Виселити
+                              Виселити
                             </div>
                           </Card.Text>
                         </Card.Body>
@@ -775,78 +836,93 @@ export const Room = (props) => {
                     </>
                   ) : (
                     <>
-                    <div>
-                    {currentRoom.furniture_list.map((list_fur, index_fur) => (
-                        <div>
-                          {selectedOption === index_fur && (
-                            <>
-                              <div className="chapter">
-                                {headers[index_fur]}
-                              </div>
-                              <div className="furniture_container">
-                              {list_fur.map((furniture, index) => (
+                      <div>
+                        {currentRoom.furniture_list.map(
+                          (list_fur, index_fur) => (
+                            <div>
+                              {selectedOption === index_fur && (
                                 <>
-                                  <div className="furniture_info">
-                                  <Card>
-                                <Card.Body className="furn-description">
-                                  {furniture.images.length != 0 ? (
-                                    <div className="image_div">
-                                      <Slider 
-                                      ref={(slider) => {
-                                        sliderRef1 = slider;
-                                      }}
-                                      {...settings_image}
-                                      style={{ flex: '1', overflow: 'hidden' }}>
-                                        {furniture.images.map(
-                                          (slideImage, index) => (
-                                            <div>
-                                              <div
-                                                className="slider_div"
-                                                key={index}
-                                              >
-                                                <img
-                                                  className="slider_image"
-                                                  src={check_url(slideImage)}
-                                                />
-                                              </div>
-                                            </div>
-                                          )
-                                        )}
-                                      </Slider>
-                                    </div>
-                                  ) : (
-                                    <>
-                                      <div className="no-pictures">Немає фото</div>
-                                    </>
-                                  )}
-                                  <Card.Title> 
-                                  <div className="furniture_navigation1">
-                                        <div onClick={previous1} className="furniture_navigation1-prev">
-                                          <i class="fa-solid fa-arrow-left"></i>
-                                        </div>
-                                        <div onClick={next1} className="furniture_navigation1-next">
-                                          <i class="fa-solid fa-arrow-right"></i>
-                                        </div>
-                                      </div>
-                                  <div
-                                      key={2 * index + 1}
-                                      className="furniture_type"
-                                    >
-                                      {furniture.type_expanded}
-                                    </div>
-                                  </Card.Title>
-                                  <Card.Text>
-                                    <div
-                                      key={2 * furniture + 2}
-                                      className="furniture_description"
-                                    >
-                                      Опис: {furniture.description}
-                                    </div>
-                                  </Card.Text>
-                                    </Card.Body>
-                                    </Card>
+                                  <div className="chapter">
+                                    {headers[index_fur]}
                                   </div>
-                                  {/* {furniture.owner ? (
+                                  <div className="furniture_container">
+                                    {list_fur.map((furniture, index) => (
+                                      <>
+                                        <div className="furniture_info">
+                                          <Card>
+                                            <Card.Body className="furn-description">
+                                              {furniture.images.length != 0 ? (
+                                                <div className="image_div">
+                                                  <Slider
+                                                    ref={(slider) => {
+                                                      sliderRef1 = slider;
+                                                    }}
+                                                    {...settings_image}
+                                                    style={{
+                                                      flex: "1",
+                                                      overflow: "hidden",
+                                                    }}
+                                                  >
+                                                    {furniture.images.map(
+                                                      (slideImage, index) => (
+                                                        <div>
+                                                          <div
+                                                            className="slider_div"
+                                                            key={index}
+                                                          >
+                                                            <img
+                                                              className="slider_image"
+                                                              src={check_url(
+                                                                slideImage
+                                                              )}
+                                                            />
+                                                          </div>
+                                                        </div>
+                                                      )
+                                                    )}
+                                                  </Slider>
+                                                </div>
+                                              ) : (
+                                                <>
+                                                  <div className="no-pictures">
+                                                    Немає фото
+                                                  </div>
+                                                </>
+                                              )}
+                                              <Card.Title>
+                                                {/* <div className="furniture_navigation1">
+                                                  <div
+                                                    onClick={previous1}
+                                                    className="furniture_navigation1-prev"
+                                                  >
+                                                    <i class="fa-solid fa-arrow-left"></i>
+                                                  </div>
+                                                  <div
+                                                    onClick={next1}
+                                                    className="furniture_navigation1-next"
+                                                  >
+                                                    <i class="fa-solid fa-arrow-right"></i>
+                                                  </div>
+                                                </div> */}
+                                                <div
+                                                  key={2 * index + 1}
+                                                  className="furniture_type"
+                                                >
+                                                  {furniture.type_expanded}
+                                                </div>
+                                              </Card.Title>
+                                              <Card.Text>
+                                                <div
+                                                  key={2 * furniture + 2}
+                                                  className="furniture_description"
+                                                >
+                                                  Опис: {furniture.description}
+                                                </div>
+                                              </Card.Text>
+                                            </Card.Body>
+                                          </Card>
+                                        </div>
+                                        {/* {furniture.owner ? (
                                     <div
                                       key={
                                         "furniture_owner_div" +
@@ -859,7 +935,7 @@ export const Room = (props) => {
                                   ) : (
                                     <></>
                                   )} */}
-                                  {/* {furniture.images.length != 0 ? (
+                                        {/* {furniture.images.length != 0 ? (
                                     <div className="image_div">
                                       <Slider {...settings_image}>
                                         {furniture.images.map(
@@ -882,14 +958,15 @@ export const Room = (props) => {
                                   ) : (
                                     <></>
                                   )} */}
+                                      </>
+                                    ))}
+                                  </div>
                                 </>
-                              ))}
-                              </div>
-                            </>
-                          )}
-                        </div>
-                      ))}
-                    </div>
+                              )}
+                            </div>
+                          )
+                        )}
+                      </div>
                     </>
                   )}
                 </div>

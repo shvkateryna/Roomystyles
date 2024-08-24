@@ -53,8 +53,8 @@ function App() {
                 <>
                   {role === "ADMIN" ? (
                     <>
-                    <Route path="/csv_parser" element={<CSVParserMain />} />
-                    <Route path="/csv_parser/:number" element={<GroupDetail />} />
+                    <Route path="/csv_parser" element={<CSVParserMain role={role}/>} />
+                    <Route path="/csv_parser/:number" element={<GroupDetail/>} />
 
                       <Route
                         path="/:number"
@@ -72,8 +72,8 @@ function App() {
                         path="/:number"
                         element={<Room role={role} user_id={1} />}
                       />
-                      <Route path="/csv_parser" element={<CSVParserMain />} />
-                      <Route path="/csv_parser/:number" element={<GroupDetail />} />
+                      <Route path="/csv_parser" element={<CSVParserMain props={role}/>} />
+                      <Route path="/csv_parser/:number" element={<GroupDetail/>} />
 
                     </>
                   )}

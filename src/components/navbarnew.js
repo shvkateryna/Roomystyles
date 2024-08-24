@@ -191,6 +191,10 @@ export default function NavBar(props) {
     window.location.href = "/";
   };
 
+  const navigateCsvParser = () => {
+    window.location.href = "/csv_parser";
+  };
+
   return (
     <>
       <div
@@ -347,6 +351,17 @@ export default function NavBar(props) {
                 >
                   {" "}
                   Кімнати{" "}
+                </span>
+              </div>
+
+              <div id="navoption">
+                <span
+                  onClick={() => {
+                    navigateCsvParser();
+                  }}
+                >
+                  {" "}
+                  Перегляд звіту{" "}
                 </span>
               </div>
 
