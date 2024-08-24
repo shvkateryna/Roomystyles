@@ -32,7 +32,7 @@
     height: 40px;
     width: 127px;
     font-family:  "Roboto Flex", sans-serif;
-    font-size: 12px;
+    font-size: 16px;
     color: #ffffff;
     transition: background-color 300ms ease-out;
 }
@@ -49,7 +49,7 @@
     height: 40px;
     width: 127px;
     font-family:  "Roboto Flex", sans-serif;
-    font-size: 12px;
+    font-size: 16px;
     color: #ffffff;
     transition: background-color 300ms ease-out;
 }
@@ -122,6 +122,12 @@ cursor: pointer;
     }
 
     #navoption{
+        font-size: 12px;
+    }
+    .discard_button {
+        font-size: 12px;
+    }
+    .confirm_button{
         font-size: 12px;
     }
 }

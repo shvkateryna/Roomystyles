@@ -175,6 +175,23 @@ input[disabled]:hover{
     max-width: 300px;
 }
 
+.images-button {
+    text-decoration: none;
+    color: black;
+    border-radius: 12px;
+    color: #ffffff;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    padding: 14px;
+    background-color: #8D0709;
+    font-family: "Roboto Flex", sans-serif;
+    font-size: 16px;
+    width: 200px;
+    height: 50px;
+    text-align: center;
+}
+
 .file_input::-webkit-file-upload-button {
     content: "Додати фото";
     visibility: hidden;
@@ -189,7 +206,6 @@ input[disabled]:hover{
     text-decoration: none;
     color: black;
     border-radius: 12px;
-    content: "Додати фото";
     color: #ffffff;
     display: inline-block;
     border: none;
@@ -667,6 +683,10 @@ justify-content: center;
 }
 
 @media screen and (max-width:480px){
+    .images-button {
+        width: 40%;
+        font-size: 12px;
+    }
     .current-room {
         font-size: 12px;
     }

@@ -57,12 +57,10 @@
 .my-rooms {
     font-family: "Roboto Flex", sans-serif;
     font-size: 20px;
-    letter-spacing: 2px;
 }
 
 .input-room {
     font-family: "Roboto Flex", sans-serif;
-    letter-spacing: 2px;
     font-size: 16px;
     height: 45px;
     width: 300px;
@@ -234,7 +232,6 @@ background-color: aquamarine;
     width: 127px;
     font-family:  "Roboto Flex", sans-serif;
     font-size: 16px;
-    letter-spacing: 2px;
     color: #ffffff;
     transition: 300ms ease-out;
 }

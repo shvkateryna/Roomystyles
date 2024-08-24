@@ -18,31 +18,41 @@ function One(props) {
   const [progress, setProgress] = useState(0);
   const new_block = room.furniture_list[3];
   const [successVisible, setSuccessVisible] = useState(false);
+  const [loadingStates, setLoadingStates] = useState({});
   
   let navigate = useNavigate();
   const routeChange = (path) => {
     navigate(path);
   };
-  const alertStyle = {
-    display: alertVisible ? 'block' : 'none', // Show or hide based on alertVisible state
+  const baseAlertStyle = {
     position: 'fixed',
-    top: '40%',
+    top: '20%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
+    color: '#8D0709',
     backgroundColor: '#fdd',
     border: '1px solid #8D0709',
     padding: '2%',
     width: '70%',
     marginBottom: '10px',
     zIndex: 1000,
-    fontFamily: 'Roboto Flex, sans-serif',
+    fontFamily: "Roboto Flex",
     fontSize: '16px',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    '@media (max-width: 600px)': {
-      fontSize: '12px',
-    }
+  };
+  
+  const mobileAlertStyle = {
+    ...baseAlertStyle,
+    fontSize: '12px',
+  };
+  
+  const isMobile = window.innerWidth < 768;
+  
+  const alertStyle = {
+    ...baseAlertStyle,
+    ...(isMobile ? mobileAlertStyle : {}),
   };
 
   const successStyle = {
@@ -65,9 +75,6 @@ function One(props) {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    '@media (max-width: 600px)': {
-      fontSize: '12px',
-    }
   };
 
   const closeButtonStyle = {
@@ -129,17 +136,19 @@ function One(props) {
     setRoom((prev) => ({ ...prev, start_dates: users_dates }));
   };
   const handleChangeRoomFile = async (index_block, index, option, value) => {
+    setLoadingStates(prev => ({ ...prev, [index]: true }));
     let compressedFiles = [];
     for (var i = 0; i < value.length; i++) {
       compressedFiles.push(await shrinkImage(value[i]));
     }
-
+  
     let obj = room.furniture_list[index_block];
     obj[index][option] = compressedFiles;
     let new_list = room.furniture_list;
     new_list[index_block] = obj;
-
+  
     setRoom((prev) => ({ ...prev, furniture_list: new_list }));
+    setLoadingStates(prev => ({ ...prev, [index]: false }));
   };
   const handleChangeRoom = (index_block, index, option, value) => {
     let obj = room.furniture_list[index_block];
@@ -365,33 +374,38 @@ function One(props) {
                             maxLength={150}
                           />
                           <div
-                            key={"div_image" + index + "" + 3}
-                            className="file_div"
-                          >
-                            <input
-                              key={"input_image" + index + "" + 3}
-                              className="file_input"
-                              type="file"
-                              multiple
-                              onChange={(event) => {
-                                handleChangeRoomFile(
-                                  3,
-                                  index,
-                                  "images",
-                                  Array.from(event.target.files)
-                                );
-                              }}
-                            ></input>
-                            <div
-                              className="clear_images"
-                              onClick={() => {
-                                handleChangeRoomFile(3, index, "images", []);
-                              }}
-                            >
-                              <img className="trash_logo" src={trash_logo} />
-                            </div>
-                          </div>
-
+  key={"div_image" + index + "" + 3}
+  className="file_div"
+>
+  <label htmlFor={"file-input-" + index} className="images-button">
+    {loadingStates[index] ? "Зачекайте..." : "Додати фото"}
+  </label>
+  <input
+    id={"file-input-" + index}
+    key={"input_image" + index + "" + 3}
+    className="file_input"
+    type="file"
+    multiple
+    onChange={(event) => {
+      handleChangeRoomFile(
+        3,
+        index,
+        "images",
+        Array.from(event.target.files)
+      );
+    }}
+    style={{display: 'none'}}
+  />
+  <div
+    className="clear_images"
+    onClick={() => {
+      handleChangeRoomFile(3, index, "images", []);
+    }}
+  >
+    <img className="trash_logo" src={trash_logo} alt="Clear images" />
+  </div>
+</div>
+                          
                           {ele.images.length != 0 ? (
                             <div className="slider_wrapper">
                               <Slider {...settings}>

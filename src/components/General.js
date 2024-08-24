@@ -44,10 +44,9 @@ function General(props) {
   
   const mobileAlertStyle = {
     ...baseAlertStyle,
-    fontSize: '12px', // Adjust font size for mobile
+    fontSize: '12px',
   };
   
-  // Determine if the screen is mobile (width < 768px is a common breakpoint)
   const isMobile = window.innerWidth < 768;
   
   const alertStyle = {
@@ -75,9 +74,6 @@ function General(props) {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    '@media (max-width: 600px)': {
-      fontSize: '12px',
-    }
   };
 
   const closeButtonStyle = {

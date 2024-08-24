@@ -31,8 +31,7 @@ function Two2(props) {
     initialSlide: 1,
   };
 
-  const alertStyle = {
-    display: alertVisible ? 'block' : 'none', // Show or hide based on alertVisible state
+  const baseAlertStyle = {
     position: 'fixed',
     top: '20%',
     left: '50%',
@@ -44,16 +43,23 @@ function Two2(props) {
     width: '70%',
     marginBottom: '10px',
     zIndex: 1000,
-    fontFamily: 'Lexend, sans-serif',
+    fontFamily: "Roboto Flex",
     fontSize: '16px',
-    letterSpacing: '2px',
-    fontWeight: 300,
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    '@media (max-width: 600px)': {
-      fontSize: '12px',
-    }
+  };
+  
+  const mobileAlertStyle = {
+    ...baseAlertStyle,
+    fontSize: '12px',
+  };
+  
+  const isMobile = window.innerWidth < 768;
+  
+  const alertStyle = {
+    ...baseAlertStyle,
+    ...(isMobile ? mobileAlertStyle : {}),
   };
 
   const successStyle = {
@@ -75,10 +81,7 @@ function Two2(props) {
     fontSize: '16px',
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    '@media (max-width: 600px)': {
-      fontSize: '12px',
-    }
+    alignItems: 'center'
   };
 
   const closeButtonStyle = {
