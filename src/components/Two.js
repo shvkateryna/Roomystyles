@@ -20,6 +20,7 @@ function Two(props) {
   const new_block = room.furniture_list[4];
   const [alertVisible, setAlertVisible] = useState(false);
   const [successVisible, setSuccessVisible] = useState(false);
+  const [loadingStates, setLoadingStates] = useState({});
 
   let navigate = useNavigate();
   const routeChange = (path) => {
@@ -146,6 +147,7 @@ function Two(props) {
     setRoom((prev) => ({ ...prev, furniture_list: new_list }));
   };
   const handleChangeRoomFile = async (index_block, index, option, value) => {
+    setLoadingStates(prev => ({ ...prev, [index]: true }));
     let compressedFiles = [];
     for (var i = 0; i < value.length; i++) {
       compressedFiles.push(await shrinkImage(value[i]));
@@ -157,6 +159,7 @@ function Two(props) {
     new_list[index_block] = obj;
 
     setRoom((prev) => ({ ...prev, furniture_list: new_list }));
+    setLoadingStates(prev => ({ ...prev, [index]: false }));
   };
   const handleChangeFilled = (index) => {
     let filled = room.filled_form;
@@ -355,7 +358,11 @@ function Two(props) {
                             key={"div_image" + index + "" + 4}
                             className="file_div"
                           >
+                            <label htmlFor={"file-input-" + index} className="images-button">
+                              {loadingStates[index] ? "Зачекайте..." : "Додати фото"}
+                            </label>
                             <input
+                              id={"file-input-" + index}
                               key={"input_image" + index + "" + 4}
                               className="file_input"
                               type="file"
@@ -368,14 +375,15 @@ function Two(props) {
                                   Array.from(event.target.files)
                                 );
                               }}
-                            ></input>
+                              style={{display: 'none'}}
+                            />
                             <div
                               className="clear_images"
                               onClick={() => {
                                 handleChangeRoomFile(4, index, "images", []);
                               }}
                             >
-                              <img className="trash_logo" src={trash_logo} />
+                              <img className="trash_logo" src={trash_logo} alt="Clear images" />
                             </div>
                           </div>
                           {ele.images.length != 0 ? (

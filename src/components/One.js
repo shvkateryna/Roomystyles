@@ -374,37 +374,37 @@ function One(props) {
                             maxLength={150}
                           />
                           <div
-  key={"div_image" + index + "" + 3}
-  className="file_div"
->
-  <label htmlFor={"file-input-" + index} className="images-button">
-    {loadingStates[index] ? "Зачекайте..." : "Додати фото"}
-  </label>
-  <input
-    id={"file-input-" + index}
-    key={"input_image" + index + "" + 3}
-    className="file_input"
-    type="file"
-    multiple
-    onChange={(event) => {
-      handleChangeRoomFile(
-        3,
-        index,
-        "images",
-        Array.from(event.target.files)
-      );
-    }}
-    style={{display: 'none'}}
-  />
-  <div
-    className="clear_images"
-    onClick={() => {
-      handleChangeRoomFile(3, index, "images", []);
-    }}
-  >
-    <img className="trash_logo" src={trash_logo} alt="Clear images" />
-  </div>
-</div>
+                            key={"div_image" + index + "" + 3}
+                            className="file_div"
+                          >
+                            <label htmlFor={"file-input-" + index} className="images-button">
+                              {loadingStates[index] ? "Зачекайте..." : "Додати фото"}
+                            </label>
+                            <input
+                              id={"file-input-" + index}
+                              key={"input_image" + index + "" + 3}
+                              className="file_input"
+                              type="file"
+                              multiple
+                              onChange={(event) => {
+                                handleChangeRoomFile(
+                                  3,
+                                  index,
+                                  "images",
+                                  Array.from(event.target.files)
+                                );
+                              }}
+                              style={{display: 'none'}}
+                            />
+                            <div
+                              className="clear_images"
+                              onClick={() => {
+                                handleChangeRoomFile(3, index, "images", []);
+                              }}
+                            >
+                              <img className="trash_logo" src={trash_logo} alt="Clear images" />
+                            </div>
+                          </div>
                           
                           {ele.images.length != 0 ? (
                             <div className="slider_wrapper">

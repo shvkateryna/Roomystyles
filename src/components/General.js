@@ -22,6 +22,7 @@ function General(props) {
   const [alertVisible, setAlertVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [successVisible, setSuccessVisible] = useState(false);
+  const [loadingStates, setLoadingStates] = useState({});
 
   const baseAlertStyle = {
     position: 'fixed',
@@ -165,6 +166,7 @@ function General(props) {
     return compressedFile;
   }
   const handleChangeRoomFile = async (index_block, index, option, value) => {
+    setLoadingStates(prev => ({ ...prev, [index]: true }));
     let compressedFiles = [];
     for (var i = 0; i < value.length; i++) {
       setLoading(true)
@@ -177,6 +179,7 @@ function General(props) {
     new_list[index_block] = obj;
 
     setRoom((prev) => ({ ...prev, furniture_list: new_list }));
+    setLoadingStates(prev => ({ ...prev, [index]: false }));
   };
   const handleChangeRoom = async (index_block, index, option, value) => {
     let new_list = room.furniture_list;
@@ -418,43 +421,41 @@ function General(props) {
                                 maxLength={150}
                               />
 
+                          <div
+                            key={`div_image_${index_room}_${index}_${ele.type_expanded}`}
+                            className="file_div"
+                          >
+                            <label htmlFor={"file-input-" + index} className="images-button">
+                              {loadingStates[index] ? "Зачекайте..." : "Додати фото"}
+                            </label>
+                            <input
+                              id={"file-input-" + index_room}
+                              key={`div_input_image_${index_room}_${index}_${ele.type_expanded}`}
+                              className="file_input"
+                              type="file"
+                              multiple
+                              onChange={(event) => {
+                                handleChangeRoomFile(
+                                  index_room,
+                                  index,
+                                  "images",
+                                  Array.from(event.target.files)
+                                );
+                              }}
+                              style={{display: 'none'}}
+                            />
+                            <div
+                              className="clear_images"
+                              onClick={() => {
+                                handleChangeRoomFile(index_room, index, "images", []);
+                              }}
+                            >
+                              <img className="trash_logo" src={trash_logo} alt="Clear images" />
+                            </div>
+                          </div>
                               {/* </div> */}
-                              <div
-                                key={`div_image_${index_room}_${index}_${ele.type_expanded}`}
-                                className="file_div"
-                              >
-                                <input
-                                  key={`div_input_image_${index_room}_${index}_${ele.type_expanded}`}
-                                  className="file_input"
-                                  type="file"
-                                  multiple
-                                  onChange={(event) => {
-                                    handleChangeRoomFile(
-                                      index_room,
-                                      index,
-                                      "images",
-                                      Array.from(event.target.files)
-                                    );
-                                  }}
-                                ></input>
-
-                                <div
-                                  className="clear_images"
-                                  onClick={() => {
-                                    handleChangeRoomFile(
-                                      index_room,
-                                      index,
-                                      "images",
-                                      []
-                                    );
-                                  }}
-                                >
-                                  <img
-                                    className="trash_logo"
-                                    src={trash_logo}
-                                  />
-                                </div>
-                              </div>
+                              
+                              
                               {ele.images.length != 0 ? (
                                 <>
                                 {loading ? (
