@@ -102,8 +102,8 @@ function Two(props) {
 
   async function shrinkImage(image) {
     const options = {
-      maxSizeMB: 0.01,
-      maxWidthOrHeight: 800,
+      maxSizeMB: 0.03,
+      maxWidthOrHeight: 1920,
       useWebWorker: true,
     };
     const compressedFile = await imageCompression(image, options);
