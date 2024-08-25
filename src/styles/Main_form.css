@@ -23,6 +23,14 @@
     font-size: larger;
 }
 
+.form-submitted {
+  font-size: 16px;
+  color: black;
+  text-align: center;
+  padding-top: 20%;
+  font-family: "Roboto Flex", sans-serif;
+}
+
 .reg_text_div{
   height: 70px;
   font-size: 16px;
@@ -149,6 +157,11 @@
 }
 
 @media screen and (max-width:480px){
+  .form-submitted {
+    padding-top: 70%;
+    padding-left: 2%;
+    padding-right: 2%;
+  }
   .greet {
     font-family: "Roboto Flex", sans-serif;
     font-size: 12px;

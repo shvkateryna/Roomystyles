@@ -62,14 +62,7 @@ function Main_Form() {
                 </div>
               ) : (
                 <div
-                  style={{
-                    paddingLeft: "20px",
-                    fontSize: "20px",
-                    color: "black",
-                    textAlign: "center",
-                    padding: "30px",
-                    fontFamily: "Montserrat Medium 500",
-                  }}
+                className="form-submitted"
                 >
                   Ваша форма вже підтверджена куратором, ви не можете робити
                   зміни.

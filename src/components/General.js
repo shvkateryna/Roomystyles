@@ -169,9 +169,7 @@ function General(props) {
     setLoadingStates(prev => ({ ...prev, [index]: true }));
     let compressedFiles = [];
     for (var i = 0; i < value.length; i++) {
-      setLoading(true)
       compressedFiles.push(await shrinkImage(value[i]));
-      setLoading(false)
     }
     let new_list = room.furniture_list;
     let obj = room.furniture_list[index_block];
