@@ -425,11 +425,11 @@ function General(props) {
                             key={`div_image_${index_room}_${index}_${ele.type_expanded}`}
                             className="file_div"
                           >
-                            <label htmlFor={"file-input-" + index} className="images-button">
+                            <label htmlFor={`file-input-${index_room}-${index}-${ele.type_expanded}`} className="images-button">
                               {loadingStates[index] ? "Зачекайте..." : "Додати фото"}
                             </label>
                             <input
-                              id={"file-input-" + index_room}
+                              id={`file-input-${index_room}-${index}-${ele.type_expanded}`}
                               key={`div_input_image_${index_room}_${index}_${ele.type_expanded}`}
                               className="file_input"
                               type="file"

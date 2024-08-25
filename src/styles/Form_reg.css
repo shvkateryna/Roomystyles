@@ -628,7 +628,6 @@ li .active::after {
 .slider_image{
     max-width: 95%;
     height: 400px;
-    margin-left: -16%;
 }
 .slider_div{
     display: flex;
