@@ -100,7 +100,7 @@ function Two2(props) {
   };
   async function shrinkImage(image) {
     const options = {
-      maxSizeMB: 0.05,
+      maxSizeMB: 0.03,
       maxWidthOrHeight: 1920,
       useWebWorker: true,
     };

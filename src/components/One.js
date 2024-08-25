@@ -97,7 +97,7 @@ function One(props) {
   };
   async function upload_google_drive(file) {
     let url =
-      "https://script.google.com/macros/s/AKfycbxZ3S11M9zGUvVYxdwql8bu5JYgP9JwDT4H1n5J-526IpDVZblaRAqj04BWQdIzGUhe/exec";
+      "https://script.google.com/macros/s/AKfycbzzUASeCpfNN5Z9nv4H21rq3p3KcH8lSm5-HDBxay0EpJIeZ18T_XF1s090Ki_o9Ga2hg/exec";
     return new Promise(function (resolve, reject) {
       var reader = new FileReader();
       reader.readAsDataURL(file);
@@ -164,7 +164,7 @@ function One(props) {
   };
   async function shrinkImage(image) {
     const options = {
-      maxSizeMB: 0.05,
+      maxSizeMB: 0.03,
       maxWidthOrHeight: 1920,
       useWebWorker: true,
     };
